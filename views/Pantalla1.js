@@ -16,13 +16,13 @@ function Pantalla1(props) {
         edad:'',
         telefono:'',
         direccion:''
-
     });//estado inicial de usestate nullo.
     console.log(FormPersonal);
 
     function EstadoInputs(value,input){
         setFormPersonal({...FormPersonal, [input]:value});
         console.log(FormPersonal);
+        
     }
 
     let {name,apellido,ci,extension,edad,telefono,direccion}=FormPersonal;

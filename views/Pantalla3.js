@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
     FormControl, Button, Input, Stack, ScrollView, Divider, Box,
     NativeBaseProvider, TextArea, Radio, HStack
@@ -6,6 +6,22 @@ import {
 
 function Pantalla3(props) {
     const { navigation } = props;
+    const [FormDescripNegocio,setFormDescripNegocio] = useState({
+        descripActividad:'',
+        estadoFuncionamiento:'',
+        tiempoFuncionamiento:'',
+        inversiones:'',
+        proyectoRentable:''
+    });
+    console.log(FormDescripNegocio);
+    function EstadoInputs(value,input){
+        setFormDescripNegocio({...FormDescripNegocio, [input]:value});
+        console.log(FormDescripNegocio);
+        
+    }
+
+
+    let{descripActividad,estadoFuncionamiento,tiempoFuncionamiento,inversiones,proyectoRentable}=FormDescripNegocio;
     return (
         <NativeBaseProvider>
             <ScrollView
@@ -30,28 +46,38 @@ function Pantalla3(props) {
                             <FormControl.Label >Descripción de la Actividad</FormControl.Label>
                             <TextArea h={20}
                                 placeholder="Descripción de la Actividad"
-                                w={{
-                                    base: "100%",
-                                    md: "25%",
-                                }} variant="rounded" />
+                                w={{ base: "100%", md: "25%",}} variant="rounded" value={descripActividad}
+                                onChangeText={(value)=>EstadoInputs(value,'descripActividad')}
+                                />
+
+
+
                             <FormControl.Label>La actividad esta funcionando</FormControl.Label>
                                 <Radio.Group name="myRadioGroup">
-                                    <Radio value="one" my={1} size="sm">
-                                        One
+                                    <Radio value='si' my={1} size="sm">
+                                        Sí
                                     </Radio>
-                                    <Radio value="two" my={1} size="sm">
-                                        Two
+                                    <Radio value='no' my={1} size="sm">
+                                        No
                                     </Radio>
                                 </Radio.Group>
+
                             <FormControl.Label>Tiempo de Funcionamieto</FormControl.Label>
-                            <Input placeholder="Cuantos meses" keyboardType='numeric' variant="rounded" />
+                            <Input placeholder="Cuantos meses" keyboardType='numeric' variant="rounded" value={tiempoFuncionamiento}
+                            onChangeText={(value)=>EstadoInputs(value,'tiempoFuncionamiento')}
+                            />
+
+
+
                             <FormControl.Label>Que inversiones nesecita</FormControl.Label>
-                            <TextArea h={20}
-                                placeholder="Que inversiones nesecita"
+                            <TextArea h={20} placeholder="Que inversiones nesecita"
                                 w={{
                                     base: "100%",
                                     md: "25%",
-                                }} variant="rounded" />
+                                }} variant="rounded" value={inversiones} onChangeText={(value)=>EstadoInputs(value,'inversiones')}/>
+
+
+
                             <FormControl.Label>¿Por que el Proyecto es rentable?</FormControl.Label>
                             <TextArea
                                 h={20}
@@ -60,14 +86,14 @@ function Pantalla3(props) {
                                     base: "100%",
                                     md: "25%",
                                 }}
-                                variant="rounded" />
+                                variant="rounded" value={proyectoRentable} onChangeText={(value)=>EstadoInputs(value,'proyectoRentable')}/>
                         </FormControl>
                         <Divider />
                     </Box>
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Servicio")}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );
