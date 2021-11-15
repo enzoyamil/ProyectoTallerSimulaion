@@ -1,10 +1,11 @@
 import React,{useState} from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet} from "react-native";
 // import { NativeBaseProvider, Box,Button } from 'native-base';
 import {
     FormControl, Button, Input, Stack, Text, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select
 } from "native-base";
+import {tamanioMaximo,tamanioMin,sinCaractEsp}from "../helpers/Validation"
 
 function Pantalla1(props) {
     const { navigation } = props;
@@ -24,8 +25,39 @@ function Pantalla1(props) {
         console.log(FormPersonal);
         
     }
+    function buttonPress() {
+        
+        if(name =='' || apellido =='' ||ci ==''||extension ==''||edad ==''||telefono ==''||direccion ==''){
+            console.log(name);
+            Alert.alert("error campo vacio"); 
+        } else if(tamanioMaximo(name,15)){
+            Alert.alert("cadena nombre muy grande");
+        }else if(tamanioMin(name,2)){
+            Alert.alert("cadena nombre muy pequeña");
+        }else if(tamanioMaximo(apellido,15)){
+            Alert.alert("cadena apellido muy grande");
+        }else if(tamanioMaximo(apellido,15)){
+            Alert.alert("cadena apellido muy grande");
+        }else if(tamanioMin(apellido,4)){
+            Alert.alert("cadena apellido muy pequeña");
+        }else if(edad<0||edad<18){
+            Alert.alert("Edad no aceptada");
+        }else if(telefono.length<7){
+            Alert.alert("telefono no aceptado");
+        }else if(ci.length<8){
+            Alert.alert("CI no aceptado");
+        }else if(tamanioMaximo(direccion,50)){
+            Alert.alert("Edad no aceptada");
+        }else if(tamanioMin(direccion,10)){
+            Alert.alert("dirección muy corta");
+        }else{
+            Alert.alert("succesfull");
+            navigation.navigate("Informacón del Emprendimiento");
+        }
+    }
 
     let {name,apellido,ci,extension,edad,telefono,direccion}=FormPersonal;
+    let [service, setService] = React.useState("");
     return (
         <NativeBaseProvider>
             <ScrollView
@@ -59,24 +91,23 @@ function Pantalla1(props) {
 
 
                             <FormControl.Label>CI</FormControl.Label>
-                            <Input variant="rounded" value={ci} onChangeText={(value)=>EstadoInputs(value,'ci')}/>
+                            <Input variant="rounded" value={ci} onChangeText={(value)=>EstadoInputs(value,'ci')} keyboardType="numeric"/>
                         
 
 
                             <FormControl.Label>Extensión</FormControl.Label>
-                            <Select placeholder="Extension" variant="rounded" >
+                            <Select placeholder="Extension" value={extension} variant="rounded" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            onChangeText={(value)=>EstadoInputs(value,'extension')}>
                                 <Select.Item label="cbba" value="cochabamba" onPress={()=>EstadoInputs('cochabamba','extension')}/>
-                                <Select.Item label="la paz" value="la paz"  onPress={()=>EstadoInputs('la paz','extension')}/>
+                                <Select.Item label="la paz" onPress={()=>EstadoInputs('la paz','extension')}/>
                                 <Select.Item label="Santa Cruz" value="Santa Cruz" onPress={()=>EstadoInputs('santacruz','extension')}/>
                                 <Select.Item label="Oruro" value="Oruro" onPress={()=>EstadoInputs('oruro','extension')}/>
                                 <Select.Item label="Potosi" value="Potosi" onPress={()=>EstadoInputs('potosi','extension')} />
                                 <Select.Item label="Chuquisaca" value="Chuquisaca" onPress={()=>EstadoInputs('chuquisaca','extension')}/>
                                 <Select.Item label="Pando" value="Pando" onPress={()=>EstadoInputs('pando','extension')} />
                                 <Select.Item label="Tarija" value="Tarija" onPress={()=>EstadoInputs('Tarija','extension')} />
-                                <Select.Item label="Beni" value="Beni"  onPress={()=>EstadoInputs('Beni','extension')}/>
+                                <Select.Item label="Beni" value="Beni"  onPress={()=>EstadoInputs('Beni','extension')}/> 
                             </Select>
-                            
-
 
                             <FormControl.Label>Edad</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={edad} onChangeText={(value)=>EstadoInputs(value,'edad')} />
@@ -99,7 +130,8 @@ function Pantalla1(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Informacón del Emprendimiento")}>Siguiente</Button>
+                {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Informacón del Emprendimiento")}>Siguiente</Button> */}
+                <Button colorScheme="primary" onPress={() =>buttonPress()}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

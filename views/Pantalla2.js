@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { SafeAreaView } from "react-native";
+import React,{isValidElement, useState} from "react";
+import { Alert, SafeAreaView } from "react-native";
 import {
     FormControl, Button, Input, Stack, Text, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select
@@ -25,6 +25,23 @@ function Pantalla2(props) {
         console.log(FormEmpresa);
         
     }
+    
+    // function buttonValidate() {
+        
+    //     // if(razonSocial==''|| nit==''||tipoSociedad==''||representantelegal==''|| nombEmp==''||
+    //     //    departamento==''||municipio==''||telefono==''||direcEmpresa=='' 
+    //     // ){
+    //     //     Alert.alert("Error Campos Vacios");
+    //     // }else if(){
+            
+    //     // }
+    //     // else{
+    //         if(){
+    //             Alert.alert("Error");
+    //         }
+
+        
+    
 
     let {razonSocial,nit,tipoSociedad,representantelegal,nombEmp,departamento,municipio,telefono,direcEmpresa}=FormEmpresa;
     return (
@@ -33,8 +50,7 @@ function Pantalla2(props) {
                 w={{
                     base: "90%",
                     md: "90%",
-                }}
-            >
+                }}>
                 <Stack
                     space={2.5}
                     alignSelf="center"
@@ -95,8 +111,9 @@ function Pantalla2(props) {
             </ScrollView>
             <Box>
             <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Negocio")}>Siguiente</Button>
+            {/* <Button colorScheme="primary" onPress={() => buttonValidate()}>Siguiente</Button> */}
             </Box>
         </NativeBaseProvider>
     );
-}
+                }
 export default Pantalla2;
