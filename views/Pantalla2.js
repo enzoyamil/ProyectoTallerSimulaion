@@ -25,25 +25,13 @@ function Pantalla2(props) {
         console.log(FormEmpresa);
         
     }
-    
-    // function buttonValidate() {
-        
-    //     // if(razonSocial==''|| nit==''||tipoSociedad==''||representantelegal==''|| nombEmp==''||
-    //     //    departamento==''||municipio==''||telefono==''||direcEmpresa=='' 
-    //     // ){
-    //     //     Alert.alert("Error Campos Vacios");
-    //     // }else if(){
-            
-    //     // }
-    //     // else{
-    //         if(){
-    //             Alert.alert("Error");
-    //         }
+    let [service, setService] = React.useState("");
+    let [tipoSocial, setTipoSocial] = React.useState("");
 
-        
-    
+    let {razonSocial,nit,tipoSociedad,representantelegal,
+        nombEmp,departamento,municipio,telefono,direcEmpresa}=FormEmpresa;
 
-    let {razonSocial,nit,tipoSociedad,representantelegal,nombEmp,departamento,municipio,telefono,direcEmpresa}=FormEmpresa;
+
     return (
         <NativeBaseProvider>
             <ScrollView
@@ -71,9 +59,13 @@ function Pantalla2(props) {
                             <Input keyboardType='numeric' variant="rounded" value={nit} onChangeText={(value)=>EstadoInputs(value,'nit')}/>
 
                             <FormControl.Label>Tipo de Sociedad</FormControl.Label>
-                            <Select placeholder="Sociedad" variant="rounded">
-                                <Select.Item label="S.R.L" value="Sociedad de Responsabilidad Limitada" onPress={()=>EstadoInputs('S.R.L','extension')}/>
-                                <Select.Item label="S.A" value="Sociedad Anonima" onPress={()=>EstadoInputs('S.A','extension')}/>
+                            <Select placeholder="Sociedad" variant="rounded" value={tipoSociedad} variant="rounded" 
+                            selectedValue={tipoSocial} onValueChange={(itemValue) => setTipoSocial(itemValue)}
+                            onChangeText={(value)=>EstadoInputs(value,'tipoSocial')}>
+
+
+                                <Select.Item label="S.R.L" value="Sociedad de Responsabilidad Limitada" onPress={()=>EstadoInputs('S.R.L','tipoSociedad')}/>
+                                <Select.Item label="S.A" value="Sociedad Anonima" onPress={()=>EstadoInputs('S.A','tipoSociedad')}/>
                             </Select>
 
                             <FormControl.Label>Representante legal</FormControl.Label>
@@ -83,7 +75,12 @@ function Pantalla2(props) {
                             <Input variant="rounded" value={nombEmp} onChangeText={(value)=>EstadoInputs(value,'nombEmp')}/>
 
                             <FormControl.Label>Departamento</FormControl.Label>
-                            <Select placeholder="Departamento" variant="rounded">
+
+                            <Select placeholder="Departamento" variant="rounded" value={departamento} variant="rounded" 
+                            selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            onChangeText={(value)=>EstadoInputs(value,'departamento')}>
+
+
                                 <Select.Item label="cbba" value="cochabamba" onPress={()=>EstadoInputs('cochabamba','extension')}/>
                                 <Select.Item label="la paz" value="la paz"onPress={()=>EstadoInputs('la paz','extension')}/>
                                 <Select.Item label="Santa Cruz" value="Santa Cruz" onPress={()=>EstadoInputs('Santa cruz','extension')}/>
