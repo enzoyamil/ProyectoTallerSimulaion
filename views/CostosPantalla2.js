@@ -4,8 +4,9 @@ import { DataTable } from 'react-native-paper';
 import { useState } from "react";
 
 export default function CostoPantalla2(props) {
-    
-    const { navigation } = props;
+
+    const { navigation, route } = props;
+    const { alto, medio, bajo } = route.params;
     const [FormTablaProducto, setFormTablaProducto] = useState({
         producto_o_servicio: '',
         tipo: '',
@@ -21,6 +22,7 @@ export default function CostoPantalla2(props) {
     }
     let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v } = FormTablaProducto;
     let [service, setService] = React.useState("");
+    console.log(alto, medio, bajo);
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -60,7 +62,9 @@ export default function CostoPantalla2(props) {
                         </Box>
                     </Center>
                     <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos3")}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos3", {
+                            alto, medio, bajo
+                        })}>Siguiente</Button>
                     </Box>
                 </Stack>
             </ScrollView>

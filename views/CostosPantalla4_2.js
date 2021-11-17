@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Select, Button } from "native-base"
+import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button } from "native-base"
 import { useState } from "react";
 
-export default function CostoPantalla3_2() {
-    
+export default function CostoPantalla4_2(props) {
+
+    const { navigation } = props;
     const [FormTablaInsumo, setFormTablaInsumo] = useState({
         insumo: '',
         cantidad_a: '',
@@ -40,7 +41,7 @@ export default function CostoPantalla3_2() {
                         </Box>
                     </Center>
                     <Box>
-                        {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos3")}>Siguiente</Button> */}
+                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Guardar</Button>
                     </Box>
                 </Stack>
             </ScrollView>
