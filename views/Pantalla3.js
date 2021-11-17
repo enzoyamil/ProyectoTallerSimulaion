@@ -93,12 +93,7 @@ function Pantalla3(props) {
                 </Stack>
             </ScrollView>
             <Box>
-<<<<<<< HEAD
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos")}>Siguiente</Button>
-                {/* por el momento pondre mis pantallas atte luis */}
-=======
                 <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Servicio")}>Siguiente</Button>
->>>>>>> 797681b14d317a5446bb5328beb6c97972d60384
             </Box>
         </NativeBaseProvider>
     );

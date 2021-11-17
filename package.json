@@ -16,11 +16,7 @@
     "react": "17.0.2",
     "react-native": "0.66.2",
     "react-native-numeric-input": "^1.9.0",
-<<<<<<< HEAD
-    "react-native-paper": "^4.10.1",
-=======
     "react-native-paper": "^4.10.0",
->>>>>>> 797681b14d317a5446bb5328beb6c97972d60384
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.9.0",
     "react-native-svg": "^12.1.1",
