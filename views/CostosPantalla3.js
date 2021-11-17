@@ -37,8 +37,8 @@ export default function CostoPantalla3(props) {
                         <Input variant="rounded" value={unidad_de_medida} onChangeText={(value) => EstadoInputs(value, 'unidad_de_medida')} />
                     </FormControl>
                     <Center>
-                            <Button onPress={verDetalle}>Crear</Button>
-                        </Center>
+                        <Button onPress={verDetalle}>Crear</Button>
+                    </Center>
                     {
                         Detalles.map((item, pos) => (
                             <DetalleInsumo
