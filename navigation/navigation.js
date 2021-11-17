@@ -29,7 +29,7 @@ function navigation() {
             <Stack.Screen name="Descripción del Servicio" component={pantalla4} />
             <Stack.Screen name="Analisis Mercado" component={pantalla5} />
             <Stack.Screen name="Estrategia de mercado" component={pantalla6} />
-            <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/>
+            {/* <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/>
             <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor}/>
             <Stack.Screen name="Materia Prima" component={materiaPrima}/>
             <Stack.Screen name="Requerimientos Promocionales" component={reqPromo}/>
@@ -39,7 +39,7 @@ function navigation() {
             <Stack.Screen name="Requerimiento Legal" component={reqLegales}/>
             <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen}/>
             <Stack.Screen name="Plan Inversión" component={planInversion}/>
-            <Stack.Screen name="Datos Resumen" component={datosResumen}/>
+            <Stack.Screen name="Datos Resumen" component={datosResumen}/> */}
 
             
         </Stack.Navigator>

@@ -96,17 +96,19 @@ function Pantalla1(props) {
 
 
                             <FormControl.Label>Extensión</FormControl.Label>
-                            <Select placeholder="Extension" value={extension} variant="rounded" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                                onChangeText={(value) => EstadoInputs(value, 'extension')}>
-                                <Select.Item label="cbba" value="cochabamba" onPress={() => EstadoInputs('cochabamba', 'extension')} />
-                                <Select.Item label="la paz" onPress={() => EstadoInputs('la paz', 'extension')} />
-                                <Select.Item label="Santa Cruz" value="Santa Cruz" onPress={() => EstadoInputs('santacruz', 'extension')} />
-                                <Select.Item label="Oruro" value="Oruro" onPress={() => EstadoInputs('oruro', 'extension')} />
-                                <Select.Item label="Potosi" value="Potosi" onPress={() => EstadoInputs('potosi', 'extension')} />
-                                <Select.Item label="Chuquisaca" value="Chuquisaca" onPress={() => EstadoInputs('chuquisaca', 'extension')} />
-                                <Select.Item label="Pando" value="Pando" onPress={() => EstadoInputs('pando', 'extension')} />
-                                <Select.Item label="Tarija" value="Tarija" onPress={() => EstadoInputs('Tarija', 'extension')} />
-                                <Select.Item label="Beni" value="Beni" onPress={() => EstadoInputs('Beni', 'extension')} />
+                            <Select placeholder="Extesion" variant="rounded" value={extension} 
+                            selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            onValueChange={(value) => EstadoInputs(value, 'extension')}
+                                >
+                                <Select.Item label="cbba" value="cochabamba" />
+                                <Select.Item label="La paz" value="La paz" />
+                                <Select.Item label="Santa Cruz" value="Santa Cruz"/>
+                                <Select.Item label="Oruro" value="Oruro"/>
+                                <Select.Item label="Potosi" value="Potosi" />
+                                <Select.Item label="Chuquisaca" value="Chuquisaca" />
+                                <Select.Item label="Pando" value="Pando" />
+                                <Select.Item label="Tarija" value="Tarija" />
+                                <Select.Item label="Beni" value="Beni" />
                             </Select>
 
                             <FormControl.Label>Edad</FormControl.Label>
