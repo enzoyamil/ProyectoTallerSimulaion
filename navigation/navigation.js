@@ -21,7 +21,11 @@ function navigation() {
       {/* <Stack.Screen name="Analisis Mercado" component={pantalla5} />
             <Stack.Screen name="Estrategia de mercado" component={pantalla6} /> */}
       <Stack.Screen name="cabecera" component={Cabecera} />
-      <Stack.Screen name="Costos Operativos" component={CostosOperativos} />
+      <Stack.Screen
+        options={{title: 'Costos Operativos'}}
+        name="Costos Operativos"
+        component={CostosOperativos}
+      />
     </Stack.Navigator>
   );
 }

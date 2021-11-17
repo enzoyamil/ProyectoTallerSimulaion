@@ -11,7 +11,7 @@ function App() {
     <NavigationContainer>
       {/* <Cabeza/> */}
       <Navigation />
-      {/* <CostosOperativos/> */}
+      {/* <CostosOperativos /> */}
     </NavigationContainer>
   );
 }

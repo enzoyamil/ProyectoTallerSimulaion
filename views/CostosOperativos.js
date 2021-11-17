@@ -41,18 +41,6 @@ function CostosOperativos(props) {
     console.log(FormPersonal);
   }
 
-  //   Impuestos
-  // Alimentación
-  // Servicio de Luz
-  // Servicio de Agua
-  // Servicio de Gas
-  // Servicio de Telefono/Celular
-  // Servicio de Internet
-  // Alquiler
-  // Transporte
-  // Material de Escritorio
-  // Pago a Empleados
-  // Promoción
   function buttonPress() {
     if (
       impuestos == '' ||
@@ -135,7 +123,9 @@ function CostosOperativos(props) {
       Alert.alert('cadena nombre muy pequeña');
     } else {
       Alert.alert('succesfull');
-      navigation.navigate('Costos Operativos');
+      console.log('here');
+      console.log(FormPersonal);
+      // navigation.navigate('');
     }
   }
 
@@ -183,7 +173,6 @@ function CostosOperativos(props) {
                 value={impuestos}
                 onChangeText={value => EstadoInputs(value, 'impuestos')}
               />
-
               <FormControl.Label>Alimentación</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -191,7 +180,6 @@ function CostosOperativos(props) {
                 value={alimentacion}
                 onChangeText={value => EstadoInputs(value, 'alimentacion')}
               />
-
               <FormControl.Label>Servicio de Luz</FormControl.Label>
               <Input
                 variant="rounded"
@@ -199,7 +187,6 @@ function CostosOperativos(props) {
                 onChangeText={value => EstadoInputs(value, 'luz')}
                 keyboardType="numeric"
               />
-
               <FormControl.Label>Servicio de Agua</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -207,7 +194,6 @@ function CostosOperativos(props) {
                 value={agua}
                 onChangeText={value => EstadoInputs(value, 'agua')}
               />
-
               <FormControl.Label>Servicio de Gas</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -215,7 +201,6 @@ function CostosOperativos(props) {
                 value={gas}
                 onChangeText={value => EstadoInputs(value, 'gas')}
               />
-
               <FormControl.Label>
                 Servicio de Telefono/Celular
               </FormControl.Label>
@@ -225,7 +210,6 @@ function CostosOperativos(props) {
                 value={celular}
                 onChangeText={value => EstadoInputs(value, 'celular')}
               />
-
               <FormControl.Label>Servicio de Internet</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -233,7 +217,6 @@ function CostosOperativos(props) {
                 value={internet}
                 onChangeText={value => EstadoInputs(value, 'internet')}
               />
-
               <FormControl.Label>Alquiler</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -241,7 +224,6 @@ function CostosOperativos(props) {
                 value={alquiler}
                 onChangeText={value => EstadoInputs(value, 'alquiler')}
               />
-
               <FormControl.Label>Transporte</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -249,7 +231,6 @@ function CostosOperativos(props) {
                 value={transporte}
                 onChangeText={value => EstadoInputs(value, 'transporte')}
               />
-
               <FormControl.Label>Material de Escritorio</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -257,7 +238,6 @@ function CostosOperativos(props) {
                 value={escritorio}
                 onChangeText={value => EstadoInputs(value, 'escritorio')}
               />
-
               <FormControl.Label>Pago a Empleados</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -265,7 +245,6 @@ function CostosOperativos(props) {
                 value={empleados}
                 onChangeText={value => EstadoInputs(value, 'empleados')}
               />
-
               <FormControl.Label>Promoción</FormControl.Label>
               <Input
                 keyboardType="numeric"
@@ -273,9 +252,8 @@ function CostosOperativos(props) {
                 value={promocion}
                 onChangeText={value => EstadoInputs(value, 'promocion')}
               />
-
+              {'\n'}
               <Divider />
-
               <FormControl.Label>Vestimenta</FormControl.Label>
               <Input
                 keyboardType="numeric"
