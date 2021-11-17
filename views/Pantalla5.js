@@ -64,9 +64,9 @@ return (
                             }} variant="rounded" value={relacionesClientes} onChangeText={(value) => EstadoInputs(value, 'relacionesClientes')} />
 
                     </FormControl>
-                    <Box>
+                    {/* <Box>
                         <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button>
-                    </Box>
+                    </Box> */}
                     <Divider />
                 </Box>
             </Stack>

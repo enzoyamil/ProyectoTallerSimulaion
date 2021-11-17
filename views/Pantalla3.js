@@ -53,11 +53,11 @@ function Pantalla3(props) {
 
 
                             <FormControl.Label>La actividad esta funcionando</FormControl.Label>
-                                <Radio.Group name="myRadioGroup">
-                                    <Radio value='si' my={1} size="sm">
+                                <Radio.Group name="myRadioGroup" value={estadoFuncionamiento}>
+                                    <Radio value='si' my={1} size="sm"  onPress={()=>EstadoInputs('si','estadoFuncionamiento')}>
                                         Sí
                                     </Radio>
-                                    <Radio value='no' my={1} size="sm">
+                                    <Radio value='no' my={1} size="sm" onPress={()=>EstadoInputs('no','estadoFuncionamiento')}>
                                         No
                                     </Radio>
                                 </Radio.Group>

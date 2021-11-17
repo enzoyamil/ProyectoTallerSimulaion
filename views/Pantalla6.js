@@ -80,7 +80,7 @@ function Pantalla6(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Emprendimiento")}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
 
