@@ -27,33 +27,34 @@ function Pantalla1(props) {
     }
     function buttonPress() {
 
-        if (name == '' || apellido == '' || ci == '' || extension == '' || edad == '' || telefono == '' || direccion == '') {
-            console.log(name);
-            Alert.alert("Error Campo Vacio");
-        } else if (tamanioMaximo(name, 15)) {
-            Alert.alert("Cadena nombre muy grande");
-        } else if (tamanioMin(name, 2)) {
-            Alert.alert("Cadena nombre muy pequeña");
-        } else if (tamanioMaximo(apellido, 15)) {
-            Alert.alert("Cadena apellido muy grande");
-        } else if (tamanioMaximo(apellido, 15)) {
-            Alert.alert("Cadena apellido muy grande");
-        } else if (tamanioMin(apellido, 4)) {
-            Alert.alert("Cadena apellido muy pequeña");
-        } else if (edad < 0 || edad < 18) {
-            Alert.alert("Edad no aceptada");
-        } else if (telefono.length < 7) {
-            Alert.alert("Telefono no aceptado");
-        } else if (ci.length < 7) {
-            Alert.alert("CI no aceptado");
-        } else if (tamanioMaximo(direccion, 50)) {
-            Alert.alert("Edad no aceptada");
-        } else if (tamanioMin(direccion, 10)) {
-            Alert.alert("Dirección muy corta");
-        } else {
-            Alert.alert("Succesfull");
-            navigation.navigate("Informacón del Emprendimiento");
-        }
+        // if (name == '' || apellido == '' || ci == '' || extension == '' || edad == '' || telefono == '' || direccion == '') {
+        //     console.log(name);
+        //     Alert.alert("Error Campo Vacio");
+        // } else if (tamanioMaximo(name, 15)) {
+        //     Alert.alert("Cadena nombre muy grande");
+        // } else if (tamanioMin(name, 2)) {
+        //     Alert.alert("Cadena nombre muy pequeña");
+        // } else if (tamanioMaximo(apellido, 15)) {
+        //     Alert.alert("Cadena apellido muy grande");
+        // } else if (tamanioMaximo(apellido, 15)) {
+        //     Alert.alert("Cadena apellido muy grande");
+        // } else if (tamanioMin(apellido, 4)) {
+        //     Alert.alert("Cadena apellido muy pequeña");
+        // } else if (edad < 0 || edad < 18) {
+        //     Alert.alert("Edad no aceptada");
+        // } else if (telefono.length < 7) {
+        //     Alert.alert("Telefono no aceptado");
+        // } else if (ci.length < 7) {
+        //     Alert.alert("CI no aceptado");
+        // } else if (tamanioMaximo(direccion, 50)) {
+        //     Alert.alert("Edad no aceptada");
+        // } else if (tamanioMin(direccion, 10)) {
+        //     Alert.alert("Dirección muy corta");
+        // } else {
+        //     Alert.alert("Succesfull");
+        //     navigation.navigate("Informacón del Emprendimiento");
+        // }
+        navigation.navigate("Informacón del Emprendimiento");
     }
 
     let { name, apellido, ci, extension, edad, telefono, direccion } = FormPersonal;
@@ -96,14 +97,14 @@ function Pantalla1(props) {
 
 
                             <FormControl.Label>Extensión</FormControl.Label>
-                            <Select placeholder="Extesion" variant="rounded" value={extension} 
-                            selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                            onValueChange={(value) => EstadoInputs(value, 'extension')}
-                                >
+                            <Select placeholder="Extesion" variant="rounded" value={extension}
+                                selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                                onValueChange={(value) => EstadoInputs(value, 'extension')}
+                            >
                                 <Select.Item label="cbba" value="cochabamba" />
                                 <Select.Item label="La paz" value="La paz" />
-                                <Select.Item label="Santa Cruz" value="Santa Cruz"/>
-                                <Select.Item label="Oruro" value="Oruro"/>
+                                <Select.Item label="Santa Cruz" value="Santa Cruz" />
+                                <Select.Item label="Oruro" value="Oruro" />
                                 <Select.Item label="Potosi" value="Potosi" />
                                 <Select.Item label="Chuquisaca" value="Chuquisaca" />
                                 <Select.Item label="Pando" value="Pando" />

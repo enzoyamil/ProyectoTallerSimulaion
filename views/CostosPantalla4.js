@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button } from "native-base"
 import { useState } from "react";
-import DetalleInsumo from "../Components/DetalleInsumos"
+import DetalleInsumo from "../components/DetalleInsumos"
 
 export default function CostoPantalla4(props) {
 
