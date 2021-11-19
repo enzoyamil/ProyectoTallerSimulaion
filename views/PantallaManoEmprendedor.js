@@ -1,48 +1,55 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
+    FormControl, Button, Input, Stack, ScrollView, Divider, Box,
+    NativeBaseProvider,Text
 } from "native-base";
 import { DataTable } from 'react-native-paper';
-
 
 function PantallaManoEmprendedor(props) {
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormManoObra, setFormManoObra] = useState({
         cantidad: '',
         unidad: 'Global',
         detalle: '',
-        aportePropio: '',
+        aportePropio:''
     });
-
 
     useEffect(() => {
         setFormManoObra(FormManoObra);
     }, [FormManoObra]);
-
 
     function EstadoInputs(value, input) {
         setFormManoObra({ ...FormManoObra, [input]: value });
         console.log(FormManoObra);
     }
 
+    function sumatoria(obj) {
+        let montoTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            montoTotal = montoTotal + numero;
+        })
+        return montoTotal;
+    }
+
     function agregarFila() {
-        setTableService([...TableService, FormManoObra]);
-        console.log(TableService);
+
+        setTableService((obj)=>{
+            let {aportePropio,cantidad,unidad}=FormManoObra;
+            aportePropio = parseInt(cantidad)*parseInt(aportePropio);
+            let arr = {aportePropio,cantidad,unidad}
+            return [...obj,arr];
+        });
+        // setTableService([...TableService, FormManoObra]);
+        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
     return (
         <NativeBaseProvider>
-            <ScrollView
-                w={{
-                    base: "90%",
-                    md: "90%",
-                }}
-            >
+            <ScrollView>
                 <Stack
                     space={2.5}
                     alignSelf="center"
@@ -60,12 +67,9 @@ function PantallaManoEmprendedor(props) {
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
 
-                            {/* <FormControl.Label >Unidad</FormControl.Label>
-                            <Input variant="rounded" value={unidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value,'unidad')} /> */}
 
                             <FormControl.Label >Detalle</FormControl.Label>
-                            <Input variant="rounded" value={detalle} 
+                            <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} />
 
                             <FormControl.Label >Aporte Propio</FormControl.Label>
@@ -86,28 +90,27 @@ function PantallaManoEmprendedor(props) {
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Cantidad</DataTable.Title>
-                                <DataTable.Title>Unidad </DataTable.Title>
-                                {/* <DataTable.Title>Detalle</DataTable.Title> */}
+                                <DataTable.Title>Unidad</DataTable.Title>
                                 <DataTable.Title>Aporte Propio</DataTable.Title>
                             </DataTable.Header>
                             {
                                 TableService.map((item, pos) => (
+                                    
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        {/* <DataTable.Cell>{item.detalle}</DataTable.Cell> */}
                                         <DataTable.Cell>{item.aportePropio}</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
 
                             <DataTable>
-                            <DataTable.Header>
-                                <DataTable.Title>SUBTOTAL </DataTable.Title>
-                                <DataTable.Title>Bs </DataTable.Title>
-                            </DataTable.Header>
+                                <DataTable.Header>
+                                    <DataTable.Title>SUBTOTAL </DataTable.Title>
+                                    <DataTable.Title>{sumatoria("aportePropio")}</DataTable.Title>
+                                </DataTable.Header>
                             </DataTable>
-                            
+
                         </DataTable>
                         <Divider />
                     </Box>

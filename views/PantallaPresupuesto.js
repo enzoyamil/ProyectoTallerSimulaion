@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
+    FormControl, Button, Input, Stack, ScrollView, Divider, Box, NativeBaseProvider, Select, Text
 } from "native-base";
 import { DataTable } from 'react-native-paper';
-
 
 function PantallaPresupuesto(props) {
     const { navigation } = props;
@@ -33,11 +31,8 @@ function PantallaPresupuesto(props) {
             {
                 origenDinero: '',
                 montoDinero: ''
-                //montoTotal:''
             }
         );
-    //    console.log(TableService);
-      //  sumatoria();
     }
     function sumatoria(obj) {
         let montoTotal = 0;
@@ -46,20 +41,11 @@ function PantallaPresupuesto(props) {
             montoTotal = montoTotal + numero;
         })
         return montoTotal;
-
     }
-
-
-
-
+    
     return (
         <NativeBaseProvider>
-            <ScrollView
-                w={{
-                    base: "90%",
-                    md: "90%",
-                }}
-            >
+            <ScrollView>
                 <Stack
                     space={2.5}
                     alignSelf="center"
@@ -74,37 +60,31 @@ function PantallaPresupuesto(props) {
                     <Box>
                         <FormControl mb="5">
                             <FormControl.Label>Procedencia</FormControl.Label>
-                            <Select placeholder="" variant="rounded" value={origenDinero} 
-                            selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                            onValueChange={(value) => EstadoInputs(value, 'origenDinero')}>
-                                <Select.Item label="Efectivo" value="Efectivo"  />
-                                <Select.Item label="Banco" value="Banco"  />
-                                <Select.Item label="Otro" value="Otro"  />
+                            <Select placeholder="" variant="rounded" value={origenDinero}
+                                selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                                onValueChange={(value) => EstadoInputs(value, 'origenDinero')}>
+                                <Select.Item label="Efectivo" value="Efectivo" />
+                                <Select.Item label="Banco" value="Banco" />
+                                <Select.Item label="Otro" value="Otro" />
                             </Select>
-
 
                             <FormControl.Label >Cantidad en Efectivo (Bs)</FormControl.Label>
                             <Input variant="rounded" value={montoDinero} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'montoDinero')}
                             />
 
-
                         </FormControl>
                         <Box>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Box>
-
                         <Text>Presupuesto</Text>
-
-
 
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Origen</DataTable.Title>
                                 <DataTable.Title>Efectivo</DataTable.Title>
                             </DataTable.Header>
-
 
                             {
                                 TableService.map((item, pos) => (
@@ -114,15 +94,14 @@ function PantallaPresupuesto(props) {
                                     </DataTable.Row>
                                 ))
                             }
-
                             <DataTable>
                                 <DataTable.Header>
                                     <DataTable.Cell>SUBTOTAL</DataTable.Cell>
-                                    
 
-                                        <DataTable.Cell >{sumatoria("montoDinero")}</DataTable.Cell>
 
-                                    
+                                    <DataTable.Cell >{sumatoria("montoDinero")}</DataTable.Cell>
+
+
 
 
 

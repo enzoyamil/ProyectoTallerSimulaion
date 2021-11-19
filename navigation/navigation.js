@@ -29,7 +29,7 @@ const Stack = createNativeStackNavigator();
 function navigation() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Información Personal" component={pantalla1} />
+      {/* <Stack.Screen name="Información Personal" component={pantalla1} />
       <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
       <Stack.Screen name="Descripción del Negocio" component={pantalla3} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos" component={CostoPantalla1} />
@@ -45,7 +45,7 @@ function navigation() {
         name="Costos Operativos"
         component={CostosOperativos}
       />
-      <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/>
+      <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/> */}
             <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor}/>
             <Stack.Screen name="Materia Prima" component={materiaPrima}/>
             <Stack.Screen name="Requerimientos Promocionales" component={reqPromo}/>
