@@ -30,9 +30,36 @@ function ReqLegales(props) {
         console.log(FormReqLegal);
     }
 
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+
     function agregarFila() {
         setTableService([...TableService, FormReqLegal]);
-        console.log(TableService);
+        setFormReqLegal(
+            {
+                cantidad: '',
+                unidad: '',
+                detalle: '',
+                aportePropio: '',
+                seInvertira: ''
+            }
+        );
+        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormReqLegal;
@@ -59,10 +86,10 @@ function ReqLegales(props) {
 
                             <FormControl.Label >Unidad</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value,'unidad')} />
+                                onChangeText={(value) => EstadoInputs(value, 'unidad')} />
 
                             <FormControl.Label >Detalle</FormControl.Label>
-                            <Input variant="rounded" value={detalle} 
+                            <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} />
 
                             <FormControl.Label >Aporte Propio</FormControl.Label>
@@ -104,31 +131,20 @@ function ReqLegales(props) {
                                 ))
                             }
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                    <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
 
                             </DataTable>
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> TOTAL</DataTable.Cell>
                                     <DataTable.Cell> 1000 BS</DataTable.Cell>
                                     <DataTable.Cell> 1000 BS</DataTable.Cell>
                                 </DataTable.Row>
-
                             </DataTable>
-
-                            
                         </DataTable>
                         <Divider />
                     </Box>

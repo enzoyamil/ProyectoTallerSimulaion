@@ -43,7 +43,6 @@ function PantallaManoEmprendedor(props) {
             return [...obj,arr];
         });
         // setTableService([...TableService, FormManoObra]);
-        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
@@ -76,12 +75,8 @@ function PantallaManoEmprendedor(props) {
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
 
-
-
-
                         </FormControl>
                         <Box>
-                            {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Box>
 
@@ -103,7 +98,6 @@ function PantallaManoEmprendedor(props) {
                                     </DataTable.Row>
                                 ))
                             }
-
                             <DataTable>
                                 <DataTable.Header>
                                     <DataTable.Title>SUBTOTAL </DataTable.Title>

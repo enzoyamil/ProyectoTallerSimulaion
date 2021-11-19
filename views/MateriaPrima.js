@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
+    FormControl, Button, Input, Stack, ScrollView, Divider, Box,
+    NativeBaseProvider,Text
 } from "native-base";
 import { DataTable } from 'react-native-paper';
 
@@ -19,19 +19,45 @@ function MateriaPrima(props) {
         seInvertira: ''
     });
 
-
     useEffect(() => {
         setFormateriaPrima(FormateriaPrima);
     }, [FormateriaPrima]);
-
 
     function EstadoInputs(value, input) {
         setFormateriaPrima({ ...FormateriaPrima, [input]: value });
         console.log(FormateriaPrima);
     }
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+
+
 
     function agregarFila() {
         setTableService([...TableService, FormateriaPrima]);
+        setFormateriaPrima(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );
         console.log(TableService);
     }
 
@@ -111,8 +137,8 @@ function MateriaPrima(props) {
                                 </DataTable.Header> */}
                                 <DataTable.Row> 
                                 <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell> {sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
                                 
                             </DataTable>

@@ -9,25 +9,23 @@ import { DataTable } from 'react-native-paper';
 function PlanInversion(props) {
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
+    const [FormResumenInv, setFormResumenInv] = useState({
+        gastOperativo: '',
+        materiaPrima: '',
+        reqPromocionales: '',
+        infraestructura: '',
+        maquinaria: '',
+        reqLegales: '',
+    });
 
-    // const [FormManoObra, setFormManoObra] = useState({
-    //     cantidad: '',
-    //     unidad: 'Global',
-    //     detalle: '',
-    //     aportePropio: '',
-    // });
-    // useEffect(() => {
-    //     setFormManoObra(FormManoObra);
-    // }, [FormManoObra]);
-    // function EstadoInputs(value, input) {
-    //     setFormManoObra({ ...FormManoObra, [input]: value });
-    //     console.log(FormManoObra);
-    // }
-    // function agregarFila() {
-    //     setTableService([...TableService, FormManoObra]);
-    //     console.log(TableService);
-    // }
-    // let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
+    function EstadoInputs(value, input) {
+        setFormResumen({ ...FormResumenInv, [input]: value });
+        console.log(FormResumenInv);
+    }
+
+    let { gastOperativo,materiaPrima,reqPromocionales,infraestructura,maquinaria,reqLegales} = FormResumenInv;
+
+
     return (
         <NativeBaseProvider>
             <ScrollView>

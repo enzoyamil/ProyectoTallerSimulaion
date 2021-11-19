@@ -9,25 +9,20 @@ import { DataTable } from 'react-native-paper';
 function DatosResumen(props) {
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
+    const [FormResumenDatos, setFormResumenDatos] = useState({
+        gastOperativo: '',
+        materiaPrima: '',
+        reqPromocionales: '',
+        infraestructura: '',
+        maquinaria: '',
+        reqLegales: '',
+    });
+    function EstadoInputs(value, input) {
+        setFormResumenDatos({ ...FormResumenDatos, [input]: value });
+        console.log(FormResumenDatos);
+    }
 
-    // const [FormManoObra, setFormManoObra] = useState({
-    //     cantidad: '',
-    //     unidad: 'Global',
-    //     detalle: '',
-    //     aportePropio: '',
-    // });
-    // useEffect(() => {
-    //     setFormManoObra(FormManoObra);
-    // }, [FormManoObra]);
-    // function EstadoInputs(value, input) {
-    //     setFormManoObra({ ...FormManoObra, [input]: value });
-    //     console.log(FormManoObra);
-    // }
-    // function agregarFila() {
-    //     setTableService([...TableService, FormManoObra]);
-    //     console.log(TableService);
-    // }
-    // let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
+    let { gastOperativo,materiaPrima,reqLegales,infraestructura,maquinaria,reqPromocionales } = FormResumenDatos;
     return (
         <NativeBaseProvider>
             <ScrollView>

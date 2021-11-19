@@ -97,14 +97,7 @@ function PantallaPresupuesto(props) {
                             <DataTable>
                                 <DataTable.Header>
                                     <DataTable.Cell>SUBTOTAL</DataTable.Cell>
-
-
                                     <DataTable.Cell >{sumatoria("montoDinero")}</DataTable.Cell>
-
-
-
-
-
                                 </DataTable.Header>
                             </DataTable>
 

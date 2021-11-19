@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
+    FormControl, Button, Input, Stack,  ScrollView, Divider, Box,
+    NativeBaseProvider, Text
 } from "native-base";
 import { DataTable } from 'react-native-paper';
 
@@ -10,24 +10,23 @@ function PresupuestoResumen(props) {
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
 
-    // const [FormManoObra, setFormManoObra] = useState({
-    //     cantidad: '',
-    //     unidad: 'Global',
-    //     detalle: '',
-    //     aportePropio: '',
-    // });
-    // useEffect(() => {
-    //     setFormManoObra(FormManoObra);
-    // }, [FormManoObra]);
-    // function EstadoInputs(value, input) {
-    //     setFormManoObra({ ...FormManoObra, [input]: value });
-    //     console.log(FormManoObra);
-    // }
-    // function agregarFila() {
-    //     setTableService([...TableService, FormManoObra]);
-    //     console.log(TableService);
-    // }
-    // let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
+    const [FormResumen, setFormResumen] = useState({
+        efectivo: '',
+        manoObra: '',
+        materiaPrima: '',
+        reqPromocionales: '',
+        infraestructura: '',
+        maquinaria: '',
+        reqLegales: '',
+        gastoOperativo:''
+    });
+    function EstadoInputs(value, input) {
+        setFormResumen({ ...FormResumenInv, [input]: value });
+        console.log(FormResumenInv);
+    }
+
+    let { efectivo,manoObra,materiaPrima,reqPromocionales,infraestructura,maquinaria,reqLegales,gastoOperativo} = FormResumen;
+
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -68,6 +67,11 @@ function PresupuestoResumen(props) {
                                     <DataTable.Row>
                                         <DataTable.Cell>Requerimientos Promocionales</DataTable.Cell>
                                         <DataTable.Cell>400</DataTable.Cell>
+                                    </DataTable.Row>
+
+                                    <DataTable.Row>
+                                        <DataTable.Cell>GastoOperativo</DataTable.Cell>
+                                        <DataTable.Cell>500</DataTable.Cell>
                                     </DataTable.Row>
 
                                     <DataTable.Header>

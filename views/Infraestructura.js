@@ -27,12 +27,39 @@ function Infraestructura(props) {
 
     function EstadoInputs(value, input) {
         setFormInfraestructura({ ...FormInfraestructura, [input]: value });
-        console.log(FormInfraestructura);
+        // console.log(FormInfraestructura);
+    }
+
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
     }
 
     function agregarFila() {
         setTableService([...TableService, FormInfraestructura]);
-        console.log(TableService);
+        setFormInfraestructura(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );
+        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormInfraestructura;
@@ -104,14 +131,10 @@ function Infraestructura(props) {
                                 ))
                             }
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row> 
                                 <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
                                 
                             </DataTable>

@@ -44,9 +44,9 @@ function navigation() {
         options={{ title: 'Costos Operativos' }}
         name="Costos Operativos"
         component={CostosOperativos}
-      />
-      <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/> */}
-            <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor}/>
+      />*/}
+            <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/> 
+            <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor}/> 
             <Stack.Screen name="Materia Prima" component={materiaPrima}/>
             <Stack.Screen name="Requerimientos Promocionales" component={reqPromo}/>
             <Stack.Screen name="Gastos Operativos" component={gastosOperativos}/>
@@ -56,7 +56,6 @@ function navigation() {
             <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen}/>
             <Stack.Screen name="Plan Inversión" component={planInversion}/>
             <Stack.Screen name="Datos Resumen" component={datosResumen}/>
-
     </Stack.Navigator>
   );
 }

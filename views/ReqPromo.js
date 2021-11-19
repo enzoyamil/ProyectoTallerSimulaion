@@ -10,7 +10,6 @@ import { DataTable } from 'react-native-paper';
 function ReqPromo(props) {
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormaPromo, setFormaPromo] = useState({
         cantidad: '',
         unidad: '',
@@ -18,7 +17,6 @@ function ReqPromo(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
 
     useEffect(() => {
         setFormaPromo(FormaPromo);
@@ -30,9 +28,36 @@ function ReqPromo(props) {
         console.log(FormaPromo);
     }
 
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+
     function agregarFila() {
         setTableService([...TableService, FormaPromo]);
-        console.log(TableService);
+        setFormaPromo(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );
+        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormaPromo;
@@ -73,8 +98,6 @@ function ReqPromo(props) {
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
 
-
-
                         </FormControl>
                         <Box>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
@@ -97,21 +120,16 @@ function ReqPromo(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        {/* <DataTable.Cell>{item.detalle}</DataTable.Cell> */}
                                         <DataTable.Cell>{item.aportePropio}</DataTable.Cell>
                                         <DataTable.Cell>{item.seInvertira}</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row> 
                                 <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell> {sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
                                 
                             </DataTable>

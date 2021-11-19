@@ -30,9 +30,36 @@ function Maquinaria(props) {
         console.log(FormMaquinaria);
     }
 
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+
     function agregarFila() {
         setTableService([...TableService, FormMaquinaria]);
-        console.log(TableService);
+        setFormMaquinaria(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );
+        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormMaquinaria;
@@ -111,8 +138,8 @@ function Maquinaria(props) {
                                 </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
 
                             </DataTable>

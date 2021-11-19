@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
+    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box,
+    NativeBaseProvider,Text
 } from "native-base";
 import { DataTable } from 'react-native-paper';
 
@@ -19,7 +19,6 @@ function GastosOperativos(props) {
         seInvertira: ''
     });
 
-
     useEffect(() => {
         setGastOperativo(FormGastOperativo);
     }, [FormGastOperativo]);
@@ -30,9 +29,36 @@ function GastosOperativos(props) {
         console.log(FormGastOperativo);
     }
 
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+
     function agregarFila() {
         setTableService([...TableService, FormGastOperativo]);
-        console.log(TableService);
+        setGastOperativo(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );
+        // console.log(TableService);
     }
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormGastOperativo;
@@ -73,8 +99,6 @@ function GastosOperativos(props) {
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
 
-
-
                         </FormControl>
                         <Box>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
@@ -105,31 +129,20 @@ function GastosOperativos(props) {
                             }
 
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                    <DataTable.Cell> {sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
 
                                 <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row> 
                                 <DataTable.Cell> TOTAL</DataTable.Cell>
                                 <DataTable.Cell> 1000 BS</DataTable.Cell>
                                 <DataTable.Cell> 1000 BS</DataTable.Cell>
                                 </DataTable.Row>
-                                
                             </DataTable>
-
                             </DataTable>
-
                         </DataTable>
                         <Divider />
                     </Box>
