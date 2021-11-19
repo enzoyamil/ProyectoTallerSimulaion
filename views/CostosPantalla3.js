@@ -83,7 +83,7 @@ export default function CostoPantalla3(props) {
                         }
                     </DataTable>
                     <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4_2")}>Siguiente</Button>
+                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Siguiente</Button>
                     </Box>
                 </Stack>
             </ScrollView>

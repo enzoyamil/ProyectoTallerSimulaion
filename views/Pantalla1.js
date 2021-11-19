@@ -61,12 +61,7 @@ function Pantalla1(props) {
     let [service, setService] = React.useState("");
     return (
         <NativeBaseProvider>
-            <ScrollView
-                w={{
-                    base: "90%",
-                    md: "90%",
-                }}
-            >
+            <ScrollView>
                 <Stack
                     space={2.5}
                     alignSelf="center"

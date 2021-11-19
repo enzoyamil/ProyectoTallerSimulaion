@@ -34,11 +34,7 @@ function Pantalla2(props) {
 
     return (
         <NativeBaseProvider>
-            <ScrollView
-                w={{
-                    base: "90%",
-                    md: "90%",
-                }}>
+            <ScrollView>
                 <Stack
                     space={2.5}
                     alignSelf="center"

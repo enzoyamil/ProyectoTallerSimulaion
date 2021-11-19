@@ -38,12 +38,7 @@ function MateriaPrima(props) {
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormateriaPrima;
     return (
         <NativeBaseProvider>
-            <ScrollView
-                w={{
-                    base: "90%",
-                    md: "90%",
-                }}
-            >
+            <ScrollView>
                 <Stack
                     space={2.5}
                     alignSelf="center"

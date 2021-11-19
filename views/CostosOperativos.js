@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Alert, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { Alert, StyleSheet } from 'react-native';
 // import { NativeBaseProvider, Box,Button } from 'native-base';
 import {
   FormControl,
@@ -15,11 +15,11 @@ import {
   NativeBaseProvider,
   Select,
 } from 'native-base';
-import {tamanioMaximo, tamanioMin, sinCaractEsp} from '../helpers/Validation';
-import {DataTable} from 'react-native-paper';
+import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
+import { DataTable } from 'react-native-paper';
 
 function CostosOperativos(props) {
-  const {navigation} = props;
+  const { navigation } = props;
   const [FormPersonal, setFormPersonal] = useState({
     impuestos: '',
     alimentacion: '',
@@ -37,7 +37,7 @@ function CostosOperativos(props) {
   console.log(FormPersonal);
 
   function EstadoInputs(value, input) {
-    setFormPersonal({...FormPersonal, [input]: value});
+    setFormPersonal({ ...FormPersonal, [input]: value });
     console.log(FormPersonal);
   }
 
@@ -149,11 +149,7 @@ function CostosOperativos(props) {
   let [service, setService] = React.useState('');
   return (
     <NativeBaseProvider>
-      <ScrollView
-        w={{
-          base: '98%',
-          md: '95%',
-        }}>
+      <ScrollView>
         <Stack
           space={2.5}
           alignSelf="center"
