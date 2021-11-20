@@ -86,9 +86,9 @@ export default function CostoPantalla3(props) {
                     <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
-                                <DataTable.Title style={{ width: 80 }}>Mes</DataTable.Title>
-                                <DataTable.Title style={{ width: 150 }}>Ventas mensuales</DataTable.Title>
-                                <DataTable.Title style={{ width: 180 }}>Costo de produccion mensuales</DataTable.Title>
+                                <DataTable.Title style={{ width: 80 }} ><Text bold>Mes</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 150 }}><Text bold>Ventas mensuales</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 180 }}><Text bold>Costo de produccion mensuales</Text></DataTable.Title>
                             </DataTable.Header>
                             {
                                 TableService.map((item, pos) => (

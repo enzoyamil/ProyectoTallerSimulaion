@@ -8,7 +8,8 @@ export default function CostoPantalla4(props) {
     const { navigation } = props;
     const [FormProducto, setFormProducto] = useState({
         producto_o_servicio: '',
-        unidad_de_medida: ''
+        unidad_de_medida: '',
+        precio_venta: ''
     });
     const [Detalles, setDetalles] = useState([
 
@@ -17,11 +18,12 @@ export default function CostoPantalla4(props) {
     function EstadoInputs(value, input) {
         setFormProducto({ ...FormProducto, [input]: value });
     }
-    let { producto_o_servicio, unidad_de_medida } = FormProducto;
+    let { producto_o_servicio, unidad_de_medida, precio_venta } = FormProducto;
     function verDetalle() {
         setDetalles([...Detalles, {
             producto_o_servicio,
-            unidad_de_medida
+            unidad_de_medida,
+            precio_venta
         }])
     }
     return (
@@ -35,6 +37,8 @@ export default function CostoPantalla4(props) {
                         <Input variant="rounded" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
                         <FormControl.Label>Unidad de medida</FormControl.Label>
                         <Input variant="rounded" value={unidad_de_medida} onChangeText={(value) => EstadoInputs(value, 'unidad_de_medida')} />
+                        <FormControl.Label>Precio de venta</FormControl.Label>
+                        <Input variant="rounded" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} />
                     </FormControl>
                     <Center>
                         <Button onPress={verDetalle}>Crear</Button>
@@ -46,6 +50,7 @@ export default function CostoPantalla4(props) {
                                 navigation={navigation}
                                 producto_o_servico={item.producto_o_servicio}
                                 unidad_medida={item.unidad_de_medida}
+                                precio_venta={item.precio_venta}
                             />
                         ))
                     }
