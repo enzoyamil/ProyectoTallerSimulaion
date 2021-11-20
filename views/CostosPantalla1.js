@@ -62,7 +62,11 @@ export default function CostoPantalla2(props) {
         return sum_total_venta;
     }
     function MUBTotal() {
-        return (100 * (parseFloat(sumatoriaVentaMensuales()) - parseFloat(sumatoriaCompraMensuales())) / parseFloat(sumatoriaVentaMensuales())).toFixed(2);
+        let mub_total = 0;
+        if (parseFloat(sumatoriaVentaMensuales()) != 0 && parseFloat(sumatoriaCompraMensuales()) != 0) {
+            mub_total = (100 * (parseFloat(sumatoriaVentaMensuales()) - parseFloat(sumatoriaCompraMensuales())) / parseFloat(sumatoriaVentaMensuales())).toFixed(2);
+        }
+        return mub_total;
     }
     function valorfrecuencia(cadena) {
         let valor_frecuencia = 0;
