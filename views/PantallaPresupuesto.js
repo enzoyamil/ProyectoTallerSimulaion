@@ -17,6 +17,7 @@ function PantallaPresupuesto(props) {
     // console.log(FormPresupuesto);
     let { origenDinero, montoDinero } = FormPresupuesto;
     let [service, setService] = React.useState("");
+    
     useEffect(() => {
         setFormPresupuesto(FormPresupuesto);
     }, [FormPresupuesto]);

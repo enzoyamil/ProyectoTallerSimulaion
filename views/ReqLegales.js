@@ -165,7 +165,23 @@ function ReqLegales(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Resumen")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Resumen",{
+                    montoPresupuesto:montoPresupuesto,
+                    montoMano:montoMano,
+                    totalAportMateriaP:totalAportMateriaP,
+                    totalInvMateriaP: totalInvMateriaP,
+                    totalAportePromo:totalAportePromo,
+                    totalInvPromo:totalInvPromo,
+                    totalPropioGasOpe:totalPropioGasOpe,
+                    totalInvGasOpe:totalInvGasOpe,
+                    totalPropioInfra:totalPropioInfra,
+                    totalInvInfra:totalInvInfra,
+                    maqPropTotal:maqPropTotal,
+                    maqInvTotal:maqInvTotal,
+                    totalReqLegPropio:totalReqLegPropio,
+                    totalReqLegInv:totalReqLegInv
+                    
+                })}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );
