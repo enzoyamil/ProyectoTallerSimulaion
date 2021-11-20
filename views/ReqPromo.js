@@ -8,7 +8,7 @@ import { DataTable } from 'react-native-paper';
 
 
 function ReqPromo(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
     const [FormaPromo, setFormaPromo] = useState({
         cantidad: '',
@@ -17,7 +17,11 @@ function ReqPromo(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP} = route.params;
+    console.log("este es el monto presupuesto"+montoPresupuesto);
+    console.log("este es el monto mano de obra"+montoMano);
+    console.log("este es el monto totalAportMateriaP"+totalAportMateriaP);
+    console.log("este es el monto totalInvMateriaP"+totalInvMateriaP);
     useEffect(() => {
         setFormaPromo(FormaPromo);
     }, [FormaPromo]);
@@ -25,7 +29,7 @@ function ReqPromo(props) {
 
     function EstadoInputs(value, input) {
         setFormaPromo({ ...FormaPromo, [input]: value });
-        console.log(FormaPromo);
+        // console.log(FormaPromo);
     }
 
     function sumAportePropio(obj) {
@@ -59,6 +63,8 @@ function ReqPromo(props) {
         );
         // console.log(TableService);
     }
+    let totalAportePromo = sumAportePropio("aportePropio");
+    let totalInvPromo = sumInversionPropio("seInvertira") ;
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormaPromo;
     return (
@@ -139,7 +145,14 @@ function ReqPromo(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Gastos Operativos")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Gastos Operativos",{
+                    montoPresupuesto:montoPresupuesto,
+                    montoMano:montoMano,
+                    totalAportMateriaP:totalAportMateriaP,
+                    totalInvMateriaP: totalInvMateriaP,
+                    totalAportePromo:totalAportePromo,
+                    totalInvPromo:totalInvPromo
+                })}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

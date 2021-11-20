@@ -7,7 +7,7 @@ import {
 import { DataTable } from 'react-native-paper';
 
 function PantallaManoEmprendedor(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
     const [FormManoObra, setFormManoObra] = useState({
         cantidad: '',
@@ -15,16 +15,17 @@ function PantallaManoEmprendedor(props) {
         detalle: '',
         aportePropio:''
     });
-
+    
+    const {montoPresupuesto} = route.params;
+    console.log(montoPresupuesto);
     useEffect(() => {
         setFormManoObra(FormManoObra);
     }, [FormManoObra]);
 
     function EstadoInputs(value, input) {
         setFormManoObra({ ...FormManoObra, [input]: value });
-        console.log(FormManoObra);
+        // console.log(FormManoObra);
     }
-
     function sumatoria(obj) {
         let montoTotal = 0;
         TableService.map((item) => {
@@ -35,18 +36,29 @@ function PantallaManoEmprendedor(props) {
     }
 
     function agregarFila() {
-
         setTableService((obj)=>{
             let {aportePropio,cantidad,unidad}=FormManoObra;
             aportePropio = parseInt(cantidad)*parseInt(aportePropio);
             let arr = {aportePropio,cantidad,unidad}
+            setFormManoObra(
+                {
+                cantidad: '',
+                unidad: '',
+                detalle: '',
+                aportePropio: '',
+                seInvertira: ''
+                }
+            );
             return [...obj,arr];
         });
         // setTableService([...TableService, FormManoObra]);
     }
-
+    let monto = sumatoria("aportePropio");
+    console.log("esto es el monto mano de obra"+monto);
+    
     let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
-    return (
+    // let manoObraTotal = sumatoria(aportePropio);
+        return (
         <NativeBaseProvider>
             <ScrollView>
                 <Stack
@@ -111,7 +123,7 @@ function PantallaManoEmprendedor(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Materia Prima")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Materia Prima",{montoPresupuesto:montoPresupuesto,montoMano:monto})}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

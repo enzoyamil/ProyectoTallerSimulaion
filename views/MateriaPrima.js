@@ -8,9 +8,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function MateriaPrima(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormateriaPrima, setFormateriaPrima] = useState({
         cantidad: '',
         unidad: '',
@@ -18,6 +17,9 @@ function MateriaPrima(props) {
         aportePropio: '',
         seInvertira: ''
     });
+    const {montoPresupuesto,montoMano} = route.params;
+    console.log("este es el monto presupuesto"+montoPresupuesto);
+    console.log("este es el monto mano de obra"+montoMano);
 
     useEffect(() => {
         setFormateriaPrima(FormateriaPrima);
@@ -25,7 +27,7 @@ function MateriaPrima(props) {
 
     function EstadoInputs(value, input) {
         setFormateriaPrima({ ...FormateriaPrima, [input]: value });
-        console.log(FormateriaPrima);
+        // console.log(FormateriaPrima);
     }
     function sumAportePropio(obj) {
         let invPropia = 0;
@@ -45,8 +47,6 @@ function MateriaPrima(props) {
         return invPropioTotal;
     }
 
-
-
     function agregarFila() {
         setTableService([...TableService, FormateriaPrima]);
         setFormateriaPrima(
@@ -58,8 +58,14 @@ function MateriaPrima(props) {
             seInvertira: ''
             }
         );
-        console.log(TableService);
+        
     }
+
+
+    let montoApor = sumAportePropio("aportePropio");
+    let montoInversion =sumInversionPropio("seInvertira");
+    console.log("este es el montoAportePropio MateriaPrima:"+montoApor);
+    console.log("este es el montoInversion MateriaPrima"+ montoInversion);
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormateriaPrima;
     return (
@@ -131,10 +137,7 @@ function MateriaPrima(props) {
                             }
 
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
+
                                 <DataTable.Row> 
                                 <DataTable.Cell> SUBTOTAL</DataTable.Cell>
                                 <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
@@ -149,7 +152,13 @@ function MateriaPrima(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimientos Promocionales")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimientos Promocionales",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:montoApor,
+                totalInvMateriaP: montoInversion
+                
+            })}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

@@ -14,7 +14,7 @@ function PantallaPresupuesto(props) {
         montoDinero: ''
         //montoTotal:''
     });
-    console.log(FormPresupuesto);
+    // console.log(FormPresupuesto);
     let { origenDinero, montoDinero } = FormPresupuesto;
     let [service, setService] = React.useState("");
     useEffect(() => {
@@ -42,7 +42,8 @@ function PantallaPresupuesto(props) {
         })
         return montoTotal;
     }
-    
+    let monto = sumatoria("montoDinero");
+     console.log("este es el monto presupuesto"+monto);
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -107,7 +108,7 @@ function PantallaPresupuesto(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Mano Emprendedor")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Mano Emprendedor",{montoPresupuesto:monto})}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
 

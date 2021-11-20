@@ -8,7 +8,7 @@ import { DataTable } from 'react-native-paper';
 
 
 function GastosOperativos(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
 
     const [FormGastOperativo, setGastOperativo] = useState({
@@ -18,7 +18,13 @@ function GastosOperativos(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo} = route.params;
+    console.log("este es el monto presupuesto"+montoPresupuesto);
+    console.log("este es el monto mano de obra"+montoMano);
+    console.log("este es el monto totalAportMateriaP"+totalAportMateriaP);
+    console.log("este es el monto totalInvMateriaP"+totalInvMateriaP);
+    console.log("este es el monto totalAportePromo"+totalAportePromo);
+    console.log("este es el monto totalInvPromo"+totalInvPromo);
     useEffect(() => {
         setGastOperativo(FormGastOperativo);
     }, [FormGastOperativo]);
@@ -26,7 +32,7 @@ function GastosOperativos(props) {
 
     function EstadoInputs(value, input) {
         setGastOperativo({ ...FormGastOperativo, [input]: value });
-        console.log(FormGastOperativo);
+        // console.log(FormGastOperativo);
     }
 
     function sumAportePropio(obj) {
@@ -47,6 +53,12 @@ function GastosOperativos(props) {
         return invPropioTotal;
     }
 
+    let totalPropioGasOpe=sumAportePropio("aportePropio");
+    let totalInvGasOpe=sumInversionPropio("seInvertira");
+    console.log("este es el totalPropioGasOpe"+ totalPropioGasOpe);
+    console.log("este es el totalInvGasOpe"+ totalInvGasOpe);
+
+
     function agregarFila() {
         setTableService([...TableService, FormGastOperativo]);
         setGastOperativo(
@@ -60,6 +72,24 @@ function GastosOperativos(props) {
         );
         // console.log(TableService);
     }
+
+    function totalCapitalOpercionesPropio(){
+        let  totalPropio = parseInt(montoMano) + parseInt(totalAportMateriaP)+ parseInt(totalAportePromo)+ parseInt(totalPropioGasOpe);
+        // console.log("TOTAL:" + totalPropio)
+        return parseInt(totalPropio);
+    }
+    
+    function totalInversionOpercionesPropio(){
+        let totalInv = parseInt(totalInvMateriaP)  + parseInt(totalInvPromo)+ parseInt(totalInvGasOpe) ;
+        // console.log("TOTAL:" + totalInv)
+        return totalInv;
+    }
+
+    let totalPropio = totalCapitalOpercionesPropio();
+    console.log("TotalCapital"+totalPropio);
+    let totalInv = totalInversionOpercionesPropio();
+    console.log("TotalInversion"+totalInv);
+
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormGastOperativo;
     return (
@@ -101,7 +131,6 @@ function GastosOperativos(props) {
 
                         </FormControl>
                         <Box>
-                            {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Box>
 
@@ -138,8 +167,8 @@ function GastosOperativos(props) {
                                 <DataTable>
                                 <DataTable.Row> 
                                 <DataTable.Cell> TOTAL</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                <DataTable.Cell>{totalPropio}</DataTable.Cell>
+                                <DataTable.Cell>{totalInv}</DataTable.Cell>
                                 </DataTable.Row>
                             </DataTable>
                             </DataTable>
