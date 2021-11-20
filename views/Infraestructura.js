@@ -8,9 +8,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function Infraestructura(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormInfraestructura, setFormInfraestructura] = useState({
         cantidad: '',
         unidad: '',
@@ -18,7 +17,10 @@ function Infraestructura(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {
+        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
+        totalPropioGasOpe,totalInvGasOpe
+    } = route.params;
 
     useEffect(() => {
         setFormInfraestructura(FormInfraestructura);
@@ -61,6 +63,10 @@ function Infraestructura(props) {
         );
         // console.log(TableService);
     }
+    let totalPropioInfra=sumAportePropio("aportePropio");
+    let totalInvInfra=sumInversionPropio("seInvertira");
+    console.log("Monto totalPropioInfra" + totalPropioInfra);
+    console.log("Monto totalInvInfra"+totalInvInfra);
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormInfraestructura;
     return (
@@ -144,7 +150,18 @@ function Infraestructura(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Maquinaria")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Maquinaria",{
+                    montoPresupuesto:montoPresupuesto,
+                    montoMano:montoMano,
+                    totalAportMateriaP:totalAportMateriaP,
+                    totalInvMateriaP: totalInvMateriaP,
+                    totalAportePromo:totalAportePromo,
+                    totalInvPromo:totalInvPromo,
+                    totalPropioGasOpe:totalPropioGasOpe,
+                    totalInvGasOpe:totalInvGasOpe,
+                    totalPropioInfra:totalPropioInfra,
+                    totalInvInfra:totalInvInfra
+                })}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

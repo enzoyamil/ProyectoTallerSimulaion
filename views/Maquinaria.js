@@ -8,9 +8,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function Maquinaria(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormMaquinaria, setFormMaquinaria] = useState({
         cantidad: '',
         unidad: '',
@@ -18,7 +17,10 @@ function Maquinaria(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {
+        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
+        totalPropioGasOpe,totalInvGasOpe,totalPropioInfra,totalInvInfra
+    } = route.params;
 
     useEffect(() => {
         setFormMaquinaria(FormMaquinaria);
@@ -61,7 +63,8 @@ function Maquinaria(props) {
         );
         // console.log(TableService);
     }
-
+    let maqPropTotal=sumAportePropio("aportePropio");
+    let maqInvTotal=sumInversionPropio("seInvertira");
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormMaquinaria;
     return (
         <NativeBaseProvider>
@@ -149,7 +152,21 @@ function Maquinaria(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimiento Legal")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimiento Legal",{
+                    montoPresupuesto:montoPresupuesto,
+                    montoMano:montoMano,
+                    totalAportMateriaP:totalAportMateriaP,
+                    totalInvMateriaP: totalInvMateriaP,
+                    totalAportePromo:totalAportePromo,
+                    totalInvPromo:totalInvPromo,
+                    totalPropioGasOpe:totalPropioGasOpe,
+                    totalInvGasOpe:totalInvGasOpe,
+                    totalPropioInfra:totalPropioInfra,
+                    totalInvInfra:totalInvInfra,
+                    maqPropTotal:maqPropTotal,
+                    maqInvTotal:maqInvTotal
+
+                })}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

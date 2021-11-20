@@ -19,12 +19,12 @@ function GastosOperativos(props) {
         seInvertira: ''
     });
     const {montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo} = route.params;
-    console.log("este es el monto presupuesto"+montoPresupuesto);
-    console.log("este es el monto mano de obra"+montoMano);
-    console.log("este es el monto totalAportMateriaP"+totalAportMateriaP);
-    console.log("este es el monto totalInvMateriaP"+totalInvMateriaP);
-    console.log("este es el monto totalAportePromo"+totalAportePromo);
-    console.log("este es el monto totalInvPromo"+totalInvPromo);
+    // console.log("este es el monto presupuesto"+montoPresupuesto);
+    // console.log("este es el monto mano de obra"+montoMano);
+    // console.log("este es el monto totalAportMateriaP"+totalAportMateriaP);
+    // console.log("este es el monto totalInvMateriaP"+totalInvMateriaP);
+    // console.log("este es el monto totalAportePromo"+totalAportePromo);
+    // console.log("este es el monto totalInvPromo"+totalInvPromo);
     useEffect(() => {
         setGastOperativo(FormGastOperativo);
     }, [FormGastOperativo]);
@@ -178,7 +178,17 @@ function GastosOperativos(props) {
                 </Stack>
             </ScrollView>
             <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Infraestructura")}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Infraestructura",{
+                    montoPresupuesto:montoPresupuesto,
+                    montoMano:montoMano,
+                    totalAportMateriaP:totalAportMateriaP,
+                    totalInvMateriaP: totalInvMateriaP,
+                    totalAportePromo:totalAportePromo,
+                    totalInvPromo:totalInvPromo,
+                    totalPropioGasOpe:totalPropioGasOpe,
+                    totalInvGasOpe:totalInvGasOpe
+
+                })}>Siguiente</Button>
             </Box>
         </NativeBaseProvider>
     );

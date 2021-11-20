@@ -43,7 +43,7 @@ function PantallaPresupuesto(props) {
         return montoTotal;
     }
     let monto = sumatoria("montoDinero");
-     console.log("este es el monto presupuesto"+monto);
+    console.log("este es el monto presupuesto"+monto);
     return (
         <NativeBaseProvider>
             <ScrollView>

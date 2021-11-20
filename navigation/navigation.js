@@ -11,6 +11,7 @@ import CostoPantalla4_2 from "../views/CostosPantalla4_2";
 import pantalla4 from '../views/Pantalla4'
 import pantalla5 from '../views/Pantalla5'
 import pantalla6 from '../views/Pantalla6'
+
 import pantallaPresupuesto from "../views/PantallaPresupuesto";
 import pantallaManoEmprendedor from "../views/PantallaManoEmprendedor";
 import materiaPrima from "../views/MateriaPrima";

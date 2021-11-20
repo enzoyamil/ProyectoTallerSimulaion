@@ -8,7 +8,7 @@ import { DataTable } from 'react-native-paper';
 
 
 function ReqLegales(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
 
     const [FormReqLegal, setFormReqLegal] = useState({
@@ -18,7 +18,10 @@ function ReqLegales(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {
+        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
+        totalPropioGasOpe,totalInvGasOpe,totalPropioInfra,totalInvInfra,maqPropTotal,maqInvTotal
+    } = route.params;
 
     useEffect(() => {
         setFormReqLegal(FormReqLegal);
@@ -47,7 +50,8 @@ function ReqLegales(props) {
         })
         return invPropioTotal;
     }
-
+    let totalReqLegPropio= sumAportePropio("aportePropio");
+    let totalReqLegInv= sumInversionPropio("seInvertira");
     function agregarFila() {
         setTableService([...TableService, FormReqLegal]);
         setFormReqLegal(
@@ -62,6 +66,17 @@ function ReqLegales(props) {
         // console.log(TableService);
     }
 
+    function totalCapitalInvProp(){
+        let total=0
+        return  total= totalPropioInfra+maqPropTotal+ totalReqLegPropio;
+    }
+    function totalCapitalInvInv(){
+        let total=0
+        return  total= totalInvInfra + maqInvTotal + totalReqLegInv;
+    }
+
+    let sumaCapitalInvProp= totalCapitalInvProp();
+    let sumaCapitalInvInv= totalCapitalInvInv();
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormReqLegal;
     return (
         <NativeBaseProvider>
@@ -104,7 +119,6 @@ function ReqLegales(props) {
 
                         </FormControl>
                         <Box>
-                            {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Box>
 
@@ -141,8 +155,8 @@ function ReqLegales(props) {
                             <DataTable>
                                 <DataTable.Row>
                                     <DataTable.Cell> TOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumaCapitalInvProp}</DataTable.Cell>
+                                    <DataTable.Cell> {sumaCapitalInvInv}</DataTable.Cell>
                                 </DataTable.Row>
                             </DataTable>
                         </DataTable>
