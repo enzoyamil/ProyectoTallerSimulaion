@@ -92,7 +92,7 @@ export default function CostoPantalla2(props) {
         return valor_frecuencia;
     }
     return (
-        <NativeBaseProvider>
+        <NativeBaseProvider style={{bg: "red"}}>
             <ScrollView>
                 <Stack space={5}
                     px="4"
@@ -102,36 +102,32 @@ export default function CostoPantalla2(props) {
                     <Text fontSize="md" bold>Comportamiento de Ventas mensuales</Text>
                     <FormControl>
                         <FormControl.Label>Producto o Servicio</FormControl.Label>
-                        <Input variant="rounded" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
+                        <Input variant="rounded" borderColor="gray.400" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
                         <FormControl.Label>Tipo</FormControl.Label>
-                        <Input variant="rounded" value={tipo} onChangeText={(value) => EstadoInputs(value, 'tipo')} />
+                        <Input variant="rounded" borderColor="gray.400" value={tipo} onChangeText={(value) => EstadoInputs(value, 'tipo')} />
                         <FormControl.Label>Cantidad</FormControl.Label>
-                        <Input variant="rounded" value={cantidad} onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
+                        <Input variant="rounded" borderColor="gray.400" value={cantidad} onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
                         <FormControl.Label>Unidad de Venta</FormControl.Label>
-                        <Input variant="rounded" value={unidad_de_venta} onChangeText={(value) => EstadoInputs(value, 'unidad_de_venta')} />
-                        <Box>
-                            <FormControl.Label>Frecuencia</FormControl.Label>
-                            <Select placeholder="Frecuencia" variant="rounded" value={frecuencia} selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                                onValueChange={(value) => EstadoInputs(value, 'frecuencia')}>
-                                <Select.Item label="Diario" value="Diario" />
-                                <Select.Item label="Semanal" value="Semanal" />
-                                <Select.Item label="Quincenal" value="Quincenal" />
-                                <Select.Item label="Mensual" value="Mensual" />
-                                <Select.Item label="Bimestral" value="Bimestral" />
-                                <Select.Item label="Trimestral" value="Trimestral" />
-                                <Select.Item label="Semestral" value="Semestral" />
-                                <Select.Item label="Anual" value="Anual" />
-                            </Select>
-                        </Box>
+                        <Input variant="rounded" borderColor="gray.400" value={unidad_de_venta} onChangeText={(value) => EstadoInputs(value, 'unidad_de_venta')} />
+                        <FormControl.Label>Frecuencia</FormControl.Label>
+                        <Select placeholder="Frecuencia" borderColor="gray.400" variant="rounded" value={frecuencia} selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            onValueChange={(value) => EstadoInputs(value, 'frecuencia')}>
+                            <Select.Item label="Diario" value="Diario" />
+                            <Select.Item label="Semanal" value="Semanal" />
+                            <Select.Item label="Quincenal" value="Quincenal" />
+                            <Select.Item label="Mensual" value="Mensual" />
+                            <Select.Item label="Bimestral" value="Bimestral" />
+                            <Select.Item label="Trimestral" value="Trimestral" />
+                            <Select.Item label="Semestral" value="Semestral" />
+                            <Select.Item label="Anual" value="Anual" />
+                        </Select>
                         <FormControl.Label>Precio Compra</FormControl.Label>
-                        <Input variant="rounded" value={precio_c} onChangeText={(value) => EstadoInputs(value, 'precio_c')} />
+                        <Input variant="rounded" borderColor="gray.400" value={precio_c} onChangeText={(value) => EstadoInputs(value, 'precio_c')} />
                         <FormControl.Label>Precio Venta</FormControl.Label>
-                        <Input variant="rounded" value={precio_v} onChangeText={(value) => EstadoInputs(value, 'precio_v')} />
+                        <Input variant="rounded" borderColor="gray.400" value={precio_v} onChangeText={(value) => EstadoInputs(value, 'precio_v')} />
                     </FormControl>
                     <Center>
-                        <Box>
-                            <Button onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        <Button onPress={agregarFila}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>
@@ -165,11 +161,9 @@ export default function CostoPantalla2(props) {
                             <Text>MUB total: {MUBTotal()}%</Text>
                         </Stack>
                     </Box>
-                    <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {
-                            mub
-                        })}>Siguiente</Button>
-                    </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {
+                        mub
+                    })}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

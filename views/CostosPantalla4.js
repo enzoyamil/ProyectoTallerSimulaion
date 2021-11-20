@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button } from "native-base"
+import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base"
 import { useState } from "react";
 import DetalleInsumo from "../components/DetalleInsumos"
 
@@ -32,13 +32,14 @@ export default function CostoPantalla4(props) {
                 <Stack space={5}
                     px="4"
                     mt="4">
+                        <Text bold>Hoja de control de insumos para los producto o servicios</Text>
                     <FormControl>
                         <FormControl.Label>Producto o Servicio</FormControl.Label>
-                        <Input variant="rounded" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
+                        <Input variant="rounded" borderColor="gray.400" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
                         <FormControl.Label>Unidad de medida</FormControl.Label>
-                        <Input variant="rounded" value={unidad_de_medida} onChangeText={(value) => EstadoInputs(value, 'unidad_de_medida')} />
+                        <Input variant="rounded" borderColor="gray.400" value={unidad_de_medida} onChangeText={(value) => EstadoInputs(value, 'unidad_de_medida')} />
                         <FormControl.Label>Precio de venta</FormControl.Label>
-                        <Input variant="rounded" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} />
+                        <Input variant="rounded" borderColor="gray.400" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} />
                     </FormControl>
                     <Center>
                         <Button onPress={verDetalle}>Crear</Button>
@@ -54,9 +55,7 @@ export default function CostoPantalla4(props) {
                             />
                         ))
                     }
-                    <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos")}>Siguiente</Button>
-                    </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos")}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

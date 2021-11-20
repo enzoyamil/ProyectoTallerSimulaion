@@ -27,24 +27,34 @@ export default function CostoPantalla3(props) {
             }
         );
     }
-    function costoProduccionMensual(item) {
-        return (parseFloat(item.rango) * (1 - (parseFloat(mub) / 100))).toFixed(2);
+    function ventasMensuales(cadena) {
+        let valor_rango = 0;
+        if (cadena == "Alto") {
+            valor_rango = alto;
+        } else if (cadena == "Medio") {
+            valor_rango = medio;
+        } else if (cadena == "Bajo") {
+            valor_rango = bajo;
+        }
+        return valor_rango;
     }
-    function sumVentasMensuales(){
+    function costoProduccionMensual(cadena) {
+        return (parseFloat(ventasMensuales(cadena)) * (1 - (parseFloat(mub) / 100))).toFixed(2);
+    }
+    function sumVentasMensuales() {
         let sum_venta_mensual = 0;
         TableService.map((item) => {
-            sum_venta_mensual = sum_venta_mensual + parseFloat(item.rango);
+            sum_venta_mensual = sum_venta_mensual + parseFloat(ventasMensuales(item.rango));
         })
         return sum_venta_mensual;
     }
-    function sumCostoProduc(){
+    function sumCostoProduc() {
         let sum_Costo_Produc = 0;
         TableService.map((item) => {
-            sum_Costo_Produc = sum_Costo_Produc + parseFloat(costoProduccionMensual(item));
+            sum_Costo_Produc = sum_Costo_Produc + parseFloat(costoProduccionMensual(item.rango));
         })
         return sum_Costo_Produc;
     }
-    console.log(alto, medio, bajo, mub);
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -54,7 +64,7 @@ export default function CostoPantalla3(props) {
                     <FormControl>
                         <Stack space={0} alignItems="center">
                             <FormControl.Label>Mes</FormControl.Label>
-                            <Select placeholder="Mes" value={mes} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            <Select placeholder="Mes" borderColor="gray.400" value={mes} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'mes')}>
                                 <Select.Item label="Enero" value="Enero" />
                                 <Select.Item label="Febrero" value="Febrero" />
@@ -70,32 +80,32 @@ export default function CostoPantalla3(props) {
                                 <Select.Item label="Diciembre" value="Diciembre" />
                             </Select>
                             <FormControl.Label>Rango</FormControl.Label>
-                            <Select placeholder="Rango" variant="rounded" minWidth="100" value={rango} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            <Select placeholder="Rango" borderColor="gray.400" variant="rounded" minWidth="100" value={rango} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'rango')}>
-                                <Select.Item label="Alto" value={alto} />
-                                <Select.Item label="Medio" value={medio} />
-                                <Select.Item label="Bajo" value={bajo} />
+                                <Select.Item label="Alto" value="Alto" />
+                                <Select.Item label="Medio" value="Medio" />
+                                <Select.Item label="Bajo" value="Bajo" />
                             </Select>
                         </Stack>
                     </FormControl>
                     <Center>
-                        <Box>
-                            <Button onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        <Button onPress={agregarFila}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title style={{ width: 80 }} ><Text bold>Mes</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 80 }} ><Text bold>Rango</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 150 }}><Text bold>Ventas mensuales</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 180 }}><Text bold>Costo de produccion mensuales</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 205 }}><Text bold>Costo de produccion mensuales</Text></DataTable.Title>
                             </DataTable.Header>
                             {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell style={{ width: 80 }}>{item.mes}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 150 }}>{item.rango}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 180 }}>{costoProduccionMensual(item)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 80 }}>{item.rango}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 150 }}>{ventasMensuales(item.rango)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 205 }}>{costoProduccionMensual(item.rango)}</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -108,9 +118,7 @@ export default function CostoPantalla3(props) {
                             <Text>Sumatoria costo de produccion mensuales: {sumCostoProduc()}</Text>
                         </Stack>
                     </Box>
-                    <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Siguiente</Button>
-                    </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

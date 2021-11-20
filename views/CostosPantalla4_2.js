@@ -34,7 +34,7 @@ export default function CostoPantalla4_2(props) {
     function operacionABC(item) {
         return ((parseFloat(item.cantidad_a) / parseFloat(item.nro_unidades_b)) * parseFloat(item.precio_unitario_c)).toFixed(2)
     }
-    function totalABC(){
+    function totalABC() {
         let total_abc = 0;
         TableService.map((item) => {
             total_abc = total_abc + parseFloat(operacionABC(item));
@@ -50,20 +50,18 @@ export default function CostoPantalla4_2(props) {
                     mt="4">
                     <FormControl>
                         <FormControl.Label>Insumo</FormControl.Label>
-                        <Input variant="rounded" value={insumo} onChangeText={(value) => EstadoInputs(value, 'insumo')} />
+                        <Input variant="rounded" borderColor="gray.400" value={insumo} onChangeText={(value) => EstadoInputs(value, 'insumo')} />
                         <FormControl.Label>Cantidad (A)</FormControl.Label>
-                        <Input variant="rounded" value={cantidad_a} onChangeText={(value) => EstadoInputs(value, 'cantidad_a')} />
+                        <Input variant="rounded" borderColor="gray.400" value={cantidad_a} onChangeText={(value) => EstadoInputs(value, 'cantidad_a')} />
                         <FormControl.Label>Unidad</FormControl.Label>
-                        <Input variant="rounded" value={unidad} onChangeText={(value) => EstadoInputs(value, 'unidad')} />
+                        <Input variant="rounded" borderColor="gray.400" value={unidad} onChangeText={(value) => EstadoInputs(value, 'unidad')} />
                         <FormControl.Label>N° de Unidades de Productos o Servicios (B)</FormControl.Label>
-                        <Input variant="rounded" value={nro_unidades_b} onChangeText={(value) => EstadoInputs(value, 'nro_unidades_b')} />
+                        <Input variant="rounded" borderColor="gray.400" value={nro_unidades_b} onChangeText={(value) => EstadoInputs(value, 'nro_unidades_b')} />
                         <FormControl.Label>Precio Unitario (C)</FormControl.Label>
-                        <Input variant="rounded" value={precio_unitario_c} onChangeText={(value) => EstadoInputs(value, 'precio_unitario_c')} />
+                        <Input variant="rounded" borderColor="gray.400" value={precio_unitario_c} onChangeText={(value) => EstadoInputs(value, 'precio_unitario_c')} />
                     </FormControl>
                     <Center>
-                        <Box>
-                            <Button onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        <Button onPress={agregarFila}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>
@@ -92,9 +90,7 @@ export default function CostoPantalla4_2(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Text>Total costo (D): {totalABC()}</Text>
                     </Box>
-                    <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Guardar</Button>
-                    </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Guardar</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
