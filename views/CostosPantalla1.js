@@ -34,13 +34,15 @@ export default function CostoPantalla2(props) {
             }
         );
     }
-    let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v } = FormTablaProducto;
+    let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v, mub } = FormTablaProducto;
+    mub = MUBTotal();
+    console.log(mub)
     let [service, setService] = React.useState("");
     function totalCompraMensual(item) {
-        return (parseInt(item.cantidad) * valorfrecuencia(item.frecuencia) * parseInt(item.precio_c)).toFixed(2);
+        return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_c)).toFixed(2);
     }
     function totalVentaMensual(item) {
-        return (parseInt(item.cantidad) * valorfrecuencia(item.frecuencia) * parseInt(item.precio_v)).toFixed(2);
+        return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_v)).toFixed(2);
     }
     function MUB(item) {
         let total_compra_mensual = totalCompraMensual(item);
@@ -134,12 +136,12 @@ export default function CostoPantalla2(props) {
                     <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
-                                <DataTable.Title style={{ width: 150 }}><Text >Producto o Servicio</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 80 }}><Text>Tipo</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 115 }}><Text>Unidad de venta</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 150 }}><Text>Total compra mensual</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 135 }}><Text>Total venta mensual</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 60 }}><Text>MUB</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 150 }}><Text bold>Producto o Servicio</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 80 }}><Text bold>Tipo</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 115 }}><Text bold>Unidad de venta</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 150 }}><Text bold>Total compra mensual</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 135 }}><Text bold>Total venta mensual</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 60 }}><Text bold>MUB</Text></DataTable.Title>
                             </DataTable.Header>
                             {
                                 TableService.map((item, pos) => (
@@ -164,7 +166,9 @@ export default function CostoPantalla2(props) {
                         </Stack>
                     </Box>
                     <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2")}>Siguiente</Button>
+                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {
+                            mub
+                        })}>Siguiente</Button>
                     </Box>
                 </Stack>
             </ScrollView>

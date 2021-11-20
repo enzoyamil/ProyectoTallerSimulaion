@@ -4,7 +4,8 @@ import { useState } from "react";
 
 export default function CostoPantalla1(props) {
 
-    const { navigation } = props;
+    const { navigation, route } = props;
+    const { mub } = route.params;
     const [FormManofactura, setFormManofactura] = useState({
         alto: '',
         medio: '',
@@ -40,7 +41,7 @@ export default function CostoPantalla1(props) {
                     </FormControl>
                     <Box>
                         <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos3", {
-                            alto, medio, bajo
+                            alto, medio, bajo, mub
                         })}>Siguiente</Button>
                     </Box>
                 </Stack>
