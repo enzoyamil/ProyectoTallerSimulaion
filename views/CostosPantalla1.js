@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function CostoPantalla2(props) {
 
     const { navigation } = props;
+    const [TableService, setTableService] = useState([]);
     const [FormTablaProducto, setFormTablaProducto] = useState({
         producto_o_servicio: '',
         tipo: '',
@@ -19,8 +20,71 @@ export default function CostoPantalla2(props) {
     function EstadoInputs(value, input) {
         setFormTablaProducto({ ...FormTablaProducto, [input]: value });
     }
+    function agregarFila() {
+        setTableService([...TableService, FormTablaProducto]);
+        setFormTablaProducto(
+            {
+                producto_o_servicio: '',
+                tipo: '',
+                cantidad: '',
+                unidad_de_venta: '',
+                frecuencia: '',
+                precio_c: '',
+                precio_v: ''
+            }
+        );
+    }
     let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v } = FormTablaProducto;
     let [service, setService] = React.useState("");
+    function totalCompraMensual(item) {
+        return (parseInt(item.cantidad) * valorfrecuencia(item.frecuencia) * parseInt(item.precio_c)).toFixed(2);
+    }
+    function totalVentaMensual(item) {
+        return (parseInt(item.cantidad) * valorfrecuencia(item.frecuencia) * parseInt(item.precio_v)).toFixed(2);
+    }
+    function MUB(item) {
+        let total_compra_mensual = totalCompraMensual(item);
+        let total_venta_mensual = totalVentaMensual(item);
+        return (100 * (total_venta_mensual - total_compra_mensual) / total_venta_mensual).toFixed(2);
+    }
+    function sumatoriaCompraMensuales() {
+        let sum_total_compra = 0;
+        TableService.map((item) => {
+            sum_total_compra = sum_total_compra + parseFloat(totalCompraMensual(item));
+        })
+        return sum_total_compra;
+    }
+    function sumatoriaVentaMensuales() {
+        let sum_total_venta = 0;
+        TableService.map((item) => {
+            sum_total_venta = sum_total_venta + parseFloat(totalVentaMensual(item));
+        })
+        return sum_total_venta;
+    }
+    function MUBTotal() {
+        return (100 * (parseFloat(sumatoriaVentaMensuales()) - parseFloat(sumatoriaCompraMensuales())) / parseFloat(sumatoriaVentaMensuales())).toFixed(2);
+    }
+    function valorfrecuencia(cadena) {
+        let valor_frecuencia = 0;
+        if (cadena == "Diario") {
+            valor_frecuencia = 25
+        } else if (cadena == "Semanal") {
+            valor_frecuencia = 4;
+        } else if (cadena == "Quincenal") {
+            valor_frecuencia = 2;
+        } else if (cadena == "Mensual") {
+            valor_frecuencia = 1;
+        } else if (cadena == "Bimestral") {
+            valor_frecuencia = 0.5;
+        } else if (cadena == "Trimestral") {
+            valor_frecuencia = 30 / 90;
+        } else if (cadena == "Semestral") {
+            valor_frecuencia = 30 / 180;
+        } else if (cadena == "Anual") {
+            valor_frecuencia = 30 / 360;
+        }
+        return valor_frecuencia;
+    }
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -50,6 +114,7 @@ export default function CostoPantalla2(props) {
                                 <Select.Item label="Bimestral" value="Bimestral" />
                                 <Select.Item label="Trimestral" value="Trimestral" />
                                 <Select.Item label="Semestral" value="Semestral" />
+                                <Select.Item label="Anual" value="Anual" />
                             </Select>
                         </Box>
                         <FormControl.Label>Precio Compra</FormControl.Label>
@@ -59,9 +124,41 @@ export default function CostoPantalla2(props) {
                     </FormControl>
                     <Center>
                         <Box>
-                            <Button>Añadir</Button>
+                            <Button onPress={agregarFila}>Añadir</Button>
                         </Box>
                     </Center>
+                    <ScrollView horizontal>
+                        <DataTable>
+                            <DataTable.Header>
+                                <DataTable.Title style={{ width: 150 }}><Text >Producto o Servicio</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 80 }}><Text>Tipo</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 115 }}><Text>Unidad de venta</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 150 }}><Text>Total compra mensual</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 135 }}><Text>Total venta mensual</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 60 }}><Text>MUB</Text></DataTable.Title>
+                            </DataTable.Header>
+                            {
+                                TableService.map((item, pos) => (
+                                    <DataTable.Row key={pos}>
+                                        <DataTable.Cell style={{ width: 150 }}>{item.producto_o_servicio}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 80 }}>{item.tipo}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 115 }}>{item.unidad_de_venta}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 150 }}>{totalCompraMensual(item)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 135 }}>{totalVentaMensual(item)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 60 }}>{MUB(item)}%</DataTable.Cell>
+                                    </DataTable.Row>
+                                ))
+                            }
+                        </DataTable>
+                    </ScrollView>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>Totales: </Text>
+                            <Text>Sumatoria total compra mensual: {sumatoriaCompraMensuales()}</Text>
+                            <Text>Sumatoria total venta mensual: {sumatoriaVentaMensuales()}</Text>
+                            <Text>MUB total: {MUBTotal()}%</Text>
+                        </Stack>
+                    </Box>
                     <Box>
                         <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2")}>Siguiente</Button>
                     </Box>

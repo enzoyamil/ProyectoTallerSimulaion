@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, NativeBaseProvider, Text, Center, Stack, ScrollView, FormControl, Input, Select, Button } from "native-base"
+import { Box, NativeBaseProvider, Stack, ScrollView, FormControl, Input, Select, Button } from "native-base"
 import { useState } from "react";
 
 export default function CostoPantalla1(props) {

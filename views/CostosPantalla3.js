@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, NativeBaseProvider, Text, Center, Stack, ScrollView, FormControl, Input, Select, Button } from "native-base"
+import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Select, Button } from "native-base"
 import { DataTable } from 'react-native-paper';
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ export default function CostoPantalla3(props) {
     const [TableService, setTableService] = useState([]);
     const [FormManofactura, setFormManofactura] = useState({
         mes: '',
-        rango: ''
+        rango: '',
     });
     function EstadoInputs(value, input) {
         setFormManofactura({ ...FormManofactura, [input]: value });
