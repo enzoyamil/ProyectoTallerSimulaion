@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
@@ -36,7 +37,6 @@ export default function CostoPantalla4_2(props) {
         setFormTablaInsumo({
             insumo: '',
             cantidad_a: '',
-            unidad: '',
             nro_unidades_b: '',
             precio_unitario_c: '',
         }
@@ -82,6 +82,13 @@ export default function CostoPantalla4_2(props) {
         return res;
     }
     /***********************************************/
+    function buttonPress(id) {
+        if (insumo == '' || cantidad_a == '' || nro_unidades_b == '' || precio_unitario_c == '') {
+            Alert.alert("Error", "No se permiten campos vacios");
+        } else {
+            agregarFila(id);
+        }
+    }
 
     return (
         <NativeBaseProvider>
@@ -102,7 +109,7 @@ export default function CostoPantalla4_2(props) {
                         <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_unitario_c} onChangeText={(value) => EstadoInputs(value, 'precio_unitario_c')} />
                     </FormControl>
                     <Center>
-                        <Button onPress={() => agregarFila(id)}>Añadir</Button>
+                        <Button onPress={() => buttonPress(id)}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>
@@ -110,7 +117,7 @@ export default function CostoPantalla4_2(props) {
                                 <DataTable.Title style={{ width: 75 }}><Text bold>Insumo</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 100 }}><Text bold>Cantidad (A)</Text></DataTable.Title>
                                 {/* <DataTable.Title style={{ width: 80 }}><Text bold>Unidad</Text></DataTable.Title> */}
-                                <DataTable.Title style={{ width: 150 }}><Text bold>N° de Unidades de Productos o Servicios (B)</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 150 }}><Text bold>N° de Unidades (B)</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 135 }}><Text bold>Precio Unitario  (C)</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 90 }}><Text bold>Total (A/B)*C</Text></DataTable.Title>
                             </DataTable.Header>

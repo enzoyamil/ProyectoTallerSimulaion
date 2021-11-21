@@ -132,7 +132,7 @@ export default function CostoPantalla3(props) {
                     </ScrollView>
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
-                            <Text>Anual: </Text>
+                            <Text>Anual</Text>
                             <Text>Sumatoria ventas mensuales: {sumVentasMensuales()}</Text>
                             <Text>Sumatoria costo de produccion mensuales: {sumCostoProduc()}</Text>
                         </Stack>

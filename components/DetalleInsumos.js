@@ -1,7 +1,6 @@
 import React from "react";
 import { NativeBaseProvider, Box, Text, Stack, Button } from 'native-base'
 
-
 function DetalleInsumo({ producto_o_servico, unidad_medida, navigation, id }) {
     return (
         <NativeBaseProvider>
@@ -13,7 +12,6 @@ function DetalleInsumo({ producto_o_servico, unidad_medida, navigation, id }) {
                 </Stack>
             </Box>
         </NativeBaseProvider>
-
     );
 }
 export default DetalleInsumo;

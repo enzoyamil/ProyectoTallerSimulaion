@@ -17,21 +17,19 @@ export default function CostoPantalla4(props) {
     const [FormProducto, setFormProducto] = useState({
         producto_o_servicio: '',
         unidad_de_medida: '',
-        precio_venta: ''
     });
 
     function EstadoInputs(value, input) {
         setFormProducto({ ...FormProducto, [input]: value });
     }
 
-    let { producto_o_servicio, unidad_de_medida, precio_venta } = FormProducto;
+    let { producto_o_servicio, unidad_de_medida } = FormProducto;
 
     function verDetalle() {
         setDetalles([...Detalles, FormProducto]);
         setFormProducto({
             producto_o_servicio: '',
             unidad_de_medida: '',
-            precio_venta: ''
         });
     }
     /*Funciones para guardar las tablas de insumos dentro los contenedores*/
