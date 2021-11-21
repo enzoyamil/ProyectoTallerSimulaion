@@ -65,19 +65,16 @@ export default function CostoPantalla3(props) {
     }
     /****************************************/
     function buttonPress() {
-        if (mes == '') {
-            Alert.alert("Error", "Debe seleccionar un valor en mes");
-        } else if (rango == '') {
+        if (rango == '') {
             Alert.alert("Error", "Debe seleccionar un valor en rango");
-        } else if (fechaRepetida(mes)) {
-            Alert.alert("Error", "Ya existe esa fecha");
-        } else {
+        } else if(TableService.length<12){
             agregarFila();
+        }else{
+            Alert.alert("Error", "Ya lleno todas las fechas");
         }
     }
 
     function buttonPressNav() {
-        console.log(TableService.length);
         if (TableService.length > 0) {
             navigation.navigate("Hoja-de-Costos4");
         } else {
@@ -85,13 +82,33 @@ export default function CostoPantalla3(props) {
         }
     }
 
-    function fechaRepetida(value) {
-        let res = false;
-        TableService.map((item) => {
-            if (item.mes == value) {
-                res = true;
-            }
-        });
+    function addMes(pos){
+        let res = "";
+        if(pos == 0){
+            res = "Enero"
+        }else if(pos == 1){
+            res = "Febrero"
+        }else if(pos == 2){
+            res = "Marzo"
+        }else if(pos == 3){
+            res = "Abril"
+        }else if(pos == 4){
+            res = "Mayo"
+        }else if(pos == 5){
+            res = "Junio"
+        }else if(pos == 6){
+            res = "Julio"
+        }else if(pos == 7){
+            res = "Agosto"
+        }else if(pos == 8){
+            res = "Septiembre"
+        }else if(pos == 9){
+            res = "Octubre"
+        }else if(pos == 10){
+            res = "Noviembre"
+        }else if(pos == 11){
+            res = "Diciembre"
+        }
         return res;
     }
 
@@ -103,7 +120,7 @@ export default function CostoPantalla3(props) {
                     mt="4">
                     <FormControl>
                         <Stack space={0} alignItems="center">
-                            <FormControl.Label>Mes</FormControl.Label>
+                            {/* <FormControl.Label>Mes</FormControl.Label>
                             <Select placeholder="Mes" borderColor="gray.400" value={mes} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'mes')}>
                                 <Select.Item label="Enero" value="Enero" />
@@ -118,7 +135,7 @@ export default function CostoPantalla3(props) {
                                 <Select.Item label="Octubre" value="Octubre" />
                                 <Select.Item label="Noviembre" value="Noviembre" />
                                 <Select.Item label="Diciembre" value="Diciembre" />
-                            </Select>
+                            </Select> */}
                             <FormControl.Label>Rango</FormControl.Label>
                             <Select placeholder="Rango" borderColor="gray.400" variant="rounded" minWidth="100" value={rango} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'rango')}>
@@ -134,7 +151,7 @@ export default function CostoPantalla3(props) {
                     <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
-                                <DataTable.Title style={{ width: 80 }} ><Text bold>Mes</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 90 }} ><Text bold>Mes</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 80 }} ><Text bold>Rango</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 150 }}><Text bold>Ventas mensuales</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 205 }}><Text bold>Costo de produccion mensuales</Text></DataTable.Title>
@@ -142,7 +159,7 @@ export default function CostoPantalla3(props) {
                             {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
-                                        <DataTable.Cell style={{ width: 80 }}>{item.mes}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 90 }}>{addMes(pos)}</DataTable.Cell>
                                         <DataTable.Cell style={{ width: 80 }}>{item.rango}</DataTable.Cell>
                                         <DataTable.Cell style={{ width: 150 }}>{ventasMensuales(item.rango)}</DataTable.Cell>
                                         <DataTable.Cell style={{ width: 205 }}>{costoProduccionMensual(item.rango)}</DataTable.Cell>
