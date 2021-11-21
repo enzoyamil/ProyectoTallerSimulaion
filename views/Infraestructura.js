@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert,StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -51,7 +51,10 @@ function Infraestructura(props) {
     }
 
     function agregarFila() {
-        setTableService([...TableService, FormInfraestructura]);
+        if(validarAgregar()){
+            Alert.alert("Error Campos Vacios");
+        }else{
+            setTableService([...TableService, FormInfraestructura]);
         setFormInfraestructura(
             {
             cantidad: '',
@@ -61,8 +64,39 @@ function Infraestructura(props) {
             seInvertira: ''
             }
         );
+        }
+        
         // console.log(TableService);
     }
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Maquinaria",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe,
+                totalPropioInfra:totalPropioInfra,
+                totalInvInfra:totalInvInfra
+            })
+        }else{
+            Alert.alert("Error Tabla Vacia");
+        }
+    }
+
     let totalPropioInfra=sumAportePropio("aportePropio");
     let totalInvInfra=sumInversionPropio("seInvertira");
     console.log("Monto totalPropioInfra" + totalPropioInfra);
@@ -84,7 +118,7 @@ function Infraestructura(props) {
                     }}
                 >
                     <Box>
-                    <Text> Capital Inversión</Text>
+                    <Center><Text fontSize="20" bold> Capital Inversión Infraestructura</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -106,13 +140,11 @@ function Infraestructura(props) {
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
 
-
-
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -148,21 +180,11 @@ function Infraestructura(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Maquinaria",{
-                    montoPresupuesto:montoPresupuesto,
-                    montoMano:montoMano,
-                    totalAportMateriaP:totalAportMateriaP,
-                    totalInvMateriaP: totalInvMateriaP,
-                    totalAportePromo:totalAportePromo,
-                    totalInvPromo:totalInvPromo,
-                    totalPropioGasOpe:totalPropioGasOpe,
-                    totalInvGasOpe:totalInvGasOpe,
-                    totalPropioInfra:totalPropioInfra,
-                    totalInvInfra:totalInvInfra
-                })}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

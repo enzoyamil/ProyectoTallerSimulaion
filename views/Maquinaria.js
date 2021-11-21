@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -51,6 +51,9 @@ function Maquinaria(props) {
     }
 
     function agregarFila() {
+        if(validarAgregar()){
+            Alert.alert("Eror Campos Vacíos");
+        }else{
         setTableService([...TableService, FormMaquinaria]);
         setFormMaquinaria(
             {
@@ -60,8 +63,39 @@ function Maquinaria(props) {
             aportePropio: '',
             seInvertira: ''
             }
-        );
+        );}
         // console.log(TableService);
+    }
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Requerimiento Legal",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe,
+                totalPropioInfra:totalPropioInfra,
+                totalInvInfra:totalInvInfra,
+                maqPropTotal:maqPropTotal,
+                maqInvTotal:maqInvTotal
+
+            })
+        }else{
+            Alert.alert("Error Tabla Vacía");
+        }
     }
     let maqPropTotal=sumAportePropio("aportePropio");
     let maqInvTotal=sumInversionPropio("seInvertira");
@@ -80,8 +114,8 @@ function Maquinaria(props) {
                         md: "25%",
                     }}
                 >
+                    <Center><Text fontSize="20" bold > Capital Inversión Maquinaria</Text></Center>
                     <Box>
-                    <Text> Capital Inversión</Text>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -106,10 +140,10 @@ function Maquinaria(props) {
 
 
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -150,24 +184,11 @@ function Maquinaria(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimiento Legal",{
-                    montoPresupuesto:montoPresupuesto,
-                    montoMano:montoMano,
-                    totalAportMateriaP:totalAportMateriaP,
-                    totalInvMateriaP: totalInvMateriaP,
-                    totalAportePromo:totalAportePromo,
-                    totalInvPromo:totalInvPromo,
-                    totalPropioGasOpe:totalPropioGasOpe,
-                    totalInvGasOpe:totalInvGasOpe,
-                    totalPropioInfra:totalPropioInfra,
-                    totalInvInfra:totalInvInfra,
-                    maqPropTotal:maqPropTotal,
-                    maqInvTotal:maqInvTotal
-
-                })}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

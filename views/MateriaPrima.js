@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, ScrollView, Divider, Box,
-    NativeBaseProvider,Text
+    NativeBaseProvider,Text,Center
 } from "native-base";
 import { DataTable } from 'react-native-paper';
 
@@ -48,8 +48,11 @@ function MateriaPrima(props) {
     }
 
     function agregarFila() {
-        setTableService([...TableService, FormateriaPrima]);
-        setFormateriaPrima(
+        if(validarAgregar()){
+            Alert.alert("Error Campos Vacios");
+        }else{
+            setTableService([...TableService, FormateriaPrima]);
+            setFormateriaPrima(
             {
             cantidad: '',
             unidad: '',
@@ -58,14 +61,38 @@ function MateriaPrima(props) {
             seInvertira: ''
             }
         );
+        }
+        
         
     }
-
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Requerimientos Promocionales",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:montoApor,
+                totalInvMateriaP: montoInversion
+                
+            });
+        }else{
+            Alert.alert("Error Tabla Vacia");
+        }
+    }
 
     let montoApor = sumAportePropio("aportePropio");
     let montoInversion =sumInversionPropio("seInvertira");
-    console.log("este es el montoAportePropio MateriaPrima:"+montoApor);
-    console.log("este es el montoInversion MateriaPrima"+ montoInversion);
+    // console.log("este es el montoAportePropio MateriaPrima:"+montoApor);
+    // console.log("este es el montoInversion MateriaPrima"+ montoInversion);
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormateriaPrima;
     return (
@@ -83,7 +110,7 @@ function MateriaPrima(props) {
                     }}
                 >
                     <Box>
-                    <Text>Capital Operativo</Text>
+                    <Center><Text fontSize="20" bold >Materia Prima</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -108,10 +135,10 @@ function MateriaPrima(props) {
 
 
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         {/* <Text>Capital Mano de Obra</Text> */}
 
@@ -150,16 +177,10 @@ function MateriaPrima(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimientos Promocionales",{
-                montoPresupuesto:montoPresupuesto,
-                montoMano:montoMano,
-                totalAportMateriaP:montoApor,
-                totalInvMateriaP: montoInversion
-                
-            })}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
     );
 }

@@ -5,6 +5,8 @@ import {
     NativeBaseProvider, Select, FlatList, Text
 } from "native-base";
 import { DataTable, TextInput } from 'react-native-paper';
+import { border } from "native-base/lib/typescript/theme/styled-system";
+import { borderColor } from "styled-system";
 
 function DatosResumen(props) {
     const { navigation, route } = props;
@@ -33,12 +35,12 @@ function DatosResumen(props) {
     function aportePropio() {
         let aporte_Propio = 0;
         aporte_Propio = totalAporte;
-        return aporte_Propio;
+        return aporte_Propio.toFixed(2);
     }
     function porcentajeAporte() {
         let porcentaje_Aporte = 0;
         porcentaje_Aporte = (aportePropio() / totalProyecto()) * 100;
-        return porcentaje_Aporte;
+        return porcentaje_Aporte.toFixed(2);
     }
 
     function sumaAportes(){
@@ -74,7 +76,7 @@ function DatosResumen(props) {
         return mensaje
     }
 
-    let { primerDesembolso,segundoDesembolso,mensajeAporte,mesnsajeDesembolso } = FormrDesembolso;
+    let { primerDesembolso,segundoDesembolso} = FormrDesembolso;
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -88,8 +90,8 @@ function DatosResumen(props) {
                         base: "100%",
                         md: "25%",
                     }}>
-                    <Box>
-                        <Text>Plan de Inversión</Text>
+                    <Box >
+                        <Center ><Text fontSize="20" bold>Plan de Inversión</Text></Center>
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Cell>Total Proyecto</DataTable.Cell>
@@ -107,9 +109,9 @@ function DatosResumen(props) {
                                 <DataTable.Cell>{porcentajeAporte()}</DataTable.Cell>
                             </DataTable.Row>
 
-                            <DataTable.Row>
+                            <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                                 <Text>APORTE PROPIO PARA GARANTIA HIPOTECARIA DEBE SER 10% Y PARA OTRA GARANTIA 20%</Text>
-                            </DataTable.Row>
+                            </Box>
 
                             <DataTable.Row>
                                 <DataTable.Cell>Monto a Financiar</DataTable.Cell>
@@ -123,15 +125,14 @@ function DatosResumen(props) {
                             <Input variant="rounded" keyboardType="numeric"  value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')}/>
                         <Divider />
                     </Box>
-                    <Box>
+                    <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>{validarAporte()}</Text>
                     </Box>
-                    <Box>
+                    <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>{validarDesembolso()}</Text>
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
+                <Box>
                 <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", {
                     montoPresupuesto: montoPresupuesto,
                     montoMano: montoMano,
@@ -152,6 +153,7 @@ function DatosResumen(props) {
                     sumaEfectivo:sumaEfectivo
                 })}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
     );
 }

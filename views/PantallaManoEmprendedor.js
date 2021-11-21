@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, ScrollView, Divider, Box,
-    NativeBaseProvider,Text
+    NativeBaseProvider,Text, Center
 } from "native-base";
 import { DataTable } from 'react-native-paper';
 
@@ -21,7 +21,6 @@ function PantallaManoEmprendedor(props) {
     useEffect(() => {
         setFormManoObra(FormManoObra);
     }, [FormManoObra]);
-
     function EstadoInputs(value, input) {
         setFormManoObra({ ...FormManoObra, [input]: value });
         // console.log(FormManoObra);
@@ -34,24 +33,44 @@ function PantallaManoEmprendedor(props) {
         })
         return montoTotal;
     }
-
     function agregarFila() {
-        setTableService((obj)=>{
-            let {aportePropio,cantidad,unidad}=FormManoObra;
-            aportePropio = parseInt(cantidad)*parseInt(aportePropio);
-            let arr = {aportePropio,cantidad,unidad}
-            setFormManoObra(
-                {
-                cantidad: '',
-                unidad: '',
-                detalle: '',
-                aportePropio: '',
-                seInvertira: ''
-                }
-            );
-            return [...obj,arr];
-        });
+        if(validarAgregar()){
+            setTableService((obj)=>{
+                let {aportePropio,cantidad,unidad}=FormManoObra;
+                aportePropio = parseInt(cantidad)*parseInt(aportePropio);
+                let arr = {aportePropio,cantidad,unidad}
+                setFormManoObra(
+                    {
+                    cantidad: '',
+                    unidad: '',
+                    detalle: '',
+                    aportePropio: '',
+                    //seInvertira: ''
+                    }
+                );
+                return [...obj,arr];
+            });
+        }else{
+            Alert.alert("No se puede agregar campos Vacios");
+        }
         // setTableService([...TableService, FormManoObra]);
+    }
+    function validarAgregar(){
+        let isValid=false;
+        if(cantidad==''||detalle==''||aportePropio==''){
+            return isValid;
+        }else{
+            return isValid=true;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Materia Prima",{montoPresupuesto:montoPresupuesto,montoMano:monto});
+        }else{
+            Alert.alert("Tabla Vacia");
+        }
     }
     let monto = sumatoria("aportePropio");
     console.log("esto es el monto mano de obra"+monto);
@@ -73,6 +92,7 @@ function PantallaManoEmprendedor(props) {
                     }}
                 >
                     <Box>
+                        <Center><Text fontSize="20" bold >Mano de Obra</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -92,7 +112,7 @@ function PantallaManoEmprendedor(props) {
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Box>
 
-                        <Text>Capital Mano de Obra</Text>
+                        <Center><Text fontSize="15" bold margin="2">Capital Mano de Obra</Text></Center>
 
                         <DataTable>
                             <DataTable.Header>
@@ -121,10 +141,11 @@ function PantallaManoEmprendedor(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Materia Prima",{montoPresupuesto:montoPresupuesto,montoMano:monto})}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

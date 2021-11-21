@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, Keyboard, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
 } from "native-base";
 import { DataTable } from 'react-native-paper';
+import { margin } from "styled-system";
 
 function PlanInversion(props) {
     const { navigation, route } = props;
@@ -47,6 +48,32 @@ function PlanInversion(props) {
         return total;
     }
 
+    function validarSiguiente(){
+        if(gastOperativo==0||materiaPrima==0||reqPromocionales==0||infraestructura==0
+        ||maquinaria==0||reqLegales==0){
+            Alert.alert("No se puede mandar campos Vacios o con 0");
+        }else{
+            navigation.navigate("Datos Resumen",{
+                montoPresupuesto: montoPresupuesto,
+                montoMano: montoMano,
+                totalAportMateriaP: totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo: totalAportePromo,
+                totalInvPromo: totalInvPromo,
+                totalPropioGasOpe: totalPropioGasOpe,
+                totalInvGasOpe: totalInvGasOpe,
+                totalPropioInfra: totalPropioInfra,
+                totalInvInfra: totalInvInfra,
+                maqPropTotal: maqPropTotal,
+                maqInvTotal: maqInvTotal,
+                totalReqLegPropio: totalReqLegPropio,
+                totalReqLegInv: totalReqLegInv,
+                totalAporte:totalAporte,
+                totalInv:totalInv,
+                sumaEfectivo:suma
+            })
+        }
+    }
     let { gastOperativo,materiaPrima,reqPromocionales,infraestructura,maquinaria,reqLegales} = FormInvEfectivo;
     let suma = sumaInversion();
     let totalInv = sumaPlanInversion();
@@ -64,34 +91,35 @@ function PlanInversion(props) {
                         md: "25%",
                     }}>
                     <Box>
-                        <Text>Plan de Inversión</Text>
-                        <DataTable>
+                        <Center><Text fontSize="20" bold>Plan de Inversión</Text></Center>
+                        {/* <ScrollView horizontal> */}
+                        <DataTable style={{ padding:10 }}>
                             <DataTable.Header>
-                                <DataTable.Title>Plan Inversión K.O</DataTable.Title>
-                                <DataTable.Title>Monto Total </DataTable.Title>
-                                <DataTable.Title>Aporte Propio Efectivo</DataTable.Title>
+                                <DataTable.Title style={{ width: 120 }}>Plan Inversión K.O </DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }}>Monto Total </DataTable.Title>
+                                <DataTable.Title style={{ width: 80 }}>Aporte Efectivo</DataTable.Title>
                             </DataTable.Header>
 
                             <DataTable.Row>
-                                <DataTable.Cell>Gastos Operativos</DataTable.Cell>
-                                <DataTable.Cell>{totalInvGasOpe}</DataTable.Cell>
-                                <Input type="text" width="20%" value={gastOperativo}
+                                <DataTable.Cell style={{ width: 120 }}>Operativo </DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80}}>{totalInvGasOpe}</DataTable.Cell>
+                                <Input type="text"  width="30%" value={gastOperativo} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'gastOperativo')}
                                 ></Input>
                             </DataTable.Row>
 
                             <DataTable.Row>
-                                <DataTable.Cell>Materia Prima</DataTable.Cell>
-                                <DataTable.Cell>{totalInvMateriaP}</DataTable.Cell>
-                                <Input type="text"  width="20%" value={materiaPrima}
+                                <DataTable.Cell style={{ width: 120 }}>Materia Prima</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvMateriaP}</DataTable.Cell>
+                                <Input type="text"  width="30%" value={materiaPrima} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'materiaPrima')}
                                 ></Input>
                             </DataTable.Row>
 
                             <DataTable.Row>
-                                <DataTable.Cell>Requerimientos Promocionales</DataTable.Cell>
-                                <DataTable.Cell>{totalInvPromo }</DataTable.Cell>
-                                <Input type="text"  width="20%" value={reqPromocionales}
+                                <DataTable.Cell style={{ width: 120 }}>Req. Promo</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvPromo }</DataTable.Cell>
+                                <Input type="text"  width="30%" value={reqPromocionales} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'reqPromocionales')}
                                 ></Input>
                             </DataTable.Row>
@@ -103,66 +131,48 @@ function PlanInversion(props) {
 
 
                             <DataTable.Row>
-                                <DataTable.Cell>Infraestructura, Terrenos y/o Plantines</DataTable.Cell>
-                                <DataTable.Cell>{totalInvInfra}</DataTable.Cell>
-                                <Input type="text"  width="20%" value={infraestructura}
+                                <DataTable.Cell style={{ width: 120 }}>Infraestructura</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvInfra}</DataTable.Cell>
+                                <Input type="text"  width="30%" value={infraestructura} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'infraestructura')}
                                 ></Input>
                             </DataTable.Row>
 
                             <DataTable.Row>
-                                <DataTable.Cell>Maquinaria, Equipos, Vehículos y/o Ganado</DataTable.Cell>
-                                <DataTable.Cell>{maqInvTotal}</DataTable.Cell>
-                                <Input type="text"  width="20%" value={maquinaria}
+                                <DataTable.Cell style={{ width: 120 }}>Maquinaria</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{maqInvTotal}</DataTable.Cell>
+                                <Input type="text"  width="30%" value={maquinaria} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'maquinaria')}
                                 ></Input>
                             </DataTable.Row>
 
                             <DataTable.Row>
-                                <DataTable.Cell>Requerimientos Legales</DataTable.Cell>
-                                <DataTable.Cell>{totalReqLegInv }</DataTable.Cell>
-                                <Input type="text"  width="20%" value={reqLegales}
+                                <DataTable.Cell style={{ width: 120 }}>Req. Legales</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalReqLegInv }</DataTable.Cell>
+                                <Input type="text"  width="30%" value={reqLegales} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'reqLegales')}
                                 ></Input>
                             </DataTable.Row>
 
                             <DataTable>
                                 <DataTable.Header>
-                                    <DataTable.Title>TOTAL </DataTable.Title>
-                                    <DataTable.Title>{sumaPlanInversion()}</DataTable.Title>
-                                    <DataTable.Title>{sumaInversion()}</DataTable.Title>
+                                    <DataTable.Title style={{ width: 120 }}>TOTAL </DataTable.Title>
+                                    <DataTable.Title style={{ width: 100 }}>{sumaPlanInversion()}</DataTable.Title>
+                                    <DataTable.Title style={{ width: 100 }}>{sumaInversion()}</DataTable.Title>
                                 </DataTable.Header>
                             </DataTable>
                         </DataTable>
+                        {/* </ScrollView> */}
                         <Divider />
                         {/* <Button colorScheme="primary" onPress={sumaInversion()}/> */}
+                        
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Datos Resumen",{
-                    montoPresupuesto: montoPresupuesto,
-                    montoMano: montoMano,
-                    totalAportMateriaP: totalAportMateriaP,
-                    totalInvMateriaP: totalInvMateriaP,
-                    totalAportePromo: totalAportePromo,
-                    totalInvPromo: totalInvPromo,
-                    totalPropioGasOpe: totalPropioGasOpe,
-                    totalInvGasOpe: totalInvGasOpe,
-                    totalPropioInfra: totalPropioInfra,
-                    totalInvInfra: totalInvInfra,
-                    maqPropTotal: maqPropTotal,
-                    maqInvTotal: maqInvTotal,
-                    totalReqLegPropio: totalReqLegPropio,
-                    totalReqLegInv: totalReqLegInv,
-                    totalAporte:totalAporte,
-                    totalInv:totalInv,
-                    sumaEfectivo:suma
-                })
-                    
-                }>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

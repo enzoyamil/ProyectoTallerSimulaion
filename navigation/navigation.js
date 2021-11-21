@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import pantalla1 from '../views/Pantalla1'
 import pantalla2 from '../views/Pantalla2'
@@ -24,20 +25,21 @@ import presupuestoResumen from "../views/PresupuestoResumen";
 import planInversion from "../views/PlanInversion";
 import datosResumen from "../views/DatosResumen";
 import CostosOperativos from '../views/CostosOperativos';
+import { red100 } from "react-native-paper/lib/typescript/styles/colors";
 
 const Stack = createNativeStackNavigator();
 
 function navigation() {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen name="Información Personal" component={pantalla1} />
-      <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
+      {/* <Stack.Screen name="Información Personal" component={pantalla1} /> */}
+      {/* <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
       <Stack.Screen name="Descripción del Negocio" component={pantalla3} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos" component={CostoPantalla1} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos2" component={CostoPantalla2} />
-      <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos3" component={CostoPantalla3} />
-      <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4" component={CostoPantalla4} />
-      <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4_2" component={CostoPantalla4_2} />
+      <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos3" component={CostoPantalla3} /> */}
+      {/* <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4" component={CostoPantalla4} />
+      <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4_2" component={CostoPantalla4_2} /> */}
       <Stack.Screen name="Descripción del Servicio" component={pantalla4} />
       <Stack.Screen name="Analisis Mercado" component={pantalla5} />
       <Stack.Screen name="Estrategia de mercado" component={pantalla6} />
@@ -45,7 +47,7 @@ function navigation() {
         options={{ title: 'Costos Operativos' }}
         name="Costos Operativos"
         component={CostosOperativos}
-      />*/}
+      />
             <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/> 
             <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor}/> 
             <Stack.Screen name="Materia Prima" component={materiaPrima}/>
@@ -61,3 +63,8 @@ function navigation() {
   );
 }
 export default navigation;
+const styles = StyleSheet.create({
+  texto: {
+    color: 'red',
+  }
+});

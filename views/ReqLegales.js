@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert,StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -53,6 +53,9 @@ function ReqLegales(props) {
     let totalReqLegPropio= sumAportePropio("aportePropio");
     let totalReqLegInv= sumInversionPropio("seInvertira");
     function agregarFila() {
+        if(validarAgregar()){
+            Alert.alert("Eror Campos Vacíos");
+        }else{
         setTableService([...TableService, FormReqLegal]);
         setFormReqLegal(
             {
@@ -62,7 +65,7 @@ function ReqLegales(props) {
                 aportePropio: '',
                 seInvertira: ''
             }
-        );
+        );}
         // console.log(TableService);
     }
 
@@ -74,7 +77,39 @@ function ReqLegales(props) {
         let total=0
         return  total= totalInvInfra + maqInvTotal + totalReqLegInv;
     }
-
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Presupuesto Resumen",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe,
+                totalPropioInfra:totalPropioInfra,
+                totalInvInfra:totalInvInfra,
+                maqPropTotal:maqPropTotal,
+                maqInvTotal:maqInvTotal,
+                totalReqLegPropio:totalReqLegPropio,
+                totalReqLegInv:totalReqLegInv
+                
+            })
+        }else{
+            Alert.alert("Error Tabla Vacía");
+        }
+    }
     let sumaCapitalInvProp= totalCapitalInvProp();
     let sumaCapitalInvInv= totalCapitalInvInv();
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormReqLegal;
@@ -92,8 +127,8 @@ function ReqLegales(props) {
                         md: "25%",
                     }}
                 >
+                    <Center><Text fontSize="20" bold>Capital Inversión Legales</Text></Center>
                     <Box>
-                        <Text> Capital Inversión</Text>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -118,9 +153,9 @@ function ReqLegales(props) {
 
 
                         </FormControl>
-                        <Box>
+                        <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -163,26 +198,10 @@ function ReqLegales(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Resumen",{
-                    montoPresupuesto:montoPresupuesto,
-                    montoMano:montoMano,
-                    totalAportMateriaP:totalAportMateriaP,
-                    totalInvMateriaP: totalInvMateriaP,
-                    totalAportePromo:totalAportePromo,
-                    totalInvPromo:totalInvPromo,
-                    totalPropioGasOpe:totalPropioGasOpe,
-                    totalInvGasOpe:totalInvGasOpe,
-                    totalPropioInfra:totalPropioInfra,
-                    totalInvInfra:totalInvInfra,
-                    maqPropTotal:maqPropTotal,
-                    maqInvTotal:maqInvTotal,
-                    totalReqLegPropio:totalReqLegPropio,
-                    totalReqLegInv:totalReqLegInv
-                    
-                })}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() =>validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
     );
 }

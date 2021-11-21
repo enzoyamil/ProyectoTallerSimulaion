@@ -13,22 +13,6 @@ function PresupuestoResumen(props) {
         totalPropioGasOpe,totalInvGasOpe,totalPropioInfra,totalInvInfra,maqPropTotal,maqInvTotal,
         totalReqLegPropio,totalReqLegInv
     } = route.params;
-    // const [TableService, setTableService] = useState([]);
-    // const [FormResumen, setFormResumen] = useState({
-    //     efectivo: '',
-    //     manoObra: '',
-    //     materiaPrima: '',
-    //     reqPromocionales: '',
-    //     infraestructura: '',
-    //     maquinaria: '',
-    //     reqLegales: '',
-    //     gastoOperativo:''
-    // });
-    // function EstadoInputs(value, input) {
-    //     setFormResumen({ ...FormResumenInv, [input]: value });
-    //     console.log(FormResumenInv);
-    // }
-    // let { efectivo,manoObra,materiaPrima,reqPromocionales,infraestructura,maquinaria,reqLegales,gastoOperativo} = FormResumen;
     function totalAportePropio(){
         let total = 0;
         total = montoPresupuesto + montoMano + totalAportMateriaP + totalAportePromo
@@ -65,7 +49,7 @@ function PresupuestoResumen(props) {
                                     </DataTable.Row>
 
                                     <DataTable.Row>
-                                        <DataTable.Cell>Mano de Obra del Emprendedor</DataTable.Cell>
+                                        <DataTable.Cell>Mano de Obra</DataTable.Cell>
                                         <DataTable.Cell>{montoMano}</DataTable.Cell>
                                     </DataTable.Row>
 
@@ -75,12 +59,12 @@ function PresupuestoResumen(props) {
                                     </DataTable.Row>
 
                                     <DataTable.Row>
-                                        <DataTable.Cell>Requerimientos Promocionales</DataTable.Cell>
+                                        <DataTable.Cell>Req. Promo</DataTable.Cell>
                                         <DataTable.Cell>{totalAportePromo}</DataTable.Cell>
                                     </DataTable.Row>
 
                                     <DataTable.Row>
-                                        <DataTable.Cell>GastoOperativo</DataTable.Cell>
+                                        <DataTable.Cell>Gasto Operativo</DataTable.Cell>
                                         <DataTable.Cell>{totalPropioGasOpe}</DataTable.Cell>
                                     </DataTable.Row>
 
@@ -101,7 +85,7 @@ function PresupuestoResumen(props) {
                                     </DataTable.Row>
 
                                     <DataTable.Row>
-                                        <DataTable.Cell>Requerimientos Legales</DataTable.Cell>
+                                        <DataTable.Cell>Req. Legales</DataTable.Cell>
                                         <DataTable.Cell>{totalReqLegPropio}</DataTable.Cell>
                                     </DataTable.Row>
 
@@ -115,8 +99,7 @@ function PresupuestoResumen(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
+                <Box>
                 <Button colorScheme="primary" onPress={() => navigation.navigate("Plan Inversión",{
                     montoPresupuesto:montoPresupuesto,
                     montoMano:montoMano,
@@ -135,6 +118,8 @@ function PresupuestoResumen(props) {
                     totalAporte:totalAporte
                 })}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

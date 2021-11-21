@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert,StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box,
-    NativeBaseProvider,Text
+    NativeBaseProvider,Text,Center
 } from "native-base";
 import { DataTable } from 'react-native-paper';
 
@@ -60,6 +60,9 @@ function GastosOperativos(props) {
 
 
     function agregarFila() {
+        if(validarAgregar()){
+            Alert.alert("Error Campos Vacios");
+        }else{
         setTableService([...TableService, FormGastOperativo]);
         setGastOperativo(
             {
@@ -69,9 +72,10 @@ function GastosOperativos(props) {
             aportePropio: '',
             seInvertira: ''
             }
-        );
+        );}
         // console.log(TableService);
     }
+
 
     function totalCapitalOpercionesPropio(){
         let  totalPropio = parseInt(montoMano) + parseInt(totalAportMateriaP)+ parseInt(totalAportePromo)+ parseInt(totalPropioGasOpe);
@@ -84,11 +88,38 @@ function GastosOperativos(props) {
         // console.log("TOTAL:" + totalInv)
         return totalInv;
     }
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Infraestructura",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe
 
+            })
+        }else{
+            Alert.alert("Error Tabla Vacia");
+        }
+    }
     let totalPropio = totalCapitalOpercionesPropio();
     console.log("TotalCapital"+totalPropio);
     let totalInv = totalInversionOpercionesPropio();
     console.log("TotalInversion"+totalInv);
+
 
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormGastOperativo;
@@ -107,8 +138,8 @@ function GastosOperativos(props) {
                     }}
                 >
                     <Box>
+                <Center><Text fontSize="20" bold>Gastos Operativos</Text></Center>
                         <FormControl mb="5">
-                            <Text>Capital Operativo</Text>
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
@@ -130,9 +161,9 @@ function GastosOperativos(props) {
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
 
                         </FormControl>
-                        <Box>
+                        <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -176,20 +207,10 @@ function GastosOperativos(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Infraestructura",{
-                    montoPresupuesto:montoPresupuesto,
-                    montoMano:montoMano,
-                    totalAportMateriaP:totalAportMateriaP,
-                    totalInvMateriaP: totalInvMateriaP,
-                    totalAportePromo:totalAportePromo,
-                    totalInvPromo:totalInvPromo,
-                    totalPropioGasOpe:totalPropioGasOpe,
-                    totalInvGasOpe:totalInvGasOpe
-
-                })}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
     );
 }
