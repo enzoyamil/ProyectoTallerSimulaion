@@ -110,7 +110,7 @@ function ReqPromo(props) {
                     }}
                 >
                     <Box>
-                    <Center><Text fontSize="20" bold>Capital Operativo</Text></Center>
+                    <Center><Text fontSize="20" bold>Requerimientos Promocionales</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"

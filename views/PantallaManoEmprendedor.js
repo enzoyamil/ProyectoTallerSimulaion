@@ -108,9 +108,9 @@ function PantallaManoEmprendedor(props) {
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
 
                         </FormControl>
-                        <Box>
+                        <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center> 
 
                         <Center><Text fontSize="15" bold margin="2">Capital Mano de Obra</Text></Center>
 
