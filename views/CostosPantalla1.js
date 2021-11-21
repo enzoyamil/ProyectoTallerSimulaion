@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Select, Button, Text } from "native-base"
+import React, { useState } from "react";
+import { Alert } from "react-native";
+import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Select, Button, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { useState } from "react";
 
 export default function CostoPantalla2(props) {
 
@@ -16,27 +16,24 @@ export default function CostoPantalla2(props) {
         precio_c: '',
         precio_v: ''
     });
-    console.log(FormTablaProducto);
     function EstadoInputs(value, input) {
         setFormTablaProducto({ ...FormTablaProducto, [input]: value });
     }
     function agregarFila() {
         setTableService([...TableService, FormTablaProducto]);
-        setFormTablaProducto(
-            {
-                producto_o_servicio: '',
-                tipo: '',
-                cantidad: '',
-                unidad_de_venta: '',
-                frecuencia: '',
-                precio_c: '',
-                precio_v: ''
-            }
+        setFormTablaProducto({
+            producto_o_servicio: '',
+            tipo: '',
+            cantidad: '',
+            unidad_de_venta: '',
+            frecuencia: '',
+            precio_c: '',
+            precio_v: ''
+        }
         );
     }
     let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v, mub } = FormTablaProducto;
     mub = MUBTotal();
-    console.log(mub)
     let [service, setService] = React.useState("");
     function totalCompraMensual(item) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_c)).toFixed(2);
@@ -45,54 +42,65 @@ export default function CostoPantalla2(props) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_v)).toFixed(2);
     }
     function MUB(item) {
-        let total_compra_mensual = totalCompraMensual(item);
-        let total_venta_mensual = totalVentaMensual(item);
-        return (100 * (total_venta_mensual - total_compra_mensual) / total_venta_mensual).toFixed(2);
+        let res = 0;
+        if (parseInt(totalVentaMensual(item)) != 0) {
+            res = (100 * (totalVentaMensual(item) - totalCompraMensual(item)) / totalVentaMensual(item)).toFixed(2);
+        }
+        return res;
     }
     function sumatoriaCompraMensuales() {
-        let sum_total_compra = 0;
+        let res = 0;
         TableService.map((item) => {
-            sum_total_compra = sum_total_compra + parseFloat(totalCompraMensual(item));
+            res = res + parseFloat(totalCompraMensual(item));
         })
-        return sum_total_compra;
+        return res;
     }
     function sumatoriaVentaMensuales() {
-        let sum_total_venta = 0;
+        let res = 0;
         TableService.map((item) => {
-            sum_total_venta = sum_total_venta + parseFloat(totalVentaMensual(item));
+            res = res + parseFloat(totalVentaMensual(item));
         })
-        return sum_total_venta;
+        return res;
     }
     function MUBTotal() {
-        let mub_total = 0;
-        if (parseFloat(sumatoriaVentaMensuales()) != 0 && parseFloat(sumatoriaCompraMensuales()) != 0) {
-            mub_total = (100 * (parseFloat(sumatoriaVentaMensuales()) - parseFloat(sumatoriaCompraMensuales())) / parseFloat(sumatoriaVentaMensuales())).toFixed(2);
+        let res = 0;
+        if (sumatoriaVentaMensuales() != 0) {
+            res = (100 * (sumatoriaVentaMensuales() - sumatoriaCompraMensuales()) / sumatoriaVentaMensuales()).toFixed(2);
         }
-        return mub_total;
+        return res;
     }
     function valorfrecuencia(cadena) {
-        let valor_frecuencia = 0;
+        let res = 0;
         if (cadena == "Diario") {
-            valor_frecuencia = 25
+            res = 25
         } else if (cadena == "Semanal") {
-            valor_frecuencia = 4;
+            res = 4;
         } else if (cadena == "Quincenal") {
-            valor_frecuencia = 2;
+            res = 2;
         } else if (cadena == "Mensual") {
-            valor_frecuencia = 1;
+            res = 1;
         } else if (cadena == "Bimestral") {
-            valor_frecuencia = 0.5;
+            res = 0.5;
         } else if (cadena == "Trimestral") {
-            valor_frecuencia = 30 / 90;
+            res = 30 / 90;
         } else if (cadena == "Semestral") {
-            valor_frecuencia = 30 / 180;
+            res = 30 / 180;
         } else if (cadena == "Anual") {
-            valor_frecuencia = 30 / 360;
+            res = 30 / 360;
         }
-        return valor_frecuencia;
+        return res;
+    }
+    function buttonPress() {
+        if (producto_o_servicio == '' || tipo == '' || cantidad == '' || unidad_de_venta == '' || precio_c == '' || precio_v == '') {
+            Alert.alert("Error", "No se permiten campos vacios");
+        } else if (frecuencia == '') {
+            Alert.alert("Error", "Debe de seleccionar un valor en frecuencia");
+        } else {
+            agregarFila();
+        }
     }
     return (
-        <NativeBaseProvider style={{bg: "red"}}>
+        <NativeBaseProvider style={{ bg: "red" }}>
             <ScrollView>
                 <Stack space={5}
                     px="4"
@@ -106,7 +114,7 @@ export default function CostoPantalla2(props) {
                         <FormControl.Label>Tipo</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={tipo} onChangeText={(value) => EstadoInputs(value, 'tipo')} />
                         <FormControl.Label>Cantidad</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={cantidad} onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={cantidad} onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
                         <FormControl.Label>Unidad de Venta</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={unidad_de_venta} onChangeText={(value) => EstadoInputs(value, 'unidad_de_venta')} />
                         <FormControl.Label>Frecuencia</FormControl.Label>
@@ -122,12 +130,12 @@ export default function CostoPantalla2(props) {
                             <Select.Item label="Anual" value="Anual" />
                         </Select>
                         <FormControl.Label>Precio Compra</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={precio_c} onChangeText={(value) => EstadoInputs(value, 'precio_c')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_c} onChangeText={(value) => EstadoInputs(value, 'precio_c')} />
                         <FormControl.Label>Precio Venta</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={precio_v} onChangeText={(value) => EstadoInputs(value, 'precio_v')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_v} onChangeText={(value) => EstadoInputs(value, 'precio_v')} />
                     </FormControl>
                     <Center>
-                        <Button onPress={agregarFila}>Añadir</Button>
+                        <Button onPress={buttonPress}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>
@@ -161,9 +169,7 @@ export default function CostoPantalla2(props) {
                             <Text>MUB total: {MUBTotal()}%</Text>
                         </Stack>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {
-                        mub
-                    })}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", { mub })}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

@@ -1,12 +1,12 @@
-import React from "react";
-import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base"
+import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { useState } from "react";
-import { parse } from "react-native-svg";
 
 export default function CostoPantalla4_2(props) {
 
-    const { navigation } = props;
+    const { navigation, route } = props;
+    const { id } = route.params;
     const [TableService, setTableService] = useState([]);
     const [FormTablaInsumo, setFormTablaInsumo] = useState({
         insumo: '',
@@ -15,33 +15,62 @@ export default function CostoPantalla4_2(props) {
         nro_unidades_b: '',
         precio_unitario_c: ''
     });
-    console.log(FormTablaInsumo);
+    useEffect(() => {
+        getInsumos(id).then(async (res) => {
+            const table_defecto = await res;
+            setTableService(table_defecto);
+            console.log(table_defecto);
+        })
+    }, []);
     function EstadoInputs(value, input) {
         setFormTablaInsumo({ ...FormTablaInsumo, [input]: value });
     }
-    function agregarFila() {
+    function agregarFila(id) {
         setTableService([...TableService, FormTablaInsumo]);
-        setFormTablaInsumo(
-            {
-                insumo: '',
-                cantidad_a: '',
-                unidad: '',
-                nro_unidades_b: '',
-                precio_unitario_c: '',
-            }
+        setFormTablaInsumo({
+            insumo: '',
+            cantidad_a: '',
+            unidad: '',
+            nro_unidades_b: '',
+            precio_unitario_c: '',
+        }
         );
+        guardartablaInsumo(id);
     }
+    async function guardartablaInsumo(id) {
+        let arr = await AsyncStorage.getItem("insumos");
+        let arrjson = JSON.parse(arr);
+        let { table } = arrjson[id];
+        table = [...table, FormTablaInsumo];
+        arrjson[id] = { table };
+        arrjson = [...arrjson]
+        await AsyncStorage.setItem("insumos", JSON.stringify(arrjson));
+    }
+    // async function resetInsumos(){
+    //     await AsyncStorage.setItem("insumos", "[]");
+    // }
     function operacionABC(item) {
-        return ((parseFloat(item.cantidad_a) / parseFloat(item.nro_unidades_b)) * parseFloat(item.precio_unitario_c)).toFixed(2)
+        let res = 0;
+        if (parseFloat(item.nro_unidades_b) != 0) {
+            res = ((parseFloat(item.cantidad_a) / parseFloat(item.nro_unidades_b)) * parseFloat(item.precio_unitario_c)).toFixed(2);
+        }
+        return res;
     }
     function totalABC() {
-        let total_abc = 0;
+        let res = 0;
         TableService.map((item) => {
-            total_abc = total_abc + parseFloat(operacionABC(item));
+            res = res + parseFloat(operacionABC(item));
         })
-        return total_abc;
+        return res;
     }
-    let { insumo, cantidad_a, unidad, nro_unidades_b, precio_unitario_c } = FormTablaInsumo;
+    async function getInsumos(id) {
+        let arr = await AsyncStorage.getItem("insumos");
+        let arrjson = JSON.parse(arr);
+        let { table } = arrjson[0];
+        return table;
+    }
+    let { insumo, cantidad_a, unidad, nro_unidades_b, precio_unitario_c, total_abc } = FormTablaInsumo;
+    total_abc = totalABC();
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -52,16 +81,16 @@ export default function CostoPantalla4_2(props) {
                         <FormControl.Label>Insumo</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={insumo} onChangeText={(value) => EstadoInputs(value, 'insumo')} />
                         <FormControl.Label>Cantidad (A)</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={cantidad_a} onChangeText={(value) => EstadoInputs(value, 'cantidad_a')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={cantidad_a} onChangeText={(value) => EstadoInputs(value, 'cantidad_a')} />
                         <FormControl.Label>Unidad</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={unidad} onChangeText={(value) => EstadoInputs(value, 'unidad')} />
                         <FormControl.Label>N° de Unidades de Productos o Servicios (B)</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={nro_unidades_b} onChangeText={(value) => EstadoInputs(value, 'nro_unidades_b')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={nro_unidades_b} onChangeText={(value) => EstadoInputs(value, 'nro_unidades_b')} />
                         <FormControl.Label>Precio Unitario (C)</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={precio_unitario_c} onChangeText={(value) => EstadoInputs(value, 'precio_unitario_c')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_unitario_c} onChangeText={(value) => EstadoInputs(value, 'precio_unitario_c')} />
                     </FormControl>
                     <Center>
-                        <Button onPress={agregarFila}>Añadir</Button>
+                        <Button onPress={() => agregarFila(id)}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>

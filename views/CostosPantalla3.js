@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Select, Button, Text } from "native-base"
+import React, { useState } from "react";
+import { Alert } from "react-native";
+import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Select, Button, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { useState } from "react";
 
 export default function CostoPantalla3(props) {
 
@@ -17,43 +17,50 @@ export default function CostoPantalla3(props) {
     }
     let { mes, rango } = FormManofactura;
     let [service, setService] = React.useState("");
-    console.log(FormManofactura);
     function agregarFila() {
         setTableService([...TableService, FormManofactura]);
-        setFormManofactura(
-            {
-                mes: '',
-                rango: ''
-            }
+        setFormManofactura({
+            mes: '',
+            rango: ''
+        }
         );
     }
     function ventasMensuales(cadena) {
-        let valor_rango = 0;
+        let res = 0;
         if (cadena == "Alto") {
-            valor_rango = alto;
+            res = alto;
         } else if (cadena == "Medio") {
-            valor_rango = medio;
+            res = medio;
         } else if (cadena == "Bajo") {
-            valor_rango = bajo;
+            res = bajo;
         }
-        return valor_rango;
+        return res;
     }
     function costoProduccionMensual(cadena) {
         return (parseFloat(ventasMensuales(cadena)) * (1 - (parseFloat(mub) / 100))).toFixed(2);
     }
     function sumVentasMensuales() {
-        let sum_venta_mensual = 0;
+        let res = 0;
         TableService.map((item) => {
-            sum_venta_mensual = sum_venta_mensual + parseFloat(ventasMensuales(item.rango));
+            res = res + parseFloat(ventasMensuales(item.rango));
         })
-        return sum_venta_mensual;
+        return res;
     }
     function sumCostoProduc() {
-        let sum_Costo_Produc = 0;
+        let res = 0;
         TableService.map((item) => {
-            sum_Costo_Produc = sum_Costo_Produc + parseFloat(costoProduccionMensual(item.rango));
+            res = res + parseFloat(costoProduccionMensual(item.rango));
         })
-        return sum_Costo_Produc;
+        return res;
+    }
+    function buttonPress() {
+        if (mes == '') {
+            Alert.alert("Error", "Debe seleccionar un valor en mes");
+        } else if (rango == '') {
+            Alert.alert("Error", "Debe seleccionar un valor en rango");
+        } else {
+            agregarFila();
+        }
     }
     return (
         <NativeBaseProvider>
@@ -89,7 +96,7 @@ export default function CostoPantalla3(props) {
                         </Stack>
                     </FormControl>
                     <Center>
-                        <Button onPress={agregarFila}>Añadir</Button>
+                        <Button onPress={buttonPress}>Añadir</Button>
                     </Center>
                     <ScrollView horizontal>
                         <DataTable>

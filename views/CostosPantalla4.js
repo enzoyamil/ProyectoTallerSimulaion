@@ -1,30 +1,49 @@
-import React from "react";
-import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base"
-import { useState } from "react";
-import DetalleInsumo from "../components/DetalleInsumos"
+import React, { useState, useEffect } from "react";
+import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
+import DetalleInsumo from "../components/DetalleInsumos";
 
 export default function CostoPantalla4(props) {
 
+    useEffect(()=>{
+        crearContenedorInsumo();
+    }, []);
     const { navigation } = props;
+    const [Detalles, setDetalles] = useState([])
     const [FormProducto, setFormProducto] = useState({
         producto_o_servicio: '',
         unidad_de_medida: '',
         precio_venta: ''
     });
-    const [Detalles, setDetalles] = useState([
-
-    ])
-    console.log(FormProducto);
     function EstadoInputs(value, input) {
         setFormProducto({ ...FormProducto, [input]: value });
     }
     let { producto_o_servicio, unidad_de_medida, precio_venta } = FormProducto;
     function verDetalle() {
-        setDetalles([...Detalles, {
-            producto_o_servicio,
-            unidad_de_medida,
-            precio_venta
-        }])
+        setDetalles([...Detalles, FormProducto]);
+        setFormProducto({
+            producto_o_servicio: '',
+            unidad_de_medida: '',
+            precio_venta: ''
+        });
+    }
+    async function buttonPress() {
+        if (producto_o_servicio == '' || unidad_de_medida == '' || precio_venta == '') {
+            Alert.alert("Error", "No se permiten campos vacios");
+        } else {
+            verDetalle();
+            let arr = await AsyncStorage.getItem("insumos");
+            let arrjson = JSON.parse(arr);
+            arrjson = [...arrjson, {
+                table: []
+            }]
+            let arrtext = JSON.stringify(arrjson);
+            await AsyncStorage.setItem("insumos", arrtext);
+        }
+    }
+    async function crearContenedorInsumo() {
+        await AsyncStorage.setItem("insumos", "[]");
     }
     return (
         <NativeBaseProvider>
@@ -32,22 +51,23 @@ export default function CostoPantalla4(props) {
                 <Stack space={5}
                     px="4"
                     mt="4">
-                        <Text bold>Hoja de control de insumos para los producto o servicios</Text>
+                    <Text bold>Hoja de control de insumos para los producto o servicios</Text>
                     <FormControl>
                         <FormControl.Label>Producto o Servicio</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
                         <FormControl.Label>Unidad de medida</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={unidad_de_medida} onChangeText={(value) => EstadoInputs(value, 'unidad_de_medida')} />
                         <FormControl.Label>Precio de venta</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} />
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} />
                     </FormControl>
                     <Center>
-                        <Button onPress={verDetalle}>Crear</Button>
+                        <Button onPress={buttonPress}>Crear</Button>
                     </Center>
                     {
                         Detalles.map((item, pos) => (
                             <DetalleInsumo
                                 key={pos}
+                                id = {pos}
                                 navigation={navigation}
                                 producto_o_servico={item.producto_o_servicio}
                                 unidad_medida={item.unidad_de_medida}

@@ -1,6 +1,6 @@
-import React from "react";
-import { NativeBaseProvider, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base"
-import { useState } from "react";
+import React, { useState } from "react";
+import { Alert } from "react-native";
+import { NativeBaseProvider, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
 
 export default function CostoPantalla1(props) {
 
@@ -15,7 +15,17 @@ export default function CostoPantalla1(props) {
         setFormManofactura({ ...FormManofactura, [input]: value });
     }
     let { alto, medio, bajo } = FormManofactura;
-    console.log(FormManofactura);
+    function buttonPress() {
+        if (bajo == '' || medio == '' || alto == '') {
+            Alert.alert("Error", "No se permiten campos vacios");
+        } else if (parseInt(bajo) > parseInt(medio)) {
+            Alert.alert("Error", "El valor de bajo no puede ser mayor al valor de medio");
+        } else if (parseInt(medio) > parseInt(alto)) {
+            Alert.alert("Error", "El valor de medio no puede ser mayor al valor de alto");
+        } else {
+            navigation.navigate("Hoja-de-Costos3", { alto, medio, bajo, mub })
+        }
+    }
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -40,9 +50,7 @@ export default function CostoPantalla1(props) {
                                 base: "50%"
                             }} />
                     </FormControl>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos3", {
-                        alto, medio, bajo, mub
-                    })}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
