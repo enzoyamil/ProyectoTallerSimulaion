@@ -69,9 +69,30 @@ export default function CostoPantalla3(props) {
             Alert.alert("Error", "Debe seleccionar un valor en mes");
         } else if (rango == '') {
             Alert.alert("Error", "Debe seleccionar un valor en rango");
+        } else if (fechaRepetida(mes)) {
+            Alert.alert("Error", "Ya existe esa fecha");
         } else {
             agregarFila();
         }
+    }
+
+    function buttonPressNav() {
+        console.log(TableService.length);
+        if (TableService.length > 0) {
+            navigation.navigate("Hoja-de-Costos4");
+        } else {
+            Alert.alert("Error", "Agregue al menos un mes con su rango");
+        }
+    }
+
+    function fechaRepetida(value) {
+        let res = false;
+        TableService.map((item) => {
+            if (item.mes == value) {
+                res = true;
+            }
+        });
+        return res;
     }
 
     return (
@@ -137,7 +158,7 @@ export default function CostoPantalla3(props) {
                             <Text>Sumatoria costo de produccion mensuales: {sumCostoProduc()}</Text>
                         </Stack>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4")}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={buttonPressNav}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
