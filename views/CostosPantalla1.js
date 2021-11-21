@@ -6,7 +6,9 @@ import { DataTable } from 'react-native-paper';
 export default function CostoPantalla2(props) {
 
     const { navigation } = props;
+
     const [TableService, setTableService] = useState([]);
+
     const [FormTablaProducto, setFormTablaProducto] = useState({
         producto_o_servicio: '',
         tipo: '',
@@ -16,9 +18,11 @@ export default function CostoPantalla2(props) {
         precio_c: '',
         precio_v: ''
     });
+
     function EstadoInputs(value, input) {
         setFormTablaProducto({ ...FormTablaProducto, [input]: value });
     }
+
     function agregarFila() {
         setTableService([...TableService, FormTablaProducto]);
         setFormTablaProducto({
@@ -29,18 +33,23 @@ export default function CostoPantalla2(props) {
             frecuencia: '',
             precio_c: '',
             precio_v: ''
-        }
-        );
+        });
     }
+
     let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v, mub } = FormTablaProducto;
-    mub = MUBTotal();
+
     let [service, setService] = React.useState("");
+
+    mub = MUBTotal();
+    /*Operaciones*/
     function totalCompraMensual(item) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_c)).toFixed(2);
     }
+
     function totalVentaMensual(item) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_v)).toFixed(2);
     }
+
     function MUB(item) {
         let res = 0;
         if (parseInt(totalVentaMensual(item)) != 0) {
@@ -48,6 +57,7 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
+
     function sumatoriaCompraMensuales() {
         let res = 0;
         TableService.map((item) => {
@@ -55,6 +65,7 @@ export default function CostoPantalla2(props) {
         })
         return res;
     }
+
     function sumatoriaVentaMensuales() {
         let res = 0;
         TableService.map((item) => {
@@ -62,6 +73,7 @@ export default function CostoPantalla2(props) {
         })
         return res;
     }
+
     function MUBTotal() {
         let res = 0;
         if (sumatoriaVentaMensuales() != 0) {
@@ -69,6 +81,7 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
+    
     function valorfrecuencia(cadena) {
         let res = 0;
         if (cadena == "Diario") {
@@ -90,6 +103,7 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
+    /************************************************************************/
     function buttonPress() {
         if (producto_o_servicio == '' || tipo == '' || cantidad == '' || unidad_de_venta == '' || precio_c == '' || precio_v == '') {
             Alert.alert("Error", "No se permiten campos vacios");
@@ -99,6 +113,7 @@ export default function CostoPantalla2(props) {
             agregarFila();
         }
     }
+
     return (
         <NativeBaseProvider style={{ bg: "red" }}>
             <ScrollView>
@@ -111,12 +126,12 @@ export default function CostoPantalla2(props) {
                     <FormControl>
                         <FormControl.Label>Producto o Servicio</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
-                        <FormControl.Label>Tipo</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={tipo} onChangeText={(value) => EstadoInputs(value, 'tipo')} />
+                        {/* <FormControl.Label>Tipo</FormControl.Label>
+                        <Input variant="rounded" borderColor="gray.400" value={tipo} onChangeText={(value) => EstadoInputs(value, 'tipo')} /> */}
                         <FormControl.Label>Cantidad</FormControl.Label>
                         <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={cantidad} onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
-                        <FormControl.Label>Unidad de Venta</FormControl.Label>
-                        <Input variant="rounded" borderColor="gray.400" value={unidad_de_venta} onChangeText={(value) => EstadoInputs(value, 'unidad_de_venta')} />
+                        {/* <FormControl.Label>Unidad de Venta</FormControl.Label>
+                        <Input variant="rounded" borderColor="gray.400" value={unidad_de_venta} onChangeText={(value) => EstadoInputs(value, 'unidad_de_venta')} /> */}
                         <FormControl.Label>Frecuencia</FormControl.Label>
                         <Select placeholder="Frecuencia" borderColor="gray.400" variant="rounded" value={frecuencia} selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                             onValueChange={(value) => EstadoInputs(value, 'frecuencia')}>
@@ -140,22 +155,24 @@ export default function CostoPantalla2(props) {
                     <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
-                                <DataTable.Title style={{ width: 150 }}><Text bold>Producto o Servicio</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 80 }}><Text bold>Tipo</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 115 }}><Text bold>Unidad de venta</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 150 }}><Text bold>Total compra mensual</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 135 }}><Text bold>Total venta mensual</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 60 }}><Text bold>MUB</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 140 }}><Text bold>Producto o Servicio</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 90 }}><Text bold>Frecuencia</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 75 }}><Text bold>Precio C</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 75 }}><Text bold>Precio V</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 155 }}><Text bold>Total compra mensual</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 145 }}><Text bold>Total venta mensual</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 50 }}><Text bold>MUB</Text></DataTable.Title>
                             </DataTable.Header>
                             {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
-                                        <DataTable.Cell style={{ width: 150 }}>{item.producto_o_servicio}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 80 }}>{item.tipo}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 115 }}>{item.unidad_de_venta}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 150 }}>{totalCompraMensual(item)}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 135 }}>{totalVentaMensual(item)}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 60 }}>{MUB(item)}%</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 140 }}>{item.producto_o_servicio}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 90 }}>{item.frecuencia}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 75 }}>{item.precio_c}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 75 }}>{item.precio_v}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 155 }}>{totalCompraMensual(item)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 145 }}>{totalVentaMensual(item)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 50 }}>{MUB(item)}%</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }

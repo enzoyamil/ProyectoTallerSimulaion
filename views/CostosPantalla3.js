@@ -6,39 +6,48 @@ import { DataTable } from 'react-native-paper';
 export default function CostoPantalla3(props) {
 
     const { navigation, route } = props;
+
     const { alto, medio, bajo, mub } = route.params;
+
     const [TableService, setTableService] = useState([]);
+
     const [FormManofactura, setFormManofactura] = useState({
         mes: '',
         rango: '',
     });
+
     function EstadoInputs(value, input) {
         setFormManofactura({ ...FormManofactura, [input]: value });
     }
+
     let { mes, rango } = FormManofactura;
+
     let [service, setService] = React.useState("");
+
     function agregarFila() {
         setTableService([...TableService, FormManofactura]);
         setFormManofactura({
             mes: '',
             rango: ''
-        }
-        );
+        });
     }
+    /*Operaciones*/
     function ventasMensuales(cadena) {
         let res = 0;
         if (cadena == "Alto") {
-            res = alto;
+            res = parseFloat(alto);
         } else if (cadena == "Medio") {
-            res = medio;
+            res = parseFloat(medio);
         } else if (cadena == "Bajo") {
-            res = bajo;
+            res = parseFloat(bajo);
         }
-        return res;
+        return res.toFixed(2);
     }
+
     function costoProduccionMensual(cadena) {
         return (parseFloat(ventasMensuales(cadena)) * (1 - (parseFloat(mub) / 100))).toFixed(2);
     }
+
     function sumVentasMensuales() {
         let res = 0;
         TableService.map((item) => {
@@ -46,6 +55,7 @@ export default function CostoPantalla3(props) {
         })
         return res;
     }
+
     function sumCostoProduc() {
         let res = 0;
         TableService.map((item) => {
@@ -53,6 +63,7 @@ export default function CostoPantalla3(props) {
         })
         return res;
     }
+    /****************************************/
     function buttonPress() {
         if (mes == '') {
             Alert.alert("Error", "Debe seleccionar un valor en mes");
@@ -62,6 +73,7 @@ export default function CostoPantalla3(props) {
             agregarFila();
         }
     }
+
     return (
         <NativeBaseProvider>
             <ScrollView>

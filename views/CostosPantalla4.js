@@ -9,17 +9,23 @@ export default function CostoPantalla4(props) {
     useEffect(()=>{
         crearContenedorInsumo();
     }, []);
+
     const { navigation } = props;
+
     const [Detalles, setDetalles] = useState([])
+
     const [FormProducto, setFormProducto] = useState({
         producto_o_servicio: '',
         unidad_de_medida: '',
         precio_venta: ''
     });
+
     function EstadoInputs(value, input) {
         setFormProducto({ ...FormProducto, [input]: value });
     }
+
     let { producto_o_servicio, unidad_de_medida, precio_venta } = FormProducto;
+
     function verDetalle() {
         setDetalles([...Detalles, FormProducto]);
         setFormProducto({
@@ -28,8 +34,9 @@ export default function CostoPantalla4(props) {
             precio_venta: ''
         });
     }
+    /*Funciones para guardar las tablas de insumos dentro los contenedores*/
     async function buttonPress() {
-        if (producto_o_servicio == '' || unidad_de_medida == '' || precio_venta == '') {
+        if (producto_o_servicio == '' || unidad_de_medida == '') {
             Alert.alert("Error", "No se permiten campos vacios");
         } else {
             verDetalle();
@@ -42,9 +49,12 @@ export default function CostoPantalla4(props) {
             await AsyncStorage.setItem("insumos", arrtext);
         }
     }
+
     async function crearContenedorInsumo() {
         await AsyncStorage.setItem("insumos", "[]");
     }
+    /*************************************************/
+
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -57,8 +67,8 @@ export default function CostoPantalla4(props) {
                         <Input variant="rounded" borderColor="gray.400" value={producto_o_servicio} onChangeText={(value) => EstadoInputs(value, 'producto_o_servicio')} />
                         <FormControl.Label>Unidad de medida</FormControl.Label>
                         <Input variant="rounded" borderColor="gray.400" value={unidad_de_medida} onChangeText={(value) => EstadoInputs(value, 'unidad_de_medida')} />
-                        <FormControl.Label>Precio de venta</FormControl.Label>
-                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} />
+                        {/* <FormControl.Label>Precio de venta</FormControl.Label>
+                        <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={precio_venta} onChangeText={(value) => EstadoInputs(value, 'precio_venta')} /> */}
                     </FormControl>
                     <Center>
                         <Button onPress={buttonPress}>Crear</Button>
@@ -71,7 +81,6 @@ export default function CostoPantalla4(props) {
                                 navigation={navigation}
                                 producto_o_servico={item.producto_o_servicio}
                                 unidad_medida={item.unidad_de_medida}
-                                precio_venta={item.precio_venta}
                             />
                         ))
                     }
