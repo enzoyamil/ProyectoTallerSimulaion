@@ -85,6 +85,36 @@ export default function CostoPantalla3(props) {
         }
     }
 
+    function addFecha(pos) {
+        let res = "";
+        if (pos == 0) {
+            res = "Para la fecha: Enero"
+        } else if (pos == 1) {
+            res = "Para la fecha: Febrero"
+        } else if (pos == 2) {
+            res = "Para la fecha: Marzo"
+        } else if (pos == 3) {
+            res = "Para la fecha: Abril"
+        } else if (pos == 4) {
+            res = "Para la fecha: Mayo"
+        } else if (pos == 5) {
+            res = "Para la fecha: Junio"
+        } else if (pos == 6) {
+            res = "Para la fecha: Julio"
+        } else if (pos == 7) {
+            res = "Para la fecha: Agosto"
+        } else if (pos == 8) {
+            res = "Para la fecha: Septiembre"
+        } else if (pos == 9) {
+            res = "Para la fecha: Octubre"
+        } else if (pos == 10) {
+            res = "Para la fecha: Noviembre"
+        } else if (pos == 11) {
+            res = "Para la fecha: Diciembre"
+        }
+        return res;
+    }
+
     function addMes(pos) {
         let res = "";
         if (pos == 0) {
@@ -149,7 +179,7 @@ export default function CostoPantalla3(props) {
                             </Select>
                         </Stack>
                     </FormControl>
-                    <Center><Text bold>Para la Fecha: {addMes(mes)}</Text></Center>
+                    <Center><Text bold>{addFecha(mes)}</Text></Center>
                     <Center>
                         <Button onPress={buttonPress}>Añadir</Button>
                     </Center>
