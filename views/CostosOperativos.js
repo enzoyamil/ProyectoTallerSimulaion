@@ -18,33 +18,39 @@ import {
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
 import { DataTable } from 'react-native-paper';
 
+
 function CostosOperativos(props) {
-  const { navigation } = props;
+  const {navigation} = props;
   const [FormPersonal, setFormPersonal] = useState({
-    impuestos: 0,
-    alimentacion: 0,
-    luz: 0,
-    agua: 0,
-    gas: 0,
-    celular: 0,
-    internet: 0,
-    alquiler: 0,
-    transporte: 0,
-    escritorio: 0,
-    empleados: 0,
-    promocion: 0,
+    impuestos: '',
+    alimentacion: '',
+    luz: '',
+    agua: '',
+    gas: '',
+    celular: '',
+    internet: '',
+    alquiler: '',
+    transporte: '',
+    escritorio: '',
+    empleados: '',
+    promocion: '',
   }); //estado inicial de usestate nullo.
   //sconsole.log(FormPersonal);
+
+  //let valor1 = props.route.params;
 
   function EstadoInputs(value, input) {
     setFormPersonal({ ...FormPersonal, [input]: value });
     console.log(FormPersonal);
   }
 
-  // function devolverTotal(){
-  //   //total = FormPersonal.impuestos + FormPersonal.alimentacion + FormPersonal.luz + FormPersonal.agua + FormPersonal.gas + FormPersonal.celular + FormPersonal.internet + FormPersonal.alquiler + FormPersonal.transporte + FormPersonal.escritorio + FormPersonal.empleados + FormPersonal.promocion + FormPersonal.vestimenta + FormPersonal.salud + FormPersonal.otros
-  //   return FormPersonal.impuestos + FormPersonal.alimentacion + FormPersonal.luz + FormPersonal.agua + FormPersonal.gas + FormPersonal.celular + FormPersonal.internet + FormPersonal.alquiler + FormPersonal.transporte + FormPersonal.escritorio + FormPersonal.empleados + FormPersonal.promocion + FormPersonal.vestimenta + FormPersonal.salud + FormPersonal.otros;
-  // }
+  function devolverTotal(){
+    //total = FormPersonal.impuestos + FormPersonal.alimentacion + FormPersonal.luz + FormPersonal.agua + FormPersonal.gas + FormPersonal.celular + FormPersonal.internet + FormPersonal.alquiler + FormPersonal.transporte + FormPersonal.escritorio + FormPersonal.empleados + FormPersonal.promocion + FormPersonal.vestimenta + FormPersonal.salud + FormPersonal.otros
+    let total = parseInt(FormPersonal.impuestos) + parseInt(FormPersonal.alimentacion) + parseInt(FormPersonal.luz) + parseInt(FormPersonal.agua) + parseInt(FormPersonal.gas) + parseInt(FormPersonal.celular) + parseInt(FormPersonal.internet) + parseInt(FormPersonal.alquiler) + parseInt(FormPersonal.transporte) + parseInt(FormPersonal.escritorio) + parseInt(FormPersonal.empleados) + parseInt(FormPersonal.promocion) + parseInt(FormPersonal.vestimenta) + parseInt(FormPersonal.salud) + parseInt(FormPersonal.otros);
+    return isNaN(total) ? 'llenar los campos' : total;
+  }
+
+  let total = devolverTotal()
 
   function buttonPress() {
     if (
@@ -129,8 +135,9 @@ function CostosOperativos(props) {
     } else {
       Alert.alert('succesfull');
       console.log('here');
-      console.log(FormPersonal);
-      // navigation.navigate('');
+      //console.log(FormPersonal);
+      console.log(props)
+      navigation.navigate('MargenBruto');
     }
   }
 
@@ -151,7 +158,7 @@ function CostosOperativos(props) {
     salud,
     otros,
   } = FormPersonal;
-  let [service, setService] = React.useState(0);
+  //let [service, setService] = React.useState(0);
   return (
     <NativeBaseProvider>
       <ScrollView>
@@ -287,13 +294,13 @@ function CostosOperativos(props) {
               </DataTable.Row>
             </DataTable> */}
 
-            <FormControl.Label>Total: {}</FormControl.Label>
+            <FormControl.Label>Total: {total}</FormControl.Label>
           </Box>
         </Stack>
       </ScrollView>
       <Box>
         {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Informacón del Emprendimiento")}>Siguiente</Button> */}
-        <Button colorScheme="primary" onPress={() => buttonPress()}>
+        <Button colorScheme="primary" onPress={buttonPress}>
           Siguiente
         </Button>
       </Box>
