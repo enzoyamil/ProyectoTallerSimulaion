@@ -11,9 +11,7 @@ export default function CostoPantalla2(props) {
 
     const [FormTablaProducto, setFormTablaProducto] = useState({
         producto_o_servicio: '',
-        tipo: '',
         cantidad: '',
-        unidad_de_venta: '',
         frecuencia: '',
         precio_c: '',
         precio_v: ''
@@ -27,16 +25,14 @@ export default function CostoPantalla2(props) {
         setTableService([...TableService, FormTablaProducto]);
         setFormTablaProducto({
             producto_o_servicio: '',
-            tipo: '',
             cantidad: '',
-            unidad_de_venta: '',
             frecuencia: '',
             precio_c: '',
             precio_v: ''
         });
     }
 
-    let { producto_o_servicio, tipo, cantidad, unidad_de_venta, frecuencia, precio_c, precio_v, mub } = FormTablaProducto;
+    let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v, mub } = FormTablaProducto;
 
     let [service, setService] = React.useState("");
 
@@ -105,7 +101,7 @@ export default function CostoPantalla2(props) {
     }
     /************************************************************************/
     function buttonPress() {
-        if (producto_o_servicio == '' || tipo == '' || cantidad == '' || unidad_de_venta == '' || precio_c == '' || precio_v == '') {
+        if (producto_o_servicio == '' || cantidad == '' || precio_c == '' || precio_v == '') {
             Alert.alert("Error", "No se permiten campos vacios");
         } else if (frecuencia == '') {
             Alert.alert("Error", "Debe de seleccionar un valor en frecuencia");
@@ -120,7 +116,6 @@ export default function CostoPantalla2(props) {
                 <Stack space={5}
                     px="4"
                     mt="4">
-                    <Center><Text fontSize="lg" bold>10. Hoja de Costos Directos</Text></Center>
                     <Center><Text fontSize="lg" bold>Manufactura y servicios</Text></Center>
                     <Text fontSize="md" bold>Comportamiento de Ventas mensuales</Text>
                     <FormControl>
