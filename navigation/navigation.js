@@ -23,6 +23,8 @@ import presupuestoResumen from "../views/PresupuestoResumen";
 import planInversion from "../views/PlanInversion";
 import datosResumen from "../views/DatosResumen";
 import CostosOperativos from '../views/CostosOperativos';
+import MargenBruto from "../views/MargenBruto";
+import DatosCredito from "../views/DatosCredito";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,7 +58,8 @@ function navigation() {
             <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen}/>
             <Stack.Screen name="Plan Inversión" component={planInversion}/>
             <Stack.Screen name="Datos Resumen" component={datosResumen}/> */}
-
+      <Stack.Screen options={{ title: "Analisis Financiero" }} name="MargenBruto" component={MargenBruto} />
+      <Stack.Screen options={{ title: "Analisis Financiero" }} name="DatosCredito" component={DatosCredito} />
     </Stack.Navigator>
   );
 }

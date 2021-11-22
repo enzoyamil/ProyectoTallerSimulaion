@@ -21,25 +21,30 @@ import { DataTable } from 'react-native-paper';
 function CostosOperativos(props) {
   const { navigation } = props;
   const [FormPersonal, setFormPersonal] = useState({
-    impuestos: '',
-    alimentacion: '',
-    luz: '',
-    agua: '',
-    gas: '',
-    celular: '',
-    internet: '',
-    alquiler: '',
-    transporte: '',
-    escritorio: '',
-    empleados: '',
-    promocion: '',
+    impuestos: 0,
+    alimentacion: 0,
+    luz: 0,
+    agua: 0,
+    gas: 0,
+    celular: 0,
+    internet: 0,
+    alquiler: 0,
+    transporte: 0,
+    escritorio: 0,
+    empleados: 0,
+    promocion: 0,
   }); //estado inicial de usestate nullo.
-  console.log(FormPersonal);
+  //sconsole.log(FormPersonal);
 
   function EstadoInputs(value, input) {
     setFormPersonal({ ...FormPersonal, [input]: value });
     console.log(FormPersonal);
   }
+
+  // function devolverTotal(){
+  //   //total = FormPersonal.impuestos + FormPersonal.alimentacion + FormPersonal.luz + FormPersonal.agua + FormPersonal.gas + FormPersonal.celular + FormPersonal.internet + FormPersonal.alquiler + FormPersonal.transporte + FormPersonal.escritorio + FormPersonal.empleados + FormPersonal.promocion + FormPersonal.vestimenta + FormPersonal.salud + FormPersonal.otros
+  //   return FormPersonal.impuestos + FormPersonal.alimentacion + FormPersonal.luz + FormPersonal.agua + FormPersonal.gas + FormPersonal.celular + FormPersonal.internet + FormPersonal.alquiler + FormPersonal.transporte + FormPersonal.escritorio + FormPersonal.empleados + FormPersonal.promocion + FormPersonal.vestimenta + FormPersonal.salud + FormPersonal.otros;
+  // }
 
   function buttonPress() {
     if (
@@ -146,7 +151,7 @@ function CostosOperativos(props) {
     salud,
     otros,
   } = FormPersonal;
-  let [service, setService] = React.useState('');
+  let [service, setService] = React.useState(0);
   return (
     <NativeBaseProvider>
       <ScrollView>
@@ -275,12 +280,14 @@ function CostosOperativos(props) {
             <Divider />
 
             {/* tabla */}
-            <DataTable>
+            {/* <DataTable>
               <DataTable.Row>
                 <DataTable.Cell></DataTable.Cell>
                 <DataTable.Cell></DataTable.Cell>
               </DataTable.Row>
-            </DataTable>
+            </DataTable> */}
+
+            <FormControl.Label>Total: {}</FormControl.Label>
           </Box>
         </Stack>
       </ScrollView>
