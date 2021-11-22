@@ -148,17 +148,14 @@ function DatosCredito(props) {
 
                         </Select>
 
-                        {'\n'}<Text>CUOTA APROXIMADA: {}</Text>
+                        {'\n'}<Text>CUOTA APROXIMADA: { }</Text>
 
                     </Box>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>
+                        Siguiente
+                    </Button>
                 </Stack>
             </ScrollView>
-            <Box>
-                {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Informacón del Emprendimiento")}>Siguiente</Button> */}
-                <Button colorScheme="primary" onPress={() => buttonPress()}>
-                    Siguiente
-                </Button>
-            </Box>
         </NativeBaseProvider>
     );
 }

@@ -20,7 +20,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function CostosOperativos(props) {
-  const {navigation} = props;
+  const { navigation, route } = props;
+  const { mub, venta_anuales, costos_anuales } = route.params;
   const [FormPersonal, setFormPersonal] = useState({
     impuestos: '',
     alimentacion: '',
@@ -44,7 +45,7 @@ function CostosOperativos(props) {
     console.log(FormPersonal);
   }
 
-  function devolverTotal(){
+  function devolverTotal() {
     //total = FormPersonal.impuestos + FormPersonal.alimentacion + FormPersonal.luz + FormPersonal.agua + FormPersonal.gas + FormPersonal.celular + FormPersonal.internet + FormPersonal.alquiler + FormPersonal.transporte + FormPersonal.escritorio + FormPersonal.empleados + FormPersonal.promocion + FormPersonal.vestimenta + FormPersonal.salud + FormPersonal.otros
     let total = parseInt(FormPersonal.impuestos) + parseInt(FormPersonal.alimentacion) + parseInt(FormPersonal.luz) + parseInt(FormPersonal.agua) + parseInt(FormPersonal.gas) + parseInt(FormPersonal.celular) + parseInt(FormPersonal.internet) + parseInt(FormPersonal.alquiler) + parseInt(FormPersonal.transporte) + parseInt(FormPersonal.escritorio) + parseInt(FormPersonal.empleados) + parseInt(FormPersonal.promocion) + parseInt(FormPersonal.vestimenta) + parseInt(FormPersonal.salud) + parseInt(FormPersonal.otros);
     return isNaN(total) ? 'llenar los campos' : total;
@@ -74,70 +75,69 @@ function CostosOperativos(props) {
       Alert.alert('error campo vacio');
     } else if (tamanioMaximo(impuestos, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(impuestos, 2)) {
+    } else if (tamanioMin(impuestos, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(alimentacion, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(alimentacion, 2)) {
+    } else if (tamanioMin(alimentacion, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(luz, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(luz, 2)) {
+    } else if (tamanioMin(luz, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(agua, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(agua, 2)) {
+    } else if (tamanioMin(agua, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(gas, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(gas, 2)) {
+    } else if (tamanioMin(gas, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(celular, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(celular, 2)) {
+    } else if (tamanioMin(celular, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(internet, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(internet, 2)) {
+    } else if (tamanioMin(internet, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(alquiler, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(alquiler, 2)) {
+    } else if (tamanioMin(alquiler, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(transporte, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(transporte, 2)) {
+    } else if (tamanioMin(transporte, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(escritorio, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(escritorio, 2)) {
+    } else if (tamanioMin(escritorio, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(empleados, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(empleados, 2)) {
+    } else if (tamanioMin(empleados, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(promocion, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(promocion, 2)) {
+    } else if (tamanioMin(promocion, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(vestimenta, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(vestimenta, 2)) {
+    } else if (tamanioMin(vestimenta, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(salud, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(salud, 2)) {
+    } else if (tamanioMin(salud, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else if (tamanioMaximo(otros, 15)) {
       Alert.alert('cadena nombre muy grande');
-    } else if (tamanioMin(otros, 2)) {
+    } else if (tamanioMin(otros, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else {
       Alert.alert('succesfull');
       console.log('here');
-      //console.log(FormPersonal);
       console.log(props)
-      navigation.navigate('MargenBruto');
+      navigation.navigate('MargenBruto', { mub, venta_anuales, costos_anuales, total });
     }
   }
 
@@ -296,14 +296,11 @@ function CostosOperativos(props) {
 
             <FormControl.Label>Total: {total}</FormControl.Label>
           </Box>
+          <Button colorScheme="primary" onPress={buttonPress}>
+            Siguiente
+          </Button>
         </Stack>
       </ScrollView>
-      <Box>
-        {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Informacón del Emprendimiento")}>Siguiente</Button> */}
-        <Button colorScheme="primary" onPress={buttonPress}>
-          Siguiente
-        </Button>
-      </Box>
     </NativeBaseProvider>
   );
 }

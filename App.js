@@ -10,8 +10,8 @@ import DatosCredito from "./views/DatosCredito";
 function App() {
   return (
     <NavigationContainer>
-      {/* <Navigation /> */}
-      <CostosOperativos />
+      <Navigation />
+      {/* <CostosOperativos /> */}
       {/* <MargenBruto/> */}
       {/* <DatosCredito/> */}
     </NavigationContainer>

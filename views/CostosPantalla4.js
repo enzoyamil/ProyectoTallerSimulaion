@@ -10,7 +10,9 @@ export default function CostoPantalla4(props) {
         crearContenedorInsumo();
     }, []);
 
-    const { navigation } = props;
+    const { navigation, route } = props;
+
+    const {mub, venta_anuales, costos_anuales} =route.params;
 
     const [Detalles, setDetalles] = useState([])
 
@@ -82,7 +84,7 @@ export default function CostoPantalla4(props) {
                             />
                         ))
                     }
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos")}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", {mub, venta_anuales, costos_anuales})}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

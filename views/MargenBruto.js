@@ -20,7 +20,12 @@ import { DataTable } from 'react-native-paper';
 
 
 function MargenBruto(props) {
-    const { navigation } = props;
+    const { navigation, route } = props;
+    const { mub, venta_anuales, costos_anuales, total } = route.params
+    console.log(venta_anuales)
+    console.log(costos_anuales)
+    console.log(mub)
+    console.log(total)
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
     }); //estado inicial de usestate nullo.
@@ -96,32 +101,11 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>Manufactura</DataTable.Cell>
-                                <DataTable.Cell numeric>123</DataTable.Cell>
-                                <DataTable.Cell numeric>159</DataTable.Cell>
-                                <DataTable.Cell numeric>6.0</DataTable.Cell>
-                            </DataTable.Row>
-
-                            <DataTable.Row>
-                                <DataTable.Cell>Agricola</DataTable.Cell>
-                                <DataTable.Cell numeric>159</DataTable.Cell>
-                                <DataTable.Cell numeric>237</DataTable.Cell>
-                                <DataTable.Cell numeric>8.0</DataTable.Cell>
-                            </DataTable.Row>
-
-                            <DataTable.Row>
-                                <DataTable.Cell>Pecuario</DataTable.Cell>
-                                <DataTable.Cell numeric>56</DataTable.Cell>
-                                <DataTable.Cell numeric>856</DataTable.Cell>
-                                <DataTable.Cell numeric>7.0</DataTable.Cell>
+                                <DataTable.Cell numeric>{venta_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{costos_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{mub}</DataTable.Cell>
                             </DataTable.Row>
                             <Divider />
-
-                            <DataTable.Row>
-                                <DataTable.Cell>Total</DataTable.Cell>
-                                <DataTable.Cell numeric>0</DataTable.Cell>
-                                <DataTable.Cell numeric>0</DataTable.Cell>
-                                <DataTable.Cell numeric>0</DataTable.Cell>
-                            </DataTable.Row>
                         </DataTable>
 
                         {'\n'}
@@ -136,39 +120,36 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>(+)Ingresos Totales</DataTable.Cell>
-                                <DataTable.Cell numeric>123</DataTable.Cell>
+                                <DataTable.Cell numeric>{venta_anuales}</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(-)Costos Directos</DataTable.Cell>
-                                <DataTable.Cell numeric>123</DataTable.Cell>
+                                <DataTable.Cell numeric>{costos_anuales}</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Bruta</DataTable.Cell>
-                                <DataTable.Cell numeric>123</DataTable.Cell>
+                                <DataTable.Cell numeric>{venta_anuales - costos_anuales}</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(-)Costo Operativo</DataTable.Cell>
-                                <DataTable.Cell numeric>123</DataTable.Cell>
+                                <DataTable.Cell numeric>{total * 12}</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Operativa</DataTable.Cell>
-                                <DataTable.Cell numeric>123</DataTable.Cell>
+                                <DataTable.Cell numeric>{(venta_anuales - costos_anuales) - (total * 12)}</DataTable.Cell>
                             </DataTable.Row>
                         </DataTable>
 
                     </Box>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>
+                        Siguiente
+                    </Button>
                 </Stack>
             </ScrollView>
-            <Box>
-                {/* <Button colorScheme="primary" onPress={() => navigation.navigate("DatosCredito")}>Siguiente</Button> */}
-                <Button colorScheme="primary" onPress={() => buttonPress()}>
-                    Siguiente
-                </Button>
-            </Box>
         </NativeBaseProvider>
     );
 }

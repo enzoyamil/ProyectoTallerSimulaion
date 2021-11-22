@@ -20,10 +20,14 @@ export default function CostoPantalla3(props) {
         setFormManofactura({ ...FormManofactura, [input]: value });
     }
 
-    let { mes, rango } = FormManofactura;
+    let { rango, venta_anuales, costos_anuales } = FormManofactura;
 
     pos_mes = TableService.length
 
+    venta_anuales = sumVentasMensuales();
+    //console.log(venta_anuales)
+    costos_anuales = sumCostoProduc();
+    //console.log(costos_anuales)
     let [service, setService] = React.useState("");
 
     function agregarFila() {
@@ -78,8 +82,8 @@ export default function CostoPantalla3(props) {
     }
 
     function buttonPressNav() {
-        if (TableService.length == 12) {
-            navigation.navigate("Hoja-de-Costos4");
+        if (true) {
+            navigation.navigate("Hoja-de-Costos4", {mub, venta_anuales, costos_anuales});
         } else {
             Alert.alert("Error", "Llene con todos los meses");
         }
