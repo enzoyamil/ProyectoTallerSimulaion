@@ -116,7 +116,6 @@ export default function CostoPantalla2(props) {
                 <Stack space={5}
                     px="4"
                     mt="4">
-                    <Center><Text fontSize="lg" bold>10. Hoja de Costos Directos</Text></Center>
                     <Center><Text fontSize="lg" bold>Manufactura y servicios</Text></Center>
                     <Text fontSize="md" bold>Comportamiento de Ventas mensuales</Text>
                     <FormControl>

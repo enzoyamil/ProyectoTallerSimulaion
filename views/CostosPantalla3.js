@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Alert } from "react-native";
 import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Select, Button, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
+import { Table } from "react-native-table-component";
 
 export default function CostoPantalla3(props) {
 
@@ -12,7 +13,6 @@ export default function CostoPantalla3(props) {
     const [TableService, setTableService] = useState([]);
 
     const [FormManofactura, setFormManofactura] = useState({
-        mes: '',
         rango: '',
     });
 
@@ -22,12 +22,13 @@ export default function CostoPantalla3(props) {
 
     let { mes, rango } = FormManofactura;
 
+    mes = TableService.length
+
     let [service, setService] = React.useState("");
 
     function agregarFila() {
         setTableService([...TableService, FormManofactura]);
         setFormManofactura({
-            mes: '',
             rango: ''
         });
     }
@@ -40,6 +41,8 @@ export default function CostoPantalla3(props) {
             res = parseFloat(medio);
         } else if (cadena == "Bajo") {
             res = parseFloat(bajo);
+        }else if ( cadena == "Sin rango"){
+            res = 0;
         }
         return res.toFixed(2);
     }
@@ -67,46 +70,46 @@ export default function CostoPantalla3(props) {
     function buttonPress() {
         if (rango == '') {
             Alert.alert("Error", "Debe seleccionar un valor en rango");
-        } else if(TableService.length<12){
+        } else if (TableService.length < 12) {
             agregarFila();
-        }else{
+        } else {
             Alert.alert("Error", "Ya lleno todas las fechas");
         }
     }
 
     function buttonPressNav() {
-        if (TableService.length > 0) {
+        if (TableService.length == 12) {
             navigation.navigate("Hoja-de-Costos4");
         } else {
-            Alert.alert("Error", "Agregue al menos un mes con su rango");
+            Alert.alert("Error", "Llene con todos los meses");
         }
     }
 
-    function addMes(pos){
+    function addMes(pos) {
         let res = "";
-        if(pos == 0){
+        if (pos == 0) {
             res = "Enero"
-        }else if(pos == 1){
+        } else if (pos == 1) {
             res = "Febrero"
-        }else if(pos == 2){
+        } else if (pos == 2) {
             res = "Marzo"
-        }else if(pos == 3){
+        } else if (pos == 3) {
             res = "Abril"
-        }else if(pos == 4){
+        } else if (pos == 4) {
             res = "Mayo"
-        }else if(pos == 5){
+        } else if (pos == 5) {
             res = "Junio"
-        }else if(pos == 6){
+        } else if (pos == 6) {
             res = "Julio"
-        }else if(pos == 7){
+        } else if (pos == 7) {
             res = "Agosto"
-        }else if(pos == 8){
+        } else if (pos == 8) {
             res = "Septiembre"
-        }else if(pos == 9){
+        } else if (pos == 9) {
             res = "Octubre"
-        }else if(pos == 10){
+        } else if (pos == 10) {
             res = "Noviembre"
-        }else if(pos == 11){
+        } else if (pos == 11) {
             res = "Diciembre"
         }
         return res;
@@ -142,9 +145,11 @@ export default function CostoPantalla3(props) {
                                 <Select.Item label="Alto" value="Alto" />
                                 <Select.Item label="Medio" value="Medio" />
                                 <Select.Item label="Bajo" value="Bajo" />
+                                <Select.Item label="Sin rango" value="Sin rango" />
                             </Select>
                         </Stack>
                     </FormControl>
+                    <Center><Text bold>Para la Fecha: {addMes(mes)}</Text></Center>
                     <Center>
                         <Button onPress={buttonPress}>Añadir</Button>
                     </Center>
