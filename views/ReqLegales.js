@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert,StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -8,7 +8,7 @@ import { DataTable } from 'react-native-paper';
 
 
 function ReqLegales(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
 
     const [FormReqLegal, setFormReqLegal] = useState({
@@ -18,7 +18,10 @@ function ReqLegales(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {
+        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
+        totalPropioGasOpe,totalInvGasOpe,totalPropioInfra,totalInvInfra,maqPropTotal,maqInvTotal
+    } = route.params;
 
     useEffect(() => {
         setFormReqLegal(FormReqLegal);
@@ -30,11 +33,85 @@ function ReqLegales(props) {
         console.log(FormReqLegal);
     }
 
-    function agregarFila() {
-        setTableService([...TableService, FormReqLegal]);
-        console.log(TableService);
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
     }
 
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+    let totalReqLegPropio= sumAportePropio("aportePropio");
+    let totalReqLegInv= sumInversionPropio("seInvertira");
+    function agregarFila() {
+        if(validarAgregar()){
+            Alert.alert("Eror Campos Vacíos");
+        }else{
+        setTableService([...TableService, FormReqLegal]);
+        setFormReqLegal(
+            {
+                cantidad: '',
+                unidad: '',
+                detalle: '',
+                aportePropio: '',
+                seInvertira: ''
+            }
+        );}
+        // console.log(TableService);
+    }
+
+    function totalCapitalInvProp(){
+        let total=0
+        return  total= totalPropioInfra+maqPropTotal+ totalReqLegPropio;
+    }
+    function totalCapitalInvInv(){
+        let total=0
+        return  total= totalInvInfra + maqInvTotal + totalReqLegInv;
+    }
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Presupuesto Resumen",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe,
+                totalPropioInfra:totalPropioInfra,
+                totalInvInfra:totalInvInfra,
+                maqPropTotal:maqPropTotal,
+                maqInvTotal:maqInvTotal,
+                totalReqLegPropio:totalReqLegPropio,
+                totalReqLegInv:totalReqLegInv
+                
+            })
+        }else{
+            Alert.alert("Error Tabla Vacía");
+        }
+    }
+    let sumaCapitalInvProp= totalCapitalInvProp();
+    let sumaCapitalInvInv= totalCapitalInvInv();
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormReqLegal;
     return (
         <NativeBaseProvider>
@@ -50,8 +127,8 @@ function ReqLegales(props) {
                         md: "25%",
                     }}
                 >
+                    <Center><Text fontSize="20" bold>Capital Inversión Legales</Text></Center>
                     <Box>
-                        <Text> Capital Inversión</Text>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -59,10 +136,10 @@ function ReqLegales(props) {
 
                             <FormControl.Label >Unidad</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value,'unidad')} />
+                                onChangeText={(value) => EstadoInputs(value, 'unidad')} />
 
                             <FormControl.Label >Detalle</FormControl.Label>
-                            <Input variant="rounded" value={detalle} 
+                            <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} />
 
                             <FormControl.Label >Aporte Propio</FormControl.Label>
@@ -76,10 +153,9 @@ function ReqLegales(props) {
 
 
                         </FormControl>
-                        <Box>
-                            {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
+                        <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -104,39 +180,28 @@ function ReqLegales(props) {
                                 ))
                             }
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                    <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
 
                             </DataTable>
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> TOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumaCapitalInvProp}</DataTable.Cell>
+                                    <DataTable.Cell> {sumaCapitalInvInv}</DataTable.Cell>
                                 </DataTable.Row>
-
                             </DataTable>
-
-                            
                         </DataTable>
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Resumen")}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() =>validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
     );
 }

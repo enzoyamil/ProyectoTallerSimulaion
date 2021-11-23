@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert,StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -8,9 +8,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function Infraestructura(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormInfraestructura, setFormInfraestructura] = useState({
         cantidad: '',
         unidad: '',
@@ -18,7 +17,10 @@ function Infraestructura(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {
+        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
+        totalPropioGasOpe,totalInvGasOpe
+    } = route.params;
 
     useEffect(() => {
         setFormInfraestructura(FormInfraestructura);
@@ -27,13 +29,78 @@ function Infraestructura(props) {
 
     function EstadoInputs(value, input) {
         setFormInfraestructura({ ...FormInfraestructura, [input]: value });
-        console.log(FormInfraestructura);
+        // console.log(FormInfraestructura);
+    }
+
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
     }
 
     function agregarFila() {
-        setTableService([...TableService, FormInfraestructura]);
-        console.log(TableService);
+        if(validarAgregar()){
+            Alert.alert("Error Campos Vacios");
+        }else{
+            setTableService([...TableService, FormInfraestructura]);
+        setFormInfraestructura(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );
+        }
+        
+        // console.log(TableService);
     }
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Maquinaria",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe,
+                totalPropioInfra:totalPropioInfra,
+                totalInvInfra:totalInvInfra
+            })
+        }else{
+            Alert.alert("Error Tabla Vacia");
+        }
+    }
+
+    let totalPropioInfra=sumAportePropio("aportePropio");
+    let totalInvInfra=sumInversionPropio("seInvertira");
+    console.log("Monto totalPropioInfra" + totalPropioInfra);
+    console.log("Monto totalInvInfra"+totalInvInfra);
 
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormInfraestructura;
     return (
@@ -51,7 +118,7 @@ function Infraestructura(props) {
                     }}
                 >
                     <Box>
-                    <Text> Capital Inversión</Text>
+                    <Center><Text fontSize="20" bold> Capital Inversión Infraestructura</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -73,13 +140,11 @@ function Infraestructura(props) {
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
 
-
-
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -104,14 +169,10 @@ function Infraestructura(props) {
                                 ))
                             }
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row> 
                                 <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
                                 
                             </DataTable>
@@ -119,10 +180,11 @@ function Infraestructura(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Maquinaria")}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

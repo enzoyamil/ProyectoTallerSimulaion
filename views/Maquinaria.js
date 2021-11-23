@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -8,9 +8,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function Maquinaria(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormMaquinaria, setFormMaquinaria] = useState({
         cantidad: '',
         unidad: '',
@@ -18,7 +17,10 @@ function Maquinaria(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
+    const {
+        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
+        totalPropioGasOpe,totalInvGasOpe,totalPropioInfra,totalInvInfra
+    } = route.params;
 
     useEffect(() => {
         setFormMaquinaria(FormMaquinaria);
@@ -30,11 +32,73 @@ function Maquinaria(props) {
         console.log(FormMaquinaria);
     }
 
-    function agregarFila() {
-        setTableService([...TableService, FormMaquinaria]);
-        console.log(TableService);
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
     }
 
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
+    }
+
+    function agregarFila() {
+        if(validarAgregar()){
+            Alert.alert("Eror Campos Vacíos");
+        }else{
+        setTableService([...TableService, FormMaquinaria]);
+        setFormMaquinaria(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );}
+        // console.log(TableService);
+    }
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Requerimiento Legal",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo,
+                totalPropioGasOpe:totalPropioGasOpe,
+                totalInvGasOpe:totalInvGasOpe,
+                totalPropioInfra:totalPropioInfra,
+                totalInvInfra:totalInvInfra,
+                maqPropTotal:maqPropTotal,
+                maqInvTotal:maqInvTotal
+
+            })
+        }else{
+            Alert.alert("Error Tabla Vacía");
+        }
+    }
+    let maqPropTotal=sumAportePropio("aportePropio");
+    let maqInvTotal=sumInversionPropio("seInvertira");
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormMaquinaria;
     return (
         <NativeBaseProvider>
@@ -50,8 +114,8 @@ function Maquinaria(props) {
                         md: "25%",
                     }}
                 >
+                    <Center><Text fontSize="20" bold > Capital Inversión Maquinaria</Text></Center>
                     <Box>
-                    <Text> Capital Inversión</Text>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -76,10 +140,10 @@ function Maquinaria(props) {
 
 
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Operativo</Text>
 
@@ -111,8 +175,8 @@ function Maquinaria(props) {
                                 </DataTable.Header> */}
                                 <DataTable.Row>
                                     <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                    <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
 
                             </DataTable>
@@ -120,10 +184,11 @@ function Maquinaria(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Requerimiento Legal")}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }

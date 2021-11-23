@@ -6,6 +6,7 @@ import {
     NativeBaseProvider, Select
 } from "native-base";
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from "../helpers/Validation"
+import { color } from "native-base/lib/typescript/theme/styled-system";
 
 function Pantalla1(props) {
     const { navigation } = props;
@@ -73,29 +74,29 @@ function Pantalla1(props) {
                         md: "25%",
                     }}
                 >
-                    <Box>
-                        <FormControl mb="5">
-                            <FormControl.Label>Nombres</FormControl.Label>
+                    <Box >
+                        <FormControl mb="5" >
+                            <FormControl.Label>Nombres*</FormControl.Label>
                             <Input variant="rounded" value={name} onChangeText={(value) => EstadoInputs(value, 'name')} />
 
 
 
-                            <FormControl.Label>Apellidos</FormControl.Label>
+                            <FormControl.Label style={[estilos.letras]}>Apellidos*</FormControl.Label>
                             <Input variant="rounded" value={apellido} onChangeText={(value) => EstadoInputs(value, 'apellido')} />
 
 
 
 
-                            <FormControl.Label>CI</FormControl.Label>
+                            <FormControl.Label style={[estilos.letras]}>CI*</FormControl.Label>
                             <Input variant="rounded" value={ci} onChangeText={(value) => EstadoInputs(value, 'ci')} keyboardType="numeric" />
 
 
 
-                            <FormControl.Label>Extensión</FormControl.Label>
-                            <Select placeholder="Extesion" variant="rounded" value={extension}
-                                selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                                onValueChange={(value) => EstadoInputs(value, 'extension')}
-                            >
+                            <FormControl.Label>Extensión*</FormControl.Label>
+                            <Select placeholder="Extesion" variant="rounded" value={extension} 
+                            selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                            onValueChange={(value) => EstadoInputs(value, 'extension')}
+                                >
                                 <Select.Item label="cbba" value="cochabamba" />
                                 <Select.Item label="La paz" value="La paz" />
                                 <Select.Item label="Santa Cruz" value="Santa Cruz" />
@@ -107,41 +108,46 @@ function Pantalla1(props) {
                                 <Select.Item label="Beni" value="Beni" />
                             </Select>
 
-                            <FormControl.Label>Edad</FormControl.Label>
+                            <FormControl.Label>Edad*</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={edad} onChangeText={(value) => EstadoInputs(value, 'edad')} />
 
 
 
 
-                            <FormControl.Label>Telefono</FormControl.Label>
+                            <FormControl.Label>Telefono*</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={telefono} onChangeText={(value) => EstadoInputs(value, 'telefono')} />
 
 
 
 
-                            <FormControl.Label>Dirección</FormControl.Label>
+                            <FormControl.Label>Dirección*</FormControl.Label>
                             <Input variant="rounded" value={direccion} onChangeText={(value) => EstadoInputs(value, 'direccion')} />
 
                         </FormControl>
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
+                <Box>
                 {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Informacón del Emprendimiento")}>Siguiente</Button> */}
                 <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
 }
 export default Pantalla1;
 //style={estilos.texto}
 const estilos = new StyleSheet.create({
-    texto: {
-        backgroundColor: ""
-    },
     fondo: {
-        backgroundColor: "red"
+        backgroundColor: 'rgb(0,32,96)',
+    },
+    fondoRojo:{
+        backgroundColor:'red'
+    },
+    letras:{
+        fontSize:'100',
+        color:'white'
     }
 });
 

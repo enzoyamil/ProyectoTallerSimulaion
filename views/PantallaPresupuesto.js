@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
+    FormControl, Button, Input, Stack, ScrollView, Divider, Box, NativeBaseProvider, Select, Text,Center
 } from "native-base";
 import { DataTable } from 'react-native-paper';
-
-
 function PantallaPresupuesto(props) {
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
@@ -16,9 +13,10 @@ function PantallaPresupuesto(props) {
         montoDinero: ''
         //montoTotal:''
     });
-    console.log(FormPresupuesto);
+    // console.log(FormPresupuesto);
     let { origenDinero, montoDinero } = FormPresupuesto;
     let [service, setService] = React.useState("");
+    
     useEffect(() => {
         setFormPresupuesto(FormPresupuesto);
     }, [FormPresupuesto]);
@@ -28,16 +26,19 @@ function PantallaPresupuesto(props) {
         setFormPresupuesto({ ...FormPresupuesto, [input]: value });
     }
     function agregarFila() {
-        setTableService([...TableService, FormPresupuesto]);
+        if(validacionAgregar()){
+            Alert.alert("No se puede agregar campos vacios");
+        }else{
+            setTableService([...TableService, FormPresupuesto]);
         setFormPresupuesto(
             {
                 origenDinero: '',
                 montoDinero: ''
-                //montoTotal:''
             }
         );
-    //    console.log(TableService);
-      //  sumatoria();
+
+        }
+        
     }
     function sumatoria(obj) {
         let montoTotal = 0;
@@ -46,12 +47,26 @@ function PantallaPresupuesto(props) {
             montoTotal = montoTotal + numero;
         })
         return montoTotal;
-
+    }
+    function validacionSiguiente(){
+        let tamanio = TableService.length;
+        if(tamanio>0){
+            navigation.navigate("Mano Emprendedor",{montoPresupuesto:monto});
+        }else{
+            Alert.alert("Agregar datos a la tabla");
+        }
+    }
+    function validacionAgregar(){
+        let isVal= false;
+        if(origenDinero==''||montoDinero==''){
+            return isVal=true;
+        }else{
+            return isVal;
+        }
     }
 
-
-
-
+    let monto = sumatoria("montoDinero");
+    // console.log("este es el monto presupuesto"+monto);
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -68,38 +83,33 @@ function PantallaPresupuesto(props) {
                 >
                     <Box>
                         <FormControl mb="5">
+                        <Center><Text fontSize="20" bold >Efectivo</Text></Center>
                             <FormControl.Label>Procedencia</FormControl.Label>
-                            <Select placeholder="" variant="rounded" value={origenDinero} 
-                            selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                            onValueChange={(value) => EstadoInputs(value, 'origenDinero')}>
-                                <Select.Item label="Efectivo" value="Efectivo"  />
-                                <Select.Item label="Banco" value="Banco"  />
-                                <Select.Item label="Otro" value="Otro"  />
+                            <Select placeholder="" variant="rounded" value={origenDinero}
+                                selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
+                                onValueChange={(value) => EstadoInputs(value, 'origenDinero')}>
+                                <Select.Item label="Efectivo" value="Efectivo" />
+                                <Select.Item label="Banco" value="Banco" />
+                                <Select.Item label="Otro" value="Otro" />
                             </Select>
-
 
                             <FormControl.Label >Cantidad en Efectivo (Bs)</FormControl.Label>
                             <Input variant="rounded" value={montoDinero} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'montoDinero')}
                             />
 
-
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
-
+                        </Center>
                         <Text>Presupuesto</Text>
-
-
 
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Origen</DataTable.Title>
                                 <DataTable.Title>Efectivo</DataTable.Title>
                             </DataTable.Header>
-
 
                             {
                                 TableService.map((item, pos) => (
@@ -109,18 +119,10 @@ function PantallaPresupuesto(props) {
                                     </DataTable.Row>
                                 ))
                             }
-
                             <DataTable>
                                 <DataTable.Header>
                                     <DataTable.Cell>SUBTOTAL</DataTable.Cell>
-                                    
-
-                                        <DataTable.Cell >{sumatoria("montoDinero")}</DataTable.Cell>
-
-                                    
-
-
-
+                                    <DataTable.Cell >{sumatoria("montoDinero")}</DataTable.Cell>
                                 </DataTable.Header>
                             </DataTable>
 
@@ -128,10 +130,10 @@ function PantallaPresupuesto(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Mano Emprendedor")}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() =>validacionSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
 
 

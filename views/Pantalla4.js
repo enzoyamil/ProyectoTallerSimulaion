@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -30,10 +30,33 @@ function Pantalla4(props) {
 
 
     function agregarFila() {
-        setTableService([...TableService, FormDescripServ]);
-        console.log(TableService);
+        if(validarAgregar()){
+            setTableService([...TableService, FormDescripServ]);
+            console.log(TableService);
+        }else{
+            
+            Alert.alert("Error campos Vacíos");
+        }
+        
     }
 
+    function validarAgregar(){
+        let isValid=false;
+        if(nombServicio==''||elabServicio==''||caractServicio==''){
+            return isValid;
+        }else{
+            return isValid=true;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Analisis Mercado")
+        }else{
+            Alert.alert("Tabla Vacia");
+        }
+    }
 
 
     let { nombServicio, elabServicio, caractServicio } = FormDescripServ;
@@ -82,9 +105,6 @@ function Pantalla4(props) {
                         </Box>
 
                         <Text>Servicios</Text>
-
-
-
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Servicio</DataTable.Title>
@@ -110,10 +130,10 @@ function Pantalla4(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Analisis Mercado")}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() =>validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
 
 

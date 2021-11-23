@@ -101,11 +101,12 @@ function Pantalla2(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
+                <Box>
             <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Negocio")}>Siguiente</Button>
             {/* <Button colorScheme="primary" onPress={() => buttonValidate()}>Siguiente</Button> */}
             </Box>
+            </ScrollView>
+            
         </NativeBaseProvider>
     );
                 }

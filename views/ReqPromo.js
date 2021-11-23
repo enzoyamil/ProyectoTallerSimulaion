@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import {
     FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
     NativeBaseProvider, Select, FlatList, Text
@@ -8,9 +8,8 @@ import { DataTable } from 'react-native-paper';
 
 
 function ReqPromo(props) {
-    const { navigation } = props;
+    const { navigation,route } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormaPromo, setFormaPromo] = useState({
         cantidad: '',
         unidad: '',
@@ -18,8 +17,11 @@ function ReqPromo(props) {
         aportePropio: '',
         seInvertira: ''
     });
-
-
+    const {montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP} = route.params;
+    console.log("este es el monto presupuesto"+montoPresupuesto);
+    console.log("este es el monto mano de obra"+montoMano);
+    console.log("este es el monto totalAportMateriaP"+totalAportMateriaP);
+    console.log("este es el monto totalInvMateriaP"+totalInvMateriaP);
     useEffect(() => {
         setFormaPromo(FormaPromo);
     }, [FormaPromo]);
@@ -27,14 +29,71 @@ function ReqPromo(props) {
 
     function EstadoInputs(value, input) {
         setFormaPromo({ ...FormaPromo, [input]: value });
-        console.log(FormaPromo);
+        // console.log(FormaPromo);
+    }
+
+    function sumAportePropio(obj) {
+        let invPropia = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropia = invPropia + numero;
+        })
+        return invPropia;
+    }
+
+    function sumInversionPropio(obj) {
+        let invPropioTotal = 0;
+        TableService.map((item) => {
+            let numero = parseInt(item[obj]);
+            invPropioTotal = invPropioTotal + numero;
+        })
+        return invPropioTotal;
     }
 
     function agregarFila() {
+        if(validarAgregar()){
+            Alert.alert("Error Campos Vacios");
+        }else{
         setTableService([...TableService, FormaPromo]);
-        console.log(TableService);
+        setFormaPromo(
+            {
+            cantidad: '',
+            unidad: '',
+            detalle: '',
+            aportePropio: '',
+            seInvertira: ''
+            }
+        );}
+        // console.log(TableService);
     }
 
+    function validarAgregar(){
+        let isValid=true;
+        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+            return isValid;
+        }else{
+            return isValid=false;
+        }
+    }
+    function validarSiguiente(){
+        let tamanio =TableService.length;
+        // console.log(tamanio);
+        if(tamanio>0){
+            navigation.navigate("Gastos Operativos",{
+                montoPresupuesto:montoPresupuesto,
+                montoMano:montoMano,
+                totalAportMateriaP:totalAportMateriaP,
+                totalInvMateriaP: totalInvMateriaP,
+                totalAportePromo:totalAportePromo,
+                totalInvPromo:totalInvPromo
+            })
+        }else{
+            Alert.alert("Error Tabla Vacia");
+        }
+    }
+
+    let totalAportePromo = sumAportePropio("aportePropio");
+    let totalInvPromo = sumInversionPropio("seInvertira") ;
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormaPromo;
     return (
         <NativeBaseProvider>
@@ -51,7 +110,7 @@ function ReqPromo(props) {
                     }}
                 >
                     <Box>
-                    <Text>Capital Operativo</Text>
+                    <Center><Text fontSize="20" bold>Requerimientos Promocionales</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
@@ -73,13 +132,11 @@ function ReqPromo(props) {
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
 
-
-
                         </FormControl>
-                        <Box>
+                        <Center>
                             {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Box>
+                        </Center>
 
                         <Text>Capital Promocional</Text>
 
@@ -97,21 +154,16 @@ function ReqPromo(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        {/* <DataTable.Cell>{item.detalle}</DataTable.Cell> */}
                                         <DataTable.Cell>{item.aportePropio}</DataTable.Cell>
                                         <DataTable.Cell>{item.seInvertira}</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
                             <DataTable>
-                                {/* <DataTable.Header>
-                                    <DataTable.Title>Aporte Propio </DataTable.Title>
-                                    <DataTable.Title>Inversion</DataTable.Title>
-                                </DataTable.Header> */}
                                 <DataTable.Row> 
                                 <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
-                                <DataTable.Cell> 1000 BS</DataTable.Cell>
+                                <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                <DataTable.Cell> {sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
                                 
                             </DataTable>
@@ -119,10 +171,10 @@ function ReqPromo(props) {
                         <Divider />
                     </Box>
                 </Stack>
-            </ScrollView>
-            <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Gastos Operativos")}>Siguiente</Button>
+                <Box>
+                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
             </Box>
+            </ScrollView>
         </NativeBaseProvider>
     );
 }

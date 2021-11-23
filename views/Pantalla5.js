@@ -65,10 +65,10 @@ return (
                     <Divider />
                 </Box>
             </Stack>
-        </ScrollView>
-        <Box>
+            <Box>
             <Button colorScheme="primary" onPress={() => navigation.navigate("Estrategia de mercado")}>Siguiente</Button>
         </Box>
+        </ScrollView>
     </NativeBaseProvider>
     );
 }

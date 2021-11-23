@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import pantalla1 from '../views/Pantalla1'
 import pantalla2 from '../views/Pantalla2'
@@ -11,6 +12,7 @@ import CostoPantalla4_2 from "../views/CostosPantalla4_2";
 import pantalla4 from '../views/Pantalla4'
 import pantalla5 from '../views/Pantalla5'
 import pantalla6 from '../views/Pantalla6'
+
 import pantallaPresupuesto from "../views/PantallaPresupuesto";
 import pantallaManoEmprendedor from "../views/PantallaManoEmprendedor";
 import materiaPrima from "../views/MateriaPrima";
@@ -25,42 +27,50 @@ import datosResumen from "../views/DatosResumen";
 import CostosOperativos from '../views/CostosOperativos';
 import MargenBruto from "../views/MargenBruto";
 import DatosCredito from "../views/DatosCredito";
+import { red100 } from "react-native-paper/lib/typescript/styles/colors";
 
 const Stack = createNativeStackNavigator();
 
-function navigation() {
+function navigation(){
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen name="Información Personal" component={pantalla1} />
+      <Stack.Screen name="Información Personal" component={pantalla1} />
       <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
-      <Stack.Screen name="Descripción del Negocio" component={pantalla3} /> */}
+      <Stack.Screen name="Descripción del Negocio" component={pantalla3} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos" component={CostoPantalla1} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos2" component={CostoPantalla2} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos3" component={CostoPantalla3} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4" component={CostoPantalla4} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4_2" component={CostoPantalla4_2} />
-      {/* <Stack.Screen name="Descripción del Servicio" component={pantalla4} />
+      <Stack.Screen name="Descripción del Servicio" component={pantalla4} />
       <Stack.Screen name="Analisis Mercado" component={pantalla5} />
-      <Stack.Screen name="Estrategia de mercado" component={pantalla6} /> */}
+      <Stack.Screen name="Estrategia de mercado" component={pantalla6} />
       <Stack.Screen
         options={{ title: 'Costos Operativos' }}
         name="Costos Operativos"
         component={CostosOperativos}
       />
-      {/* <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto}/>
-            <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor}/>
-            <Stack.Screen name="Materia Prima" component={materiaPrima}/>
-            <Stack.Screen name="Requerimientos Promocionales" component={reqPromo}/>
-            <Stack.Screen name="Gastos Operativos" component={gastosOperativos}/>
-            <Stack.Screen name="Infraestructura" component={infraestructura}/>
-            <Stack.Screen name="Maquinaria" component={maquinaria}/>
-            <Stack.Screen name="Requerimiento Legal" component={reqLegales}/>
-            <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen}/>
-            <Stack.Screen name="Plan Inversión" component={planInversion}/>
-            <Stack.Screen name="Datos Resumen" component={datosResumen}/> */}
+      <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto} />
+      <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor} />
+      <Stack.Screen name="Materia Prima" component={materiaPrima} />
+      <Stack.Screen name="Requerimientos Promocionales" component={reqPromo} />
+      <Stack.Screen name="Gastos Operativos" component={gastosOperativos} />
+      <Stack.Screen name="Infraestructura" component={infraestructura} />
+      <Stack.Screen name="Maquinaria" component={maquinaria} />
+      <Stack.Screen name="Requerimiento Legal" component={reqLegales} />
+      <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen} />
+      <Stack.Screen name="Plan Inversión" component={planInversion} />
+      <Stack.Screen name="Datos Resumen" component={datosResumen} />
       <Stack.Screen options={{ title: "Analisis Financiero" }} name="MargenBruto" component={MargenBruto} />
       <Stack.Screen options={{ title: "Datos del Credito" }} name="DatosCredito" component={DatosCredito} />
+      <Stack.Screen name="Datos Resumen" component={datosResumen} />
     </Stack.Navigator>
   );
+
 }
 export default navigation;
+const styles = StyleSheet.create({
+  texto: {
+    color: 'red',
+  }
+});
