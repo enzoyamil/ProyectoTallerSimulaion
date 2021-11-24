@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
-import DetalleInsumo from "../components/DetalleInsumos";
+import DetalleInsumo from "../Components/DetalleInsumos"
 
 export default function CostoPantalla4(props) {
 
@@ -75,12 +75,13 @@ export default function CostoPantalla4(props) {
                     </Center>
                     {
                         Detalles.map((item, pos) => (
-                            <DetalleInsumo
+                            <DetalleInsumo 
                                 key={pos}
                                 id = {pos}
                                 navigation={navigation}
                                 producto_o_servico={item.producto_o_servicio}
                                 unidad_medida={item.unidad_de_medida}
+                                mub={item.mub}
                             />
                         ))
                     }
