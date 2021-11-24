@@ -13,7 +13,7 @@ function App() {
       <Navigation />
       {/* <CostosOperativos /> */}
       {/* <MargenBruto/> */}
-      {/* <DatosCredito/> */}
+      {/* <DatosCredito/>  */}
     </NavigationContainer>
   );
 }

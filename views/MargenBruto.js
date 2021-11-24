@@ -21,7 +21,7 @@ import { DataTable } from 'react-native-paper';
 
 function MargenBruto(props) {
     const { navigation, route } = props;
-    const { mub, ventas_anuales, costos_anuales, total } = route.params
+    const { mub, ventas_anuales, costos_anuales, total,montoFin } = route.params
     console.log(ventas_anuales)
     console.log(costos_anuales)
     console.log(mub)
@@ -52,7 +52,7 @@ function MargenBruto(props) {
         //     console.log(FormPersonal);
         //      navigation.navigate('DatosCredito');
         // }
-        navigation.navigate('DatosCredito');
+        navigation.navigate('DatosCredito',{montoFin});
     }
 
     let {

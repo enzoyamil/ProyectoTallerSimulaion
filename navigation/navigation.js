@@ -49,7 +49,7 @@ function navigation(){
         options={{ title: 'Costos Operativos' }}
         name="Costos Operativos"
         component={CostosOperativos}
-      />
+      /> 
       <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto} />
       <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor} />
       <Stack.Screen name="Materia Prima" component={materiaPrima} />
@@ -59,7 +59,7 @@ function navigation(){
       <Stack.Screen name="Maquinaria" component={maquinaria} />
       <Stack.Screen name="Requerimiento Legal" component={reqLegales} />
       <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen} />
-      <Stack.Screen name="Plan Inversión" component={planInversion} />
+      <Stack.Screen name="Plan Inversión" component={planInversion} /> 
       <Stack.Screen options={{ title: "Analisis Financiero" }} name="MargenBruto" component={MargenBruto} />
       <Stack.Screen options={{ title: "Datos del Credito" }} name="DatosCredito" component={DatosCredito} />
       <Stack.Screen name="Datos Resumen" component={datosResumen} />

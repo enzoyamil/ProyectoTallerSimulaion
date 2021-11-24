@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
-import DetalleInsumo from "../components/DetalleInsumos"
+import DetalleInsumo from"../Components/DetalleInsumos"
 
 export default function CostoPantalla4(props) {
 
@@ -12,7 +12,7 @@ export default function CostoPantalla4(props) {
 
     const { navigation, route } = props;
 
-    const {mub, ventas_anuales, costos_anuales} =route.params;
+    const {mub, ventas_anuales, costos_anuales,montoFin} =route.params;
     console.log(mub);
     console.log(ventas_anuales);
     console.log(costos_anuales);
@@ -86,10 +86,11 @@ export default function CostoPantalla4(props) {
                                 mub={mub}
                                 ventas_anuales = {ventas_anuales}
                                 costos_anuales = {costos_anuales}
+                                montoFin={montoFin}
                             />
                         ))
                     }
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", {mub, ventas_anuales, costos_anuales})}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", {mub, ventas_anuales, costos_anuales,montoFin})}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

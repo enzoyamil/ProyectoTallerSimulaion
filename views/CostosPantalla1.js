@@ -182,7 +182,7 @@ export default function CostoPantalla2(props) {
                             <Text>MUB total: {MUBTotal()}%</Text>
                         </Stack>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {mub})}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {mub,montoFin})}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

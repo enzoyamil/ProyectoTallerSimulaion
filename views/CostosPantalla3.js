@@ -8,7 +8,7 @@ export default function CostoPantalla3(props) {
 
     const { navigation, route } = props;
 
-    const { alto, medio, bajo, mub } = route.params;
+    const { alto, medio, bajo, mub,montoFin } = route.params;
 
     const [TableService, setTableService] = useState([]);
 
@@ -83,7 +83,7 @@ export default function CostoPantalla3(props) {
 
     function buttonPressNav() {
         if (true) {
-            navigation.navigate("Hoja-de-Costos4", {mub, ventas_anuales, costos_anuales});
+            navigation.navigate("Hoja-de-Costos4", {mub, ventas_anuales, costos_anuales,montoFin});
         } else {
             Alert.alert("Error", "Llene con todos los meses");
         }
