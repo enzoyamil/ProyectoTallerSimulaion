@@ -287,7 +287,7 @@ function DatosCredito(props) {
 
                         </Select>
                         <Center>
-                            <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
+                            <Box rounded="xl" p="10">
                                 {'\n'}<Text bold>CUOTA APROXIMADA: {cambioCuota(cuota)}</Text>
                             </Box>
                         </Center>
