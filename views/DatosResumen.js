@@ -54,6 +54,7 @@ function DatosResumen(props) {
         monto_Financiar = totalInv - montoPresupuesto;
         return monto_Financiar;
     }
+    
     function  validarAporte(){
         let mensaje='SIN DATOS';
         if(sumaEfectivo==montoPresupuesto){
@@ -75,7 +76,7 @@ function DatosResumen(props) {
         console.log(mensaje);
         return mensaje
     }
-
+    let montoFin= montoFinanciar();
     let { primerDesembolso,segundoDesembolso} = FormrDesembolso;
     return (
         <NativeBaseProvider>
@@ -150,7 +151,8 @@ function DatosResumen(props) {
                     totalReqLegInv: totalReqLegInv,
                     totalAporte: totalAporte,
                     totalInv: totalInv,
-                    sumaEfectivo:sumaEfectivo
+                    sumaEfectivo:sumaEfectivo,
+                    montoFin:montoFin
                 })}>Siguiente</Button>
             </Box>
             </ScrollView>

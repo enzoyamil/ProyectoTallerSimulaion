@@ -5,8 +5,8 @@ import { DataTable } from 'react-native-paper';
 
 export default function CostoPantalla2(props) {
 
-    const { navigation } = props;
-
+    const { navigation,route } = props;
+    const{montoFin} = route.params;
     const [TableService, setTableService] = useState([]);
 
     const [FormTablaProducto, setFormTablaProducto] = useState({
@@ -181,7 +181,7 @@ export default function CostoPantalla2(props) {
                             <Text>MUB total: {MUBTotal()}%</Text>
                         </Stack>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", { mub })}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {mub})}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
