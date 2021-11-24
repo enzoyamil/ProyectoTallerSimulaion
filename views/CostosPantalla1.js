@@ -5,8 +5,9 @@ import { DataTable } from 'react-native-paper';
 
 export default function CostoPantalla2(props) {
 
-    const { navigation,route } = props;
-    const{montoFin} = route.params;
+    const { navigation, route } = props;
+    const {montoFin} = route.params;
+    console.log(montoFin);
     const [TableService, setTableService] = useState([]);
 
     const [FormTablaProducto, setFormTablaProducto] = useState({

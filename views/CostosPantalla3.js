@@ -20,11 +20,11 @@ export default function CostoPantalla3(props) {
         setFormManofactura({ ...FormManofactura, [input]: value });
     }
 
-    let { rango, venta_anuales, costos_anuales } = FormManofactura;
+    let { rango, ventas_anuales, costos_anuales } = FormManofactura;
 
     pos_mes = TableService.length
 
-    venta_anuales = sumVentasMensuales();
+    ventas_anuales = sumVentasMensuales();
     //console.log(venta_anuales)
     costos_anuales = sumCostoProduc();
     //console.log(costos_anuales)
@@ -60,7 +60,7 @@ export default function CostoPantalla3(props) {
         TableService.map((item) => {
             res = res + parseFloat(ventasMensuales(item.rango));
         })
-        return res;
+        return res.toFixed(2);
     }
 
     function sumCostoProduc() {
@@ -68,7 +68,7 @@ export default function CostoPantalla3(props) {
         TableService.map((item) => {
             res = res + parseFloat(costoProduccionMensual(item.rango));
         })
-        return res;
+        return res.toFixed(2);
     }
     /****************************************/
     function buttonPress() {
@@ -83,7 +83,7 @@ export default function CostoPantalla3(props) {
 
     function buttonPressNav() {
         if (true) {
-            navigation.navigate("Hoja-de-Costos4", {mub, venta_anuales, costos_anuales});
+            navigation.navigate("Hoja-de-Costos4", {mub, ventas_anuales, costos_anuales});
         } else {
             Alert.alert("Error", "Llene con todos los meses");
         }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
-import DetalleInsumo from "../Components/DetalleInsumos"
+import DetalleInsumo from "../components/DetalleInsumos"
 
 export default function CostoPantalla4(props) {
 
@@ -12,8 +12,10 @@ export default function CostoPantalla4(props) {
 
     const { navigation, route } = props;
 
-    const {mub, venta_anuales, costos_anuales} =route.params;
-
+    const {mub, ventas_anuales, costos_anuales} =route.params;
+    console.log(mub);
+    console.log(ventas_anuales);
+    console.log(costos_anuales);
     const [Detalles, setDetalles] = useState([])
 
     const [FormProducto, setFormProducto] = useState({
@@ -81,11 +83,13 @@ export default function CostoPantalla4(props) {
                                 navigation={navigation}
                                 producto_o_servico={item.producto_o_servicio}
                                 unidad_medida={item.unidad_de_medida}
-                                mub={item.mub}
+                                mub={mub}
+                                ventas_anuales = {ventas_anuales}
+                                costos_anuales = {costos_anuales}
                             />
                         ))
                     }
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", {mub, venta_anuales, costos_anuales})}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", {mub, ventas_anuales, costos_anuales})}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

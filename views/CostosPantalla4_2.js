@@ -8,8 +8,10 @@ export default function CostoPantalla4_2(props) {
 
     const { navigation, route } = props;
 
-    const { id,mub } = route.params;
-
+    const { id, mub, ventas_anuales, costos_anuales } = route.params;
+    console.log(mub);
+    console.log(ventas_anuales);
+    console.log(costos_anuales);
     const [TableService, setTableService] = useState([]);
 
     const [FormTablaInsumo, setFormTablaInsumo] = useState({
@@ -139,7 +141,7 @@ export default function CostoPantalla4_2(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Text>Total costo (D): {totalABC()}</Text>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4",{mub})}>Guardar</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos4", {mub, ventas_anuales, costos_anuales})}>Guardar</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

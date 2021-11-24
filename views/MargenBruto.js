@@ -21,8 +21,8 @@ import { DataTable } from 'react-native-paper';
 
 function MargenBruto(props) {
     const { navigation, route } = props;
-    const { mub, venta_anuales, costos_anuales, total } = route.params
-    console.log(venta_anuales)
+    const { mub, ventas_anuales, costos_anuales, total } = route.params
+    console.log(ventas_anuales)
     console.log(costos_anuales)
     console.log(mub)
     console.log(total)
@@ -101,7 +101,7 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>Manufactura</DataTable.Cell>
-                                <DataTable.Cell numeric>{venta_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{ventas_anuales}</DataTable.Cell>
                                 <DataTable.Cell numeric>{costos_anuales}</DataTable.Cell>
                                 <DataTable.Cell numeric>{mub}</DataTable.Cell>
                             </DataTable.Row>
@@ -120,7 +120,7 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>(+)Ingresos Totales</DataTable.Cell>
-                                <DataTable.Cell numeric>{venta_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{ventas_anuales}</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
@@ -130,7 +130,7 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Bruta</DataTable.Cell>
-                                <DataTable.Cell numeric>{venta_anuales - costos_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{ventas_anuales - costos_anuales}</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
@@ -140,7 +140,7 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Operativa</DataTable.Cell>
-                                <DataTable.Cell numeric>{(venta_anuales - costos_anuales) - (total * 12)}</DataTable.Cell>
+                                <DataTable.Cell numeric>{(ventas_anuales - costos_anuales) - (total * 12)}</DataTable.Cell>
                             </DataTable.Row>
                         </DataTable>
 

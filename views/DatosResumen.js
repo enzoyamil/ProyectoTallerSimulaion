@@ -134,26 +134,7 @@ function DatosResumen(props) {
                     </Box>
                 </Stack>
                 <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", {
-                    montoPresupuesto: montoPresupuesto,
-                    montoMano: montoMano,
-                    totalAportMateriaP: totalAportMateriaP,
-                    totalInvMateriaP: totalInvMateriaP,
-                    totalAportePromo: totalAportePromo,
-                    totalInvPromo: totalInvPromo,
-                    totalPropioGasOpe: totalPropioGasOpe,
-                    totalInvGasOpe: totalInvGasOpe,
-                    totalPropioInfra: totalPropioInfra,
-                    totalInvInfra: totalInvInfra,
-                    maqPropTotal: maqPropTotal,
-                    maqInvTotal: maqInvTotal,
-                    totalReqLegPropio: totalReqLegPropio,
-                    totalReqLegInv: totalReqLegInv,
-                    totalAporte: totalAporte,
-                    totalInv: totalInv,
-                    sumaEfectivo:sumaEfectivo,
-                    montoFin:montoFin
-                })}>Siguiente</Button>
+                <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", {montoFin})}>Siguiente</Button>
             </Box>
             </ScrollView>
         </NativeBaseProvider>

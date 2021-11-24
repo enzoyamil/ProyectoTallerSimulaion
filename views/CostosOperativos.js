@@ -21,7 +21,7 @@ import { DataTable } from 'react-native-paper';
 
 function CostosOperativos(props) {
   const { navigation, route } = props;
-  const { mub, venta_anuales, costos_anuales } = route.params;
+  const { mub, ventas_anuales, costos_anuales } = route.params;
   const [FormPersonal, setFormPersonal] = useState({
     impuestos: '',
     alimentacion: '',
@@ -137,7 +137,7 @@ function CostosOperativos(props) {
       Alert.alert('succesfull');
       console.log('here');
       console.log(props)
-      navigation.navigate('MargenBruto', { mub, venta_anuales, costos_anuales, total });
+      navigation.navigate('MargenBruto', { mub, ventas_anuales, costos_anuales, total });
     }
   }
 
