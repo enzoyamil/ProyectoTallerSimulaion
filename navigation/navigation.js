@@ -27,14 +27,16 @@ import datosResumen from "../views/DatosResumen";
 import CostosOperativos from '../views/CostosOperativos';
 import MargenBruto from "../views/MargenBruto";
 import DatosCredito from "../views/DatosCredito";
+import VanTir from "../views/VanTir";
 import { red100 } from "react-native-paper/lib/typescript/styles/colors";
+
 
 const Stack = createNativeStackNavigator();
 
 function navigation(){
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Información Personal" component={pantalla1} />
+      {/* <Stack.Screen name="Información Personal" component={pantalla1} />
       <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
       <Stack.Screen name="Descripción del Negocio" component={pantalla3} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos" component={CostoPantalla1} />
@@ -62,7 +64,8 @@ function navigation(){
       <Stack.Screen name="Plan Inversión" component={planInversion} /> 
       <Stack.Screen options={{ title: "Analisis Financiero" }} name="MargenBruto" component={MargenBruto} />
       <Stack.Screen options={{ title: "Datos del Credito" }} name="DatosCredito" component={DatosCredito} />
-      <Stack.Screen name="Datos Resumen" component={datosResumen} />
+      <Stack.Screen name="Datos Resumen" component={datosResumen} /> */}
+      <Stack.Screen name="Resultados" component={VanTir} />
     </Stack.Navigator>
   );
 

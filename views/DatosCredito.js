@@ -255,7 +255,7 @@ function DatosCredito(props) {
                             />
                         </FormControl>
                         <FormControl mb="5">
-                            <FormControl.Label>taza de interes</FormControl.Label>
+                            <FormControl.Label>tasa de interes</FormControl.Label>
                             <Text>{cambioValor()}%</Text>
                             {/* <Input
                                 keyboardType="numeric"
