@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet } from 'react-native';
-// import { NativeBaseProvider, Box,Button } from 'native-base';
+import { Alert } from 'react-native';
 import {
     FormControl,
     Button,
@@ -15,7 +14,6 @@ import {
     Select,
 } from 'native-base';
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
-import { DataTable } from 'react-native-paper';
 
 
 function DatosCredito(props) {
@@ -23,9 +21,7 @@ function DatosCredito(props) {
     const { montoFin } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
-    }); //estado inicial de usestate nullo.
-    console.log(FormPersonal);
-    //console.log(montoFin);
+    });
 
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
@@ -42,13 +38,13 @@ function DatosCredito(props) {
             Alert.alert('cadena nombre muy pequeña');
         } else {
             Alert.alert('succesfull');
-            navigation.navigate('Resultados', {montoFin, frecuencia, plazo, taza});
+            navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
         }
     }
 
     let {
         frecuencia,
-        poliza,
+        poliza = '0.395',
         plazo,
         taza,
         cuota,
@@ -56,13 +52,12 @@ function DatosCredito(props) {
     } = FormPersonal;
     let cuotaProx = 0;
     let calculo = 0;
+
     taza = cambioValor();
+
     function cambioValor() {
-        console.log("este es la cuota:" + calculo);
         if (actividad == 'servicios') {
             return calculo = 11.5;
-            //console.log("este es la cuota:"+calculo);
-
         } else if (actividad == 'productiva') {
             return calculo = 7;
         }
@@ -76,12 +71,9 @@ function DatosCredito(props) {
         } else {
             cuotaProx = 0;
         }
-        console.log(cuotaProx);
-        return cuotaProx.toFixed(2);
+        return cuotaProx.toFixed(0);
     }
 
-
-    //indice, periodo,monto
     const calculateFixedFee = (rate, period, amount) => {
         const fee = amount * ((((1 + rate) ** period) * rate) / (((1 + rate) ** period) - 1));
         return fee;
@@ -203,15 +195,13 @@ function DatosCredito(props) {
                         <FormControl.Label>Frecuencia</FormControl.Label>
                         <Select variant="rounded" value={frecuencia}
                             selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                            onValueChange={(value) => EstadoInputs(value, 'frecuencia')}
-                        >
+                            onValueChange={(value) => EstadoInputs(value, 'frecuencia')}>
                             <Select.Item label="mensual" value="mensual" />
                             <Select.Item label="bimensual" value="bimensual" />
                             <Select.Item label="trimestral" value="trimestral" />
                             <Select.Item label="cuatrimestral" value="cuatrimestral" />
                             <Select.Item label="semestral" value="semestral" />
                             <Select.Item label="anual" value="anual" />
-
                         </Select>
                         <FormControl mb="5">
                             <FormControl.Label>poliza</FormControl.Label>
@@ -222,17 +212,9 @@ function DatosCredito(props) {
                                 onChangeText={value => EstadoInputs(value, 'poliza')}
                             />
                         </FormControl>
-                        <Divider />
-
                         <FormControl mb="5">
                             <FormControl.Label>monto</FormControl.Label>
                             <Text>{montoFin}</Text>
-                            {/* <Input
-                                keyboardType="numeric"
-                                variant="rounded"
-                                value={montoFin}
-                                onChangeText={value => EstadoInputs(value, 'monto')}
-                            /> */}
                         </FormControl>
                         <FormControl mb="5">
                             <FormControl.Label>plazo (meses)</FormControl.Label>
@@ -243,43 +225,30 @@ function DatosCredito(props) {
                                 onChangeText={value => EstadoInputs(value, 'plazo')}
                             />
                         </FormControl>
-                        <FormControl mb="5">
-                            <FormControl.Label>tasa de interes</FormControl.Label>
-                            <Text>{cambioValor()}%</Text>
-                            {/* <Input
-                                keyboardType="numeric"
-                                variant="rounded"
-                                value={calculo}
-                                onChangeText={value => EstadoInputs(value, 'taza')}
-                            /> */}
-                        </FormControl>
                         <FormControl.Label>tipo de cuota</FormControl.Label>
                         <Select variant="rounded" value={cuota}
                             selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                            onValueChange={(value) => EstadoInputs(value, 'cuota')}
-                        >
+                            onValueChange={(value) => EstadoInputs(value, 'cuota')}>
                             <Select.Item label="cuota fija" value="fija" />
                             <Select.Item label="cuota variable" value="variable" />
                             <Select.Item label="personalizada" value="personalizada" />
-
                         </Select>
-
-                        {'\n'}<Divider />
-
                         <FormControl.Label>Actividad</FormControl.Label>
                         <Select variant="rounded" value={actividad}
                             selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
-                            onValueChange={(value) => EstadoInputs(value, 'actividad')}
-                        >
+                            onValueChange={(value) => EstadoInputs(value, 'actividad')}>
                             <Select.Item label="Servicios" value="servicios" onChangeText={cambioValor()} />
                             <Select.Item label="Productiva" value="productiva" onChangeText={cambioValor()} />
-
                         </Select>
-                        <Center>
-                            <Box rounded="xl" p="10">
-                                {'\n'}<Text bold>CUOTA APROXIMADA: {cambioCuota(cuota)}</Text>
+                        <FormControl mb="5">
+                            <FormControl.Label>tasa de interes</FormControl.Label>
+                            <Text>{cambioValor()}%</Text>
+                            <Center>
+                            <Box p="5" borderWidth="1">
+                                <Text bold>CUOTA APROXIMADA: {cambioCuota(cuota)}</Text>
                             </Box>
                         </Center>
+                        </FormControl>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>
                         Siguiente
@@ -290,12 +259,3 @@ function DatosCredito(props) {
     );
 }
 export default DatosCredito;
-//style={estilos.texto}
-const estilos = new StyleSheet.create({
-    texto: {
-        backgroundColor: '',
-    },
-    fondo: {
-        backgroundColor: 'red',
-    },
-});

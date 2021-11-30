@@ -1,35 +1,21 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet } from 'react-native';
-// import { NativeBaseProvider, Box,Button } from 'native-base';
 import {
-    FormControl,
     Button,
-    Input,
     Stack,
     Text,
     ScrollView,
     Divider,
     Box,
-    WarningOutlineIcon,
-    Center,
-    NativeBaseProvider,
-    Select,
+    NativeBaseProvider
 } from 'native-base';
-import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
 import { DataTable } from 'react-native-paper';
-
 
 function MargenBruto(props) {
     const { navigation, route } = props;
-    const { mub, ventas_anuales, costos_anuales, total,montoFin } = route.params
-    console.log(ventas_anuales)
-    console.log(costos_anuales)
-    console.log(mub)
-    console.log(total)
+    const { mub, ventas_anuales, costos_anuales, total, montoFin } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
-    }); //estado inicial de usestate nullo.
-    console.log(FormPersonal);
+    });
 
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
@@ -50,15 +36,14 @@ function MargenBruto(props) {
         //     Alert.alert('succesfull');
         //     console.log('here');
         //     console.log(FormPersonal);
-        //      navigation.navigate('DatosCredito');
+        //     navigation.navigate('DatosCredito');
         // }
-        navigation.navigate('DatosCredito',{montoFin});
+        navigation.navigate('DatosCredito', { montoFin });
     }
 
-    let {
-        impuestos,
-    } = FormPersonal;
+    let { impuestos } = FormPersonal;
     let [service, setService] = React.useState(0);
+
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -154,12 +139,3 @@ function MargenBruto(props) {
     );
 }
 export default MargenBruto;
-//style={estilos.texto}
-const estilos = new StyleSheet.create({
-    texto: {
-        backgroundColor: '',
-    },
-    fondo: {
-        backgroundColor: 'red',
-    },
-});

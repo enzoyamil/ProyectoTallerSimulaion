@@ -6,7 +6,7 @@ import { DataTable } from 'react-native-paper';
 export default function CostoPantalla2(props) {
 
     const { navigation, route } = props;
-    const { montoFin } = route.params;
+    // const { montoFin } = route.params;
     const [TableService, setTableService] = useState([]);
 
     const [FormTablaProducto, setFormTablaProducto] = useState({
@@ -34,6 +34,7 @@ export default function CostoPantalla2(props) {
 
     let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v } = FormTablaProducto;
     let [service, setService] = React.useState("");
+    let montoFin = 121990;
 
     let mub = MUBTotal();
 

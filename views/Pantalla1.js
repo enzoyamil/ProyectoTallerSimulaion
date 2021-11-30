@@ -71,9 +71,9 @@ function Pantalla1(props) {
                         <FormControl mb="5" >
                             <FormControl.Label>Nombres*</FormControl.Label>
                             <Input variant="rounded" value={name} onChangeText={(value) => EstadoInputs(value, 'name')} />
-                            <FormControl.Label style={[estilos.letras]}>Apellidos*</FormControl.Label>
+                            <FormControl.Label>Apellidos*</FormControl.Label>
                             <Input variant="rounded" value={apellido} onChangeText={(value) => EstadoInputs(value, 'apellido')} />
-                            <FormControl.Label style={[estilos.letras]}>CI*</FormControl.Label>
+                            <FormControl.Label>CI*</FormControl.Label>
                             <Input variant="rounded" value={ci} onChangeText={(value) => EstadoInputs(value, 'ci')} keyboardType="numeric" />
                             <FormControl.Label>Extensión*</FormControl.Label>
                             <Select placeholder="Extesion" variant="rounded" value={extension}

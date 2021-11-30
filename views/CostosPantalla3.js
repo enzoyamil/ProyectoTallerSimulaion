@@ -142,7 +142,7 @@ export default function CostoPantalla3(props) {
                                 <Select.Item label="Alto" value="Alto" />
                                 <Select.Item label="Medio" value="Medio" />
                                 <Select.Item label="Bajo" value="Bajo" />
-                                <Select.Item label="Sin rango" value="Sin rango" />
+                                {/* <Select.Item label="Sin rango" value="Sin rango" /> */}
                             </Select>
                         </Stack>
                     </FormControl>
