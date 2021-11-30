@@ -12,7 +12,6 @@ import CostoPantalla4_2 from "../views/CostosPantalla4_2";
 import pantalla4 from '../views/Pantalla4'
 import pantalla5 from '../views/Pantalla5'
 import pantalla6 from '../views/Pantalla6'
-
 import pantallaPresupuesto from "../views/PantallaPresupuesto";
 import pantallaManoEmprendedor from "../views/PantallaManoEmprendedor";
 import materiaPrima from "../views/MateriaPrima";
@@ -28,7 +27,6 @@ import CostosOperativos from '../views/CostosOperativos';
 import MargenBruto from "../views/MargenBruto";
 import DatosCredito from "../views/DatosCredito";
 import VanTir from "../views/VanTir";
-import { red100 } from "react-native-paper/lib/typescript/styles/colors";
 
 
 const Stack = createNativeStackNavigator();
@@ -70,9 +68,3 @@ function navigation(){
   );
 
 }
-export default navigation;
-const styles = StyleSheet.create({
-  texto: {
-    color: 'red',
-  }
-});

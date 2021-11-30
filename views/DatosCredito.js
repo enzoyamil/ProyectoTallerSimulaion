@@ -10,7 +10,6 @@ import {
     ScrollView,
     Divider,
     Box,
-    WarningOutlineIcon,
     Center,
     NativeBaseProvider,
     Select,
@@ -34,10 +33,7 @@ function DatosCredito(props) {
     }
 
     function buttonPress() {
-        if (
-            frecuencia == '' ||
-            poliza == ''
-        ) {
+        if (frecuencia == '' || poliza == '') {
             console.log(impuestos);
             Alert.alert('error campo vacio');
         } else if (tamanioMaximo(impuestos, 15)) {
@@ -46,16 +42,13 @@ function DatosCredito(props) {
             Alert.alert('cadena nombre muy pequeña');
         } else {
             Alert.alert('succesfull');
-            console.log('here');
-            console.log(FormPersonal);
-            // navigation.navigate('');
+            navigation.navigate('Resultados', {montoFin, frecuencia, plazo, taza});
         }
     }
 
     let {
         frecuencia,
         poliza,
-        monto,
         plazo,
         taza,
         cuota,
@@ -63,6 +56,7 @@ function DatosCredito(props) {
     } = FormPersonal;
     let cuotaProx = 0;
     let calculo = 0;
+    taza = cambioValor();
     function cambioValor() {
         console.log("este es la cuota:" + calculo);
         if (actividad == 'servicios') {
@@ -77,7 +71,6 @@ function DatosCredito(props) {
     function cambioCuota(val) {
         if (val == 'fija') {
             cuotaProx = calculateFixedLoanFee(cambioValor(), plazo, montoFin, frecuencia);
-
         } else if (val == 'variable') {
             cuotaProx = calculateVariableLoanFee(cambioValor(), plazo, montoFin, frecuencia);
         } else {
@@ -192,10 +185,6 @@ function DatosCredito(props) {
         return fee;
     };
 
-
-    // let montoFin = 121990;
-    // let montoAprox = calculateFixedLoanFee (0.07, 84, 121990, "mensual");
-    // console.log(montoAprox);
     let [service, setService] = React.useState(0);
     return (
         <NativeBaseProvider>
@@ -292,9 +281,9 @@ function DatosCredito(props) {
                             </Box>
                         </Center>
                     </Box>
-                    {/* <Button colorScheme="primary" onPress={() => buttonPress()}>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>
                         Siguiente
-                    </Button> */}
+                    </Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

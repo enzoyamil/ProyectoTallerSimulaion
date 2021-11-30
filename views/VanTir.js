@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Alert, StyleSheet } from "react-native";
-import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, Text
-} from "native-base";
-import { DataTable } from 'react-native-paper';
-
-
+import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
 
 function VanTir(props) {
-    const { navigation } = props;
+    // const { navigation, route } = props;
+    // const {montoFin, frecuencia, plazo, taza} = route.params
+    let utilidad_operativa = 269458;
+    let montoFin = 121990;
+    let frecuencia = "bimensual";
+    let plazo = 84;
+    let taza = 7;
+    let aux = ((parseFloat(utilidad_operativa)/12)*getVal_1(frecuencia));
     const [FormVan, setFormVan] = useState({
         implementacionEst: '',
         desembolsoEst: '',
@@ -19,6 +20,11 @@ function VanTir(props) {
 
     function EstadoInputs(value, input) {
         setFormVan({ ...FormVan, [input]: value });
+    }
+    
+    function operacionAux(){
+        let res = aux*periodoMes();
+        return res;
     }
 
     function getVal_1(divisionMes) {
@@ -38,6 +44,7 @@ function VanTir(props) {
         }
         return valor;
     }
+
     // console.log(getVal_1("anual"));
 
     function getVal_2(divisionMes) {
@@ -57,6 +64,7 @@ function VanTir(props) {
         }
         return valor;
     }
+
     // console.log(getVal_2("anual"));
 
     function valorFecha(mesEscogio) {
@@ -86,46 +94,48 @@ function VanTir(props) {
         }
         return valor;
     }
-    let plazo = 84;
     function intervalo(variable) {
         let valor = 0;
-        let num2=parseInt(valorFecha(variable));
-        valor = (plazo-num2) / 12;
+        let num2 = parseInt(valorFecha(variable));
+        valor = (plazo - num2) / 12;
         return valor.toFixed(0);
     }
 
     // console.log("este es el intervalo"+ intervalo("Octubre"));
 
     let { implementacionEst, desembolsoEst, anioDesembolso, anioImplement } = FormVan;
+
     function periodoAnio() {
         let val = 0;
         val = parseInt(anioDesembolso) + parseInt(intervalo(desembolsoEst));
         return val;
     }
-    console.log(periodoAnio());
 
-        // nos tiene que mandar el plazo
-        // tipo de pago mensual
+    // nos tiene que mandar el plazo
+    // tipo de pago mensual
 
-    function periodoMes(){
-        let val=0;
-        val = plazo/getVal_1("mensual");
+    function periodoMes() {
+        let val = 0;
+        val = plazo / getVal_1(frecuencia);
         return val;
     }
+    function calcularVan() {
+        let res = 0;
+        let aux2 = 0;
+        if (montoFin != 0) {
+            aux2 = (parseFloat(taza)/100)/parseInt(getVal_2(frecuencia));
+            for (let index = 1; index <= periodoMes(); index++) {
+                res = res + (aux)/((1+aux2)**index);
+            }
+        }
+        return (res+montoFin).toFixed(0);
+    }
+    console.log((parseFloat(taza)/100)/parseInt(getVal_2(frecuencia)));
     console.log(periodoMes());
+    console.log(aux);
+    console.log(calcularVan());
 
-
-    
-
-    
     let [service, setService] = React.useState("");
-    let monto = -121990;
-    
-    let divisionMes = 'mensual';
-    let periodoMesEstimado= periodoMes();
-    let periodoAnioEstimado= periodoAnio();
-    // console.log("este es el mes periodo"+periodoAnioEstimado);
-    // console.log("este es el anio periodo"+periodoMesEstimado);
 
     return (
         <NativeBaseProvider>
@@ -180,22 +190,9 @@ function VanTir(props) {
                     <FormControl.Label>Año Implementacion Estimada</FormControl.Label>
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} />
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
-                        <Text>VAN : TOTAL</Text>
+                        <Text>VAN : {calcularVan()}</Text>
                         <Text>TIR : TOTAL</Text>
-
                     </Box>
-
-                    {/* <DataTable>
-                            <DataTable.Header>
-                            <DataTable.Title>VAN</DataTable.Title>
-                                <DataTable.Title>TIR</DataTable.Title>
-                            </DataTable.Header>
-                                <DataTable.Row>
-                                <DataTable.Cell>100</DataTable.Cell>
-                                <DataTable.Cell>200</DataTable.Cell>
-                                </DataTable.Row>
-                                
-                            </DataTable> */}
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

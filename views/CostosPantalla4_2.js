@@ -7,13 +7,8 @@ import { DataTable } from 'react-native-paper';
 export default function CostoPantalla4_2(props) {
 
     const { navigation, route } = props;
-
     const { id, mub, ventas_anuales, costos_anuales,montoFin } = route.params;
-    console.log(mub);
-    console.log(ventas_anuales);
-    console.log(costos_anuales);
     const [TableService, setTableService] = useState([]);
-
     const [FormTablaInsumo, setFormTablaInsumo] = useState({
         insumo: '',
         cantidad_a: '',
@@ -46,7 +41,7 @@ export default function CostoPantalla4_2(props) {
         );
         guardartablaInsumo(id);
     }
-    /*Funciones para guardar las tablas de insumos dentro los contenedores*/
+
     async function guardartablaInsumo(id) {
         let arr = await AsyncStorage.getItem("insumos");
         let arrjson = JSON.parse(arr);
@@ -57,18 +52,13 @@ export default function CostoPantalla4_2(props) {
         await AsyncStorage.setItem("insumos", JSON.stringify(arrjson));
     }
 
-    
     async function getInsumos(id) {
         let arr = await AsyncStorage.getItem("insumos");
         let arrjson = JSON.parse(arr);
         let { table } = arrjson[id];
         return table;
     }
-    /*************************************************/
-    // async function resetInsumos(){
-    //     await AsyncStorage.setItem("insumos", "[]");
-    // }
-    /*Operaciones*/
+
     function operacionABC(item) {
         let res = 0;
         if (parseFloat(item.nro_unidades_b) != 0) {
@@ -84,7 +74,7 @@ export default function CostoPantalla4_2(props) {
         })
         return res;
     }
-    /***********************************************/
+    
     function buttonPress(id) {
         if (insumo == '' || cantidad_a == '' || nro_unidades_b == '' || precio_unitario_c == '') {
             Alert.alert("Error", "No se permiten campos vacios");

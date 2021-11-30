@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import { Alert } from "react-native";
 import { Box, NativeBaseProvider, Center, Stack, ScrollView, FormControl, Select, Button, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { Table } from "react-native-table-component";
 
 export default function CostoPantalla3(props) {
 
     const { navigation, route } = props;
-
-    const { alto, medio, bajo, mub,montoFin } = route.params;
-
+    const { alto, medio, bajo, mub, montoFin } = route.params;
     const [TableService, setTableService] = useState([]);
-
     const [FormManofactura, setFormManofactura] = useState({
         rango: '',
     });
@@ -21,14 +17,11 @@ export default function CostoPantalla3(props) {
     }
 
     let { rango, ventas_anuales, costos_anuales } = FormManofactura;
+    let [service, setService] = React.useState("");
 
     pos_mes = TableService.length
-
     ventas_anuales = sumVentasMensuales();
-    //console.log(venta_anuales)
     costos_anuales = sumCostoProduc();
-    //console.log(costos_anuales)
-    let [service, setService] = React.useState("");
 
     function agregarFila() {
         setTableService([...TableService, FormManofactura]);
@@ -36,7 +29,7 @@ export default function CostoPantalla3(props) {
             rango: ''
         });
     }
-    /*Operaciones*/
+
     function ventasMensuales(cadena) {
         let res = 0;
         if (cadena == "Alto") {
@@ -45,7 +38,7 @@ export default function CostoPantalla3(props) {
             res = parseFloat(medio);
         } else if (cadena == "Bajo") {
             res = parseFloat(bajo);
-        }else if ( cadena == "Sin rango"){
+        } else if (cadena == "Sin rango") {
             res = 0;
         }
         return res.toFixed(2);
@@ -70,7 +63,7 @@ export default function CostoPantalla3(props) {
         })
         return res.toFixed(2);
     }
-    /****************************************/
+
     function buttonPress() {
         if (rango == '') {
             Alert.alert("Error", "Debe seleccionar un valor en rango");
@@ -83,7 +76,7 @@ export default function CostoPantalla3(props) {
 
     function buttonPressNav() {
         if (true) {
-            navigation.navigate("Hoja-de-Costos4", {mub, ventas_anuales, costos_anuales,montoFin});
+            navigation.navigate("Hoja-de-Costos4", { mub, ventas_anuales, costos_anuales, montoFin });
         } else {
             Alert.alert("Error", "Llene con todos los meses");
         }

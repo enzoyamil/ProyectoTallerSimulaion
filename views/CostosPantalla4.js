@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
-import DetalleInsumo from"../Components/DetalleInsumos"
+import DetalleInsumo from "../components/DetalleInsumos"
 
 export default function CostoPantalla4(props) {
 
-    useEffect(()=>{
+    useEffect(() => {
         crearContenedorInsumo();
     }, []);
 
     const { navigation, route } = props;
-
-    const {mub, ventas_anuales, costos_anuales,montoFin} =route.params;
-    console.log(mub);
-    console.log(ventas_anuales);
-    console.log(costos_anuales);
+    const { mub, ventas_anuales, costos_anuales, montoFin } = route.params;
     const [Detalles, setDetalles] = useState([])
-
     const [FormProducto, setFormProducto] = useState({
         producto_o_servicio: '',
         unidad_de_medida: '',
@@ -36,7 +31,7 @@ export default function CostoPantalla4(props) {
             unidad_de_medida: '',
         });
     }
-    /*Funciones para guardar las tablas de insumos dentro los contenedores*/
+
     async function buttonPress() {
         if (producto_o_servicio == '' || unidad_de_medida == '') {
             Alert.alert("Error", "No se permiten campos vacios");
@@ -55,7 +50,6 @@ export default function CostoPantalla4(props) {
     async function crearContenedorInsumo() {
         await AsyncStorage.setItem("insumos", "[]");
     }
-    /*************************************************/
 
     return (
         <NativeBaseProvider>
@@ -77,20 +71,20 @@ export default function CostoPantalla4(props) {
                     </Center>
                     {
                         Detalles.map((item, pos) => (
-                            <DetalleInsumo 
+                            <DetalleInsumo
                                 key={pos}
-                                id = {pos}
+                                id={pos}
                                 navigation={navigation}
                                 producto_o_servico={item.producto_o_servicio}
                                 unidad_medida={item.unidad_de_medida}
                                 mub={mub}
-                                ventas_anuales = {ventas_anuales}
-                                costos_anuales = {costos_anuales}
+                                ventas_anuales={ventas_anuales}
+                                costos_anuales={costos_anuales}
                                 montoFin={montoFin}
                             />
                         ))
                     }
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", {mub, ventas_anuales, costos_anuales,montoFin})}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Costos Operativos", { mub, ventas_anuales, costos_anuales, montoFin })}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

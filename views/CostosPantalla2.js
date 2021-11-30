@@ -5,7 +5,7 @@ import { NativeBaseProvider, Stack, ScrollView, FormControl, Input, Button, Text
 export default function CostoPantalla1(props) {
 
     const { navigation, route } = props;
-    const { mub,montoFin } = route.params;
+    const { mub, montoFin } = route.params;
     const [FormManofactura, setFormManofactura] = useState({
         alto: '',
         medio: '',
@@ -26,7 +26,7 @@ export default function CostoPantalla1(props) {
         } else if (parseInt(medio) > parseInt(alto)) {
             Alert.alert("Error", "El valor de medio no puede ser mayor al valor de alto");
         } else {
-            navigation.navigate("Hoja-de-Costos3", { alto, medio, bajo, mub,montoFin })
+            navigation.navigate("Hoja-de-Costos3", { alto, medio, bajo, mub, montoFin })
         }
     }
 

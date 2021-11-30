@@ -6,8 +6,7 @@ import { DataTable } from 'react-native-paper';
 export default function CostoPantalla2(props) {
 
     const { navigation, route } = props;
-    const {montoFin} = route.params;
-    console.log(montoFin);
+    const { montoFin } = route.params;
     const [TableService, setTableService] = useState([]);
 
     const [FormTablaProducto, setFormTablaProducto] = useState({
@@ -33,12 +32,11 @@ export default function CostoPantalla2(props) {
         });
     }
 
-    let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v, mub } = FormTablaProducto;
-
+    let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v } = FormTablaProducto;
     let [service, setService] = React.useState("");
 
-    mub = MUBTotal();
-    /*Operaciones*/
+    let mub = MUBTotal();
+
     function totalCompraMensual(item) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_c)).toFixed(2);
     }
@@ -78,7 +76,7 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
-    
+
     function valorfrecuencia(cadena) {
         let res = 0;
         if (cadena == "Diario") {
@@ -100,7 +98,7 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
-    /************************************************************************/
+
     function buttonPress() {
         if (producto_o_servicio == '' || cantidad == '' || precio_c == '' || precio_v == '') {
             Alert.alert("Error", "No se permiten campos vacios");
@@ -182,7 +180,7 @@ export default function CostoPantalla2(props) {
                             <Text>MUB total: {MUBTotal()}%</Text>
                         </Stack>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", {mub,montoFin})}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", { mub, montoFin })}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

@@ -1,17 +1,14 @@
 
 import React, { useState, useEffect } from "react";
-import { Alert, StyleSheet } from "react-native";
-import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
-} from "native-base";
+import { Alert } from "react-native";
+import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
 
 
 function Pantalla4(props) {
+
     const { navigation } = props;
     const [TableService, setTableService] = useState([]);
-
     const [FormDescripServ, setFormDescripServ] = useState({
         nombServicio: '',
         elabServicio: '',
@@ -22,42 +19,36 @@ function Pantalla4(props) {
         setFormDescripServ(FormDescripServ);
     }, [FormDescripServ]);
 
-
     function EstadoInputs(value, input) {
         setFormDescripServ({ ...FormDescripServ, [input]: value });
-        // console.log(FormDescripServ);
     }
 
 
     function agregarFila() {
-        if(validarAgregar()){
+        if (validarAgregar()) {
             setTableService([...TableService, FormDescripServ]);
-            console.log(TableService);
-        }else{
-            
+        } else {
             Alert.alert("Error campos Vacíos");
         }
-        
     }
 
-    function validarAgregar(){
-        let isValid=false;
-        if(nombServicio==''||elabServicio==''||caractServicio==''){
+    function validarAgregar() {
+        let isValid = false;
+        if (nombServicio == '' || elabServicio == '' || caractServicio == '') {
             return isValid;
-        }else{
-            return isValid=true;
+        } else {
+            return isValid = true;
         }
     }
-    function validarSiguiente(){
-        let tamanio =TableService.length;
-        // console.log(tamanio);
-        if(tamanio>0){
+
+    function validarSiguiente() {
+        let tamanio = TableService.length;
+        if (tamanio > 0) {
             navigation.navigate("Analisis Mercado")
-        }else{
+        } else {
             Alert.alert("Tabla Vacia");
         }
     }
-
 
     let { nombServicio, elabServicio, caractServicio } = FormDescripServ;
 
@@ -73,15 +64,12 @@ function Pantalla4(props) {
                     w={{
                         base: "100%",
                         md: "25%",
-                    }}
-                >
+                    }}>
                     <Box>
                         <FormControl mb="5">
                             <FormControl.Label> Nombre del Servicio</FormControl.Label>
                             <Input variant="rounded" value={nombServicio}
                                 onChangeText={(value) => EstadoInputs(value, 'nombServicio')} />
-
-
                             <FormControl.Label >Proceso de elaboración</FormControl.Label>
                             <TextArea h={20}
                                 placeholder="Descripción de la Actividad"
@@ -89,7 +77,6 @@ function Pantalla4(props) {
                                 onChangeText={(value) => EstadoInputs(value, 'elabServicio')}
                                 multiline={true}
                             />
-
                             <FormControl.Label>Caracteristicas del Servicio</FormControl.Label>
                             <TextArea h={20} placeholder="Que inversiones nesecita"
                                 w={{
@@ -100,10 +87,8 @@ function Pantalla4(props) {
                             />
                         </FormControl>
                         <Box>
-                            {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Box>
-
                         <Text>Servicios</Text>
                         <DataTable>
                             <DataTable.Header>
@@ -111,8 +96,6 @@ function Pantalla4(props) {
                                 <DataTable.Title>Elaboración</DataTable.Title>
                                 <DataTable.Title >Caracteristicas</DataTable.Title>
                             </DataTable.Header>
-
-
                             {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
@@ -122,21 +105,15 @@ function Pantalla4(props) {
                                     </DataTable.Row>
                                 ))
                             }
-
-
                         </DataTable>
-
-
                         <Divider />
                     </Box>
                 </Stack>
                 <Box>
-                <Button colorScheme="primary" onPress={() =>validarSiguiente()}>Siguiente</Button>
-            </Box>
+                    <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
+                </Box>
             </ScrollView>
         </NativeBaseProvider>
-
-
     );
 }
 export default Pantalla4;
