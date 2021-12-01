@@ -3,14 +3,14 @@ import { Alert, StyleSheet } from "react-native";
 import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
 
 function VanTir(props) {
-    // const { navigation, route } = props;
-    // const {montoFin, frecuencia, plazo, taza} = route.params
-    let utilidad_operativa = 269458;
-    let montoFin = 121990;
-    let frecuencia = "bimensual";
-    let plazo = 84;
-    let taza = 7;
-    let aux = ((parseFloat(utilidad_operativa)/12)*getVal_1(frecuencia));
+    const { navigation, route } = props;
+    const {montoFin, frecuencia, plazo, taza} = route.params
+    // let utilidad_operativa = 269458;
+    // let montoFin = 121990;
+    // let frecuencia = "bimensual";
+    // let plazo = 84;
+    // let taza = 7;
+    // let aux = ((parseFloat(utilidad_operativa) / 12) * getVal_1(frecuencia));
     const [FormVan, setFormVan] = useState({
         implementacionEst: '',
         desembolsoEst: '',
@@ -21,9 +21,9 @@ function VanTir(props) {
     function EstadoInputs(value, input) {
         setFormVan({ ...FormVan, [input]: value });
     }
-    
-    function operacionAux(){
-        let res = aux*periodoMes();
+
+    function operacionAux() {
+        let res = aux * periodoMes();
         return res;
     }
 
@@ -45,8 +45,6 @@ function VanTir(props) {
         return valor;
     }
 
-    // console.log(getVal_1("anual"));
-
     function getVal_2(divisionMes) {
         let valor = 0;
         if (divisionMes == 'mensual') {
@@ -64,8 +62,6 @@ function VanTir(props) {
         }
         return valor;
     }
-
-    // console.log(getVal_2("anual"));
 
     function valorFecha(mesEscogio) {
         let valor = 0;
@@ -101,8 +97,6 @@ function VanTir(props) {
         return valor.toFixed(0);
     }
 
-    // console.log("este es el intervalo"+ intervalo("Octubre"));
-
     let { implementacionEst, desembolsoEst, anioDesembolso, anioImplement } = FormVan;
 
     function periodoAnio() {
@@ -111,26 +105,25 @@ function VanTir(props) {
         return val;
     }
 
-    // nos tiene que mandar el plazo
-    // tipo de pago mensual
-
     function periodoMes() {
         let val = 0;
         val = plazo / getVal_1(frecuencia);
         return val;
     }
+
     function calcularVan() {
         let res = 0;
         let aux2 = 0;
         if (montoFin != 0) {
-            aux2 = (parseFloat(taza)/100)/parseInt(getVal_2(frecuencia));
+            aux2 = (parseFloat(taza) / 100) / parseInt(getVal_2(frecuencia));
             for (let index = 1; index <= periodoMes(); index++) {
-                res = res + (aux)/((1+aux2)**index);
+                res = res + (aux) / ((1 + aux2) ** index);
             }
         }
-        return (res+montoFin).toFixed(0);
+        return (res + montoFin).toFixed(0);
     }
-    console.log((parseFloat(taza)/100)/parseInt(getVal_2(frecuencia)));
+
+    console.log((parseFloat(taza) / 100) / parseInt(getVal_2(frecuencia)));
     console.log(periodoMes());
     console.log(aux);
     console.log(calcularVan());

@@ -29,17 +29,18 @@ function DatosCredito(props) {
     }
 
     function buttonPress() {
-        if (frecuencia == '' || poliza == '') {
-            console.log(impuestos);
-            Alert.alert('error campo vacio');
-        } else if (tamanioMaximo(impuestos, 15)) {
-            Alert.alert('cadena nombre muy grande');
-        } else if (tamanioMin(impuestos, 2)) {
-            Alert.alert('cadena nombre muy pequeña');
-        } else {
-            Alert.alert('succesfull');
-            navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
-        }
+        // if (frecuencia == '' || poliza == '') {
+        //     console.log(impuestos);
+        //     Alert.alert('error campo vacio');
+        // } else if (tamanioMaximo(impuestos, 15)) {
+        //     Alert.alert('cadena nombre muy grande');
+        // } else if (tamanioMin(impuestos, 2)) {
+        //     Alert.alert('cadena nombre muy pequeña');
+        // } else {
+        //     Alert.alert('succesfull');
+        //     navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
+        // }
+        navigation.navigate('Resultados', {montoFin, frecuencia, plazo, taza});
     }
 
     let {
@@ -244,10 +245,10 @@ function DatosCredito(props) {
                             <FormControl.Label>tasa de interes</FormControl.Label>
                             <Text>{cambioValor()}%</Text>
                             <Center>
-                            <Box p="5" borderWidth="1">
-                                <Text bold>CUOTA APROXIMADA: {cambioCuota(cuota)}</Text>
-                            </Box>
-                        </Center>
+                                <Box p="5" borderWidth="1">
+                                    <Text bold>CUOTA APROXIMADA: {cambioCuota(cuota)}</Text>
+                                </Box>
+                            </Center>
                         </FormControl>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>

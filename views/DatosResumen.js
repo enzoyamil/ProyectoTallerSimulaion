@@ -13,7 +13,7 @@ function DatosResumen(props) {
     const {
         montoPresupuesto, montoMano, totalAportMateriaP, totalInvMateriaP, totalAportePromo, totalInvPromo,
         totalPropioGasOpe, totalInvGasOpe, totalPropioInfra, totalInvInfra, maqPropTotal, maqInvTotal,
-        totalReqLegPropio, totalReqLegInv, totalAporte, totalInv,sumaEfectivo
+        totalReqLegPropio, totalReqLegInv, totalAporte, totalInv, sumaEfectivo
     } = route.params;
     // const [TableService, setTableService] = useState([]);
     const [FormrDesembolso, setFormDesembolso] = useState({
@@ -43,9 +43,9 @@ function DatosResumen(props) {
         return porcentaje_Aporte.toFixed(2);
     }
 
-    function sumaAportes(){
-        let total=0;
-        total = parseInt(primerDesembolso)+parseInt(segundoDesembolso);
+    function sumaAportes() {
+        let total = 0;
+        total = parseInt(primerDesembolso) + parseInt(segundoDesembolso);
         return total;
     }
 
@@ -54,30 +54,30 @@ function DatosResumen(props) {
         monto_Financiar = totalInv - montoPresupuesto;
         return monto_Financiar;
     }
-    
-    function  validarAporte(){
-        let mensaje='SIN DATOS';
-        if(sumaEfectivo==montoPresupuesto){
-            mensaje="APORTE CORRECTO"
-        }else{
-            mensaje="EL TOTAL APORTE PROPIO DEBE SER IGUAL AL EFECTIVO";
+
+    function validarAporte() {
+        let mensaje = 'SIN DATOS';
+        if (sumaEfectivo == montoPresupuesto) {
+            mensaje = "APORTE CORRECTO"
+        } else {
+            mensaje = "EL TOTAL APORTE PROPIO DEBE SER IGUAL AL EFECTIVO";
         }
         return mensaje;
     }
-    function  validarDesembolso(){
-        let mensaje='SIN APORTES';
-        if(sumaAportes()==montoFinanciar()){
-            mensaje="DESEMBOLSO CORRECTO"
-        }else{
-            mensaje="REVISAR 1ER Y 2DO DESEMBOLSO"
+    function validarDesembolso() {
+        let mensaje = 'SIN APORTES';
+        if (sumaAportes() == montoFinanciar()) {
+            mensaje = "DESEMBOLSO CORRECTO"
+        } else {
+            mensaje = "REVISAR 1ER Y 2DO DESEMBOLSO"
         }
         console.log(sumaAportes());
         console.log(montoFinanciar());
         console.log(mensaje);
         return mensaje
     }
-    let montoFin= montoFinanciar();
-    let { primerDesembolso,segundoDesembolso} = FormrDesembolso;
+    let montoFin = montoFinanciar();
+    let { primerDesembolso, segundoDesembolso } = FormrDesembolso;
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -121,9 +121,9 @@ function DatosResumen(props) {
 
                         </DataTable>
                         <FormControl.Label>Primer Desembolso</FormControl.Label>
-                            <Input variant="rounded" keyboardType="numeric" value={primerDesembolso} onChangeText={(value) => EstadoInputs(value, 'primerDesembolso')}/>
-                            <FormControl.Label>Segundo Desembolso</FormControl.Label>
-                            <Input variant="rounded" keyboardType="numeric"  value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')}/>
+                        <Input variant="rounded" keyboardType="numeric" value={primerDesembolso} onChangeText={(value) => EstadoInputs(value, 'primerDesembolso')} />
+                        <FormControl.Label>Segundo Desembolso</FormControl.Label>
+                        <Input variant="rounded" keyboardType="numeric" value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')} />
                         <Divider />
                     </Box>
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
@@ -132,10 +132,10 @@ function DatosResumen(props) {
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>{validarDesembolso()}</Text>
                     </Box>
+                    <Box>
+                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", { montoFin })}>Siguiente</Button>
+                    </Box>
                 </Stack>
-                <Box>
-                <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", {montoFin})}>Siguiente</Button>
-            </Box>
             </ScrollView>
         </NativeBaseProvider>
     );
