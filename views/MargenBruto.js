@@ -40,7 +40,7 @@ function MargenBruto(props) {
         // }
         navigation.navigate('DatosCredito', { montoFin });
     }
-
+    
     let { impuestos } = FormPersonal;
     let [service, setService] = React.useState(0);
 

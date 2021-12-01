@@ -5,12 +5,12 @@ import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, 
 function VanTir(props) {
     const { navigation, route } = props;
     const {montoFin, frecuencia, plazo, taza} = route.params
-    // let utilidad_operativa = 269458;
+    let utilidad_operativa = 269458;
     // let montoFin = 121990;
     // let frecuencia = "bimensual";
     // let plazo = 84;
     // let taza = 7;
-    // let aux = ((parseFloat(utilidad_operativa) / 12) * getVal_1(frecuencia));
+     let aux = ((parseFloat(utilidad_operativa) / 12) * getVal_1(frecuencia));
     const [FormVan, setFormVan] = useState({
         implementacionEst: '',
         desembolsoEst: '',
