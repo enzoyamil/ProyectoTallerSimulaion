@@ -18,7 +18,7 @@ import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
 
 function DatosCredito(props) {
     const { navigation, route } = props;
-    const { montoFin } = route.params
+    const { montoFin,utilidadOp } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
     });
@@ -40,7 +40,7 @@ function DatosCredito(props) {
         //     Alert.alert('succesfull');
         //     navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
         // }
-        navigation.navigate('Resultados', {montoFin, frecuencia, plazo, taza});
+        navigation.navigate('Resultados', {montoFin, frecuencia, plazo, taza,utilidadOp});
     }
 
     let {

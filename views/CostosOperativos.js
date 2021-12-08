@@ -122,7 +122,7 @@ function CostosOperativos(props) {
     } else if (tamanioMin(otros, 1)) {
       Alert.alert('cadena nombre muy pequeña');
     } else {
-      Alert.alert('succesfull');
+      // Alert.alert('succesfull');
       navigation.navigate('MargenBruto', { mub, ventas_anuales, costos_anuales, total, montoFin });
     }
   }

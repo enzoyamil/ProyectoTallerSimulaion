@@ -1,22 +1,40 @@
 import React, { useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
+// import { irr } from 'node-irr';
 
 function VanTir(props) {
     const { navigation, route } = props;
-    const {montoFin, frecuencia, plazo, taza} = route.params
-    let utilidad_operativa = 269458;
+    const {montoFin, frecuencia, plazo, taza, utilidadOp} = route.params
+    //parametros Tir
+    var IRRval = [];
+    console.log(montoFin);
+    console.log(frecuencia);
+    console.log(plazo);
+    console.log(taza);
+    console.log(utilidadOp);
+    // var financed = ;
+    // var period = 7;
+    // var rental = 32874;
+
+    ////
+    
     // let montoFin = 121990;
     // let frecuencia = "bimensual";
     // let plazo = 84;
     // let taza = 7;
-     let aux = ((parseFloat(utilidad_operativa) / 12) * getVal_1(frecuencia));
+    let aux = (((parseFloat( utilidadOp)*-1) / 12) * getVal_1(frecuencia));
     const [FormVan, setFormVan] = useState({
         implementacionEst: '',
         desembolsoEst: '',
         anioImplement: '',
         anioDesembolso: ''
     });
+
+    // const irr = (values = number, options = RootFinderOptions) => number;
+    // const data = [-10, -10, 21]
+    // console.log(irr(data))
+
 
     function EstadoInputs(value, input) {
         setFormVan({ ...FormVan, [input]: value });
@@ -122,11 +140,45 @@ function VanTir(props) {
         }
         return (res + montoFin).toFixed(0);
     }
+    
+    //Funcion TIR
+    IRRval.push(-montoFin);
+    for (var i = 0; i < periodoMes(); i++) {
+        IRRval.push(aux);
+    }
+    var IRR = IRRCalc(IRRval, 0.001) * 0.01;
+    // console.log(IRR);
+    function IRRCalc(CArray) {
+        var r = 0
+        var min = -1.0;
+        var max = 10000.0;
+        var guest = 0;
+        var NPV = 0;
+        do {
+            guest = (min + max) / 2;
+            NPV = 0;
+            for (var j = 0; j < CArray.length; j++) {
+                NPV += CArray[j] / Math.pow((1 + guest), j);
+            }
+            if (NPV > 0) {
+                min = guest;
+            }
+            else {
+                max = guest;
+            }
+            r++
+        } while (r < 100);
+        return (guest * 100).toFixed(0);
+    }
 
-    console.log((parseFloat(taza) / 100) / parseInt(getVal_2(frecuencia)));
-    console.log(periodoMes());
-    console.log(aux);
-    console.log(calcularVan());
+
+
+
+
+    // console.log((parseFloat(taza) / 100) / parseInt(getVal_2(frecuencia)));
+    // console.log(periodoMes());
+    // console.log(aux);
+    // console.log(calcularVan());
 
     let [service, setService] = React.useState("");
 
@@ -184,7 +236,7 @@ function VanTir(props) {
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} />
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>VAN : {calcularVan()}</Text>
-                        <Text>TIR : TOTAL</Text>
+                        <Text>TIR : {IRR}%</Text>
                     </Box>
                 </Stack>
             </ScrollView>

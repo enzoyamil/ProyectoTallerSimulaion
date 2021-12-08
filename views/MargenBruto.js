@@ -38,9 +38,9 @@ function MargenBruto(props) {
         //     console.log(FormPersonal);
         //     navigation.navigate('DatosCredito');
         // }
-        navigation.navigate('DatosCredito', { montoFin });
+        navigation.navigate('DatosCredito', { montoFin, utilidadOp });
     }
-    
+    let utilidadOp= (ventas_anuales - costos_anuales) - (total * 12);
     let { impuestos } = FormPersonal;
     let [service, setService] = React.useState(0);
 
@@ -125,7 +125,7 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Operativa</DataTable.Cell>
-                                <DataTable.Cell numeric>{(ventas_anuales - costos_anuales) - (total * 12)}</DataTable.Cell>
+                                <DataTable.Cell numeric>{utilidadOp}</DataTable.Cell>
                             </DataTable.Row>
                         </DataTable>
 
