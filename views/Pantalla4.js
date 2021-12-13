@@ -44,7 +44,8 @@ function Pantalla4(props) {
     function validarSiguiente() {
         let tamanio = TableService.length;
         if (tamanio > 0) {
-            navigation.navigate("Analisis Mercado")
+            // navigation.navigate("Analisis Mercado")
+            navigation.navigate("Presupuesto Emprendimiento")
         } else {
             Alert.alert("Tabla Vacia");
         }

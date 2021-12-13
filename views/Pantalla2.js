@@ -78,7 +78,8 @@ function Pantalla2(props) {
                     </Box>
                 </Stack>
                 <Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Negocio")}>Siguiente</Button>
+                    {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Negocio")}>Siguiente</Button> */}
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Servicio")}>Siguiente</Button>
                 </Box>
             </ScrollView>
         </NativeBaseProvider>

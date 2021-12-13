@@ -73,7 +73,7 @@ function PantallaManoEmprendedor(props) {
         }
     }
     let monto = sumatoria("aportePropio");
-    console.log("esto es el monto mano de obra"+monto);
+    // console.log("esto es el monto mano de obra"+monto);
     
     let { cantidad, unidad, detalle, aportePropio } = FormManoObra;
     // let manoObraTotal = sumatoria(aportePropio);

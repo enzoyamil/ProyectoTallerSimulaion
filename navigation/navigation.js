@@ -26,6 +26,7 @@ import CostosOperativos from '../views/CostosOperativos';
 import MargenBruto from "../views/MargenBruto";
 import DatosCredito from "../views/DatosCredito";
 import VanTir from "../views/VanTir";
+import Report from "../views/Report";
 
 
 const Stack = createNativeStackNavigator();
@@ -41,9 +42,9 @@ function navigation() {
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos3" component={CostoPantalla3} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4" component={CostoPantalla4} />
       <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos4_2" component={CostoPantalla4_2} />
-      <Stack.Screen name="Descripción del Servicio" component={pantalla4} />
-      <Stack.Screen name="Analisis Mercado" component={pantalla5} />
-      <Stack.Screen name="Estrategia de mercado" component={pantalla6} />
+      <Stack.Screen name="Descripción del Servicio" component={pantalla4} /> 
+      {/* <Stack.Screen name="Analisis Mercado" component={pantalla5} />  */}
+      {/* <Stack.Screen name="Estrategia de mercado" component={pantalla6} /> */}
       <Stack.Screen options={{ title: 'Costos Operativos' }} name="Costos Operativos" component={CostosOperativos} />
       <Stack.Screen name="Presupuesto Emprendimiento" component={pantallaPresupuesto} />
       <Stack.Screen name="Mano Emprendedor" component={pantallaManoEmprendedor} />
@@ -59,6 +60,8 @@ function navigation() {
       <Stack.Screen options={{ title: "Datos del Credito" }} name="DatosCredito" component={DatosCredito} />
       <Stack.Screen name="Datos Resumen" component={datosResumen} />
       <Stack.Screen name="Resultados" component={VanTir} />
+      
+      <Stack.Screen name="Reporte" component={Report} />
     </Stack.Navigator>
   );
 
