@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert } from "react-native";
-import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, NativeBaseProvider, Select } from "native-base"
+import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select } from "native-base"
 
 function Pantalla2(props) {
 
@@ -74,15 +74,12 @@ function Pantalla2(props) {
                             <FormControl.Label>Dirección de la Empresa</FormControl.Label>
                             <Input variant="rounded" value={direcEmpresa} onChangeText={(value) => EstadoInputs(value, 'direcEmpresa')} />
                         </FormControl>
-                        <Divider />
                     </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Emprendimiento")}>Siguiente</Button>
                 </Stack>
-                <Box>
-                    {/* <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Negocio")}>Siguiente</Button> */}
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Descripción del Servicio")}>Siguiente</Button>
-                </Box>
             </ScrollView>
         </NativeBaseProvider>
     );
 }
+
 export default Pantalla2;

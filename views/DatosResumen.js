@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
-import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
-} from "native-base";
-import { DataTable, TextInput } from 'react-native-paper';
-import { border } from "native-base/lib/typescript/theme/styled-system";
-import { borderColor } from "styled-system";
+import React, { useState } from "react";
+import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
+import { DataTable } from 'react-native-paper';
 
 function DatosResumen(props) {
     const { navigation, route } = props;
-    const {
-        montoPresupuesto, montoMano, totalAportMateriaP, totalInvMateriaP, totalAportePromo, totalInvPromo,
-        totalPropioGasOpe, totalInvGasOpe, totalPropioInfra, totalInvInfra, maqPropTotal, maqInvTotal,
-        totalReqLegPropio, totalReqLegInv, totalAporte, totalInv, sumaEfectivo
-    } = route.params;
-    // const [TableService, setTableService] = useState([]);
+    const { montoPresupuesto, totalAporte, totalInv, sumaEfectivo } = route.params;
     const [FormrDesembolso, setFormDesembolso] = useState({
         primerDesembolso: '',
-        segundoDesembolso: '',
-        // mesnsajeDesembolso:'',
-        // mensajeAporte:''
+        segundoDesembolso: ''
     });
+
     function EstadoInputs(value, input) {
         setFormDesembolso({ ...FormrDesembolso, [input]: value });
-        // console.log(FormrDesembolso);
     }
-
     function totalProyecto() {
         let total_Proyecto = 0;
         total_Proyecto = (totalInv + totalAporte) - montoPresupuesto;
@@ -42,19 +28,16 @@ function DatosResumen(props) {
         porcentaje_Aporte = (aportePropio() / totalProyecto()) * 100;
         return porcentaje_Aporte.toFixed(2);
     }
-
     function sumaAportes() {
         let total = 0;
         total = parseInt(primerDesembolso) + parseInt(segundoDesembolso);
         return total;
     }
-
     function montoFinanciar() {
         let monto_Financiar = 0;
         monto_Financiar = totalInv - montoPresupuesto;
         return monto_Financiar;
     }
-
     function validarAporte() {
         let mensaje = 'SIN DATOS';
         if (sumaEfectivo == montoPresupuesto) {
@@ -71,13 +54,12 @@ function DatosResumen(props) {
         } else {
             mensaje = "REVISAR 1ER Y 2DO DESEMBOLSO"
         }
-        console.log(sumaAportes());
-        console.log(montoFinanciar());
-        console.log(mensaje);
         return mensaje
     }
+
     let montoFin = montoFinanciar();
     let { primerDesembolso, segundoDesembolso } = FormrDesembolso;
+
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -132,12 +114,11 @@ function DatosResumen(props) {
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>{validarDesembolso()}</Text>
                     </Box>
-                    <Box>
-                        <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", { montoFin })}>Siguiente</Button>
-                    </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", { montoFin })}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
     );
 }
+
 export default DatosResumen;

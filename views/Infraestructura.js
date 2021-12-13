@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Alert,StyleSheet } from "react-native";
-import {
-    FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, WarningOutlineIcon, Center,
-    NativeBaseProvider, Select, FlatList, Text
-} from "native-base";
+import { AccessibilityPropertiesIOS } from "react-native";
+import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
 
-
 function Infraestructura(props) {
-    const { navigation,route } = props;
+    const { navigation, route } = props;
     const [TableService, setTableService] = useState([]);
     const [FormInfraestructura, setFormInfraestructura] = useState({
         cantidad: '',
@@ -17,21 +13,15 @@ function Infraestructura(props) {
         aportePropio: '',
         seInvertira: ''
     });
-    const {
-        montoPresupuesto,montoMano,totalAportMateriaP,totalInvMateriaP,totalAportePromo,totalInvPromo,
-        totalPropioGasOpe,totalInvGasOpe
-    } = route.params;
+    const { montoPresupuesto, montoMano, totalAportMateriaP, totalInvMateriaP, totalAportePromo, totalInvPromo, totalPropioGasOpe, totalInvGasOpe } = route.params;
 
     useEffect(() => {
         setFormInfraestructura(FormInfraestructura);
     }, [FormInfraestructura]);
 
-
     function EstadoInputs(value, input) {
         setFormInfraestructura({ ...FormInfraestructura, [input]: value });
-        // console.log(FormInfraestructura);
     }
-
     function sumAportePropio(obj) {
         let invPropia = 0;
         TableService.map((item) => {
@@ -40,7 +30,6 @@ function Infraestructura(props) {
         })
         return invPropia;
     }
-
     function sumInversionPropio(obj) {
         let invPropioTotal = 0;
         TableService.map((item) => {
@@ -49,60 +38,54 @@ function Infraestructura(props) {
         })
         return invPropioTotal;
     }
-
     function agregarFila() {
-        if(validarAgregar()){
+        if (validarAgregar()) {
             Alert.alert("Error Campos Vacios");
-        }else{
+        } else {
             setTableService([...TableService, FormInfraestructura]);
-        setFormInfraestructura(
-            {
-            cantidad: '',
-            unidad: '',
-            detalle: '',
-            aportePropio: '',
-            seInvertira: ''
-            }
-        );
+            setFormInfraestructura(
+                {
+                    cantidad: '',
+                    unidad: '',
+                    detalle: '',
+                    aportePropio: '',
+                    seInvertira: ''
+                }
+            );
         }
-        
-        // console.log(TableService);
     }
-    function validarAgregar(){
-        let isValid=true;
-        if(cantidad==''||unidad==''||detalle==''||aportePropio==''||seInvertira==''){
+    function validarAgregar() {
+        let isValid = true;
+        if (cantidad == '' || unidad == '' || detalle == '' || aportePropio == '' || seInvertira == '') {
             return isValid;
-        }else{
-            return isValid=false;
+        } else {
+            return isValid = false;
         }
     }
-    function validarSiguiente(){
-        let tamanio =TableService.length;
-        // console.log(tamanio);
-        if(tamanio>0){
-            navigation.navigate("Maquinaria",{
-                montoPresupuesto:montoPresupuesto,
-                montoMano:montoMano,
-                totalAportMateriaP:totalAportMateriaP,
+    function validarSiguiente() {
+        let tamanio = TableService.length;
+        if (tamanio > 0) {
+            navigation.navigate("Maquinaria", {
+                montoPresupuesto: montoPresupuesto,
+                montoMano: montoMano,
+                totalAportMateriaP: totalAportMateriaP,
                 totalInvMateriaP: totalInvMateriaP,
-                totalAportePromo:totalAportePromo,
-                totalInvPromo:totalInvPromo,
-                totalPropioGasOpe:totalPropioGasOpe,
-                totalInvGasOpe:totalInvGasOpe,
-                totalPropioInfra:totalPropioInfra,
-                totalInvInfra:totalInvInfra
+                totalAportePromo: totalAportePromo,
+                totalInvPromo: totalInvPromo,
+                totalPropioGasOpe: totalPropioGasOpe,
+                totalInvGasOpe: totalInvGasOpe,
+                totalPropioInfra: totalPropioInfra,
+                totalInvInfra: totalInvInfra
             })
-        }else{
+        } else {
             Alert.alert("Error Tabla Vacia");
         }
     }
 
-    let totalPropioInfra=sumAportePropio("aportePropio");
-    let totalInvInfra=sumInversionPropio("seInvertira");
-    console.log("Monto totalPropioInfra" + totalPropioInfra);
-    console.log("Monto totalInvInfra"+totalInvInfra);
-
+    let totalPropioInfra = sumAportePropio("aportePropio");
+    let totalInvInfra = sumInversionPropio("seInvertira");
     let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormInfraestructura;
+
     return (
         <NativeBaseProvider>
             <ScrollView>
@@ -115,77 +98,62 @@ function Infraestructura(props) {
                     w={{
                         base: "100%",
                         md: "25%",
-                    }}
-                >
+                    }}>
                     <Box>
-                    <Center><Text fontSize="20" bold> Capital Inversión Infraestructura</Text></Center>
+                        <Center><Text fontSize="20" bold> Capital Inversión Infraestructura</Text></Center>
                         <FormControl mb="5">
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
-
                             <FormControl.Label >Unidad</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value,'unidad')} />
-
+                                onChangeText={(value) => EstadoInputs(value, 'unidad')} />
                             <FormControl.Label >Detalle</FormControl.Label>
-                            <Input variant="rounded" value={detalle} 
+                            <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} />
-
                             <FormControl.Label >Aporte Propio</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
-
                             <FormControl.Label >Inversión</FormControl.Label>
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
-
                         </FormControl>
                         <Center>
-                            {/* <Button colorScheme="primary" onPress={() => navigation.navigate("")}>Añadir</Button> */}
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Center>
-
                         <Text>Capital Operativo</Text>
-
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Cantidad</DataTable.Title>
                                 <DataTable.Title>Unidad </DataTable.Title>
-                                {/* <DataTable.Title>Detalle</DataTable.Title> */}
                                 <DataTable.Title>Aporte Propio</DataTable.Title>
                                 <DataTable.Title>Inversión</DataTable.Title>
                             </DataTable.Header>
-
                             {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        {/* <DataTable.Cell>{item.detalle}</DataTable.Cell> */}
                                         <DataTable.Cell>{item.aportePropio}</DataTable.Cell>
                                         <DataTable.Cell>{item.seInvertira}</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
                             <DataTable>
-                                <DataTable.Row> 
-                                <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
-                                <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
+                                <DataTable.Row>
+                                    <DataTable.Cell> SUBTOTAL</DataTable.Cell>
+                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
+                                    <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
                                 </DataTable.Row>
-                                
                             </DataTable>
                         </DataTable>
                         <Divider />
                     </Box>
+                    <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
                 </Stack>
-                <Box>
-                <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
-            </Box>
             </ScrollView>
-            
         </NativeBaseProvider>
     );
 }
+
 export default Infraestructura;
