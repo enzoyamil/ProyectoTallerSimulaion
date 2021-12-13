@@ -7,7 +7,6 @@ import {
     Stack,
     Text,
     ScrollView,
-    Divider,
     Box,
     Center,
     NativeBaseProvider,
@@ -25,7 +24,6 @@ function DatosCredito(props) {
 
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
-        console.log(FormPersonal);
     }
 
     function buttonPress() {
@@ -63,7 +61,6 @@ function DatosCredito(props) {
             return calculo = 7;
         }
     }
-
     function cambioCuota(val) {
         if (val == 'fija') {
             cuotaProx = calculateFixedLoanFee(cambioValor(), plazo, montoFin, frecuencia);
@@ -74,7 +71,6 @@ function DatosCredito(props) {
         }
         return cuotaProx.toFixed(0);
     }
-
     const calculateFixedFee = (rate, period, amount) => {
         const fee = amount * ((((1 + rate) ** period) * rate) / (((1 + rate) ** period) - 1));
         return fee;
@@ -132,7 +128,6 @@ function DatosCredito(props) {
         }
         return fee;
     };
-
     function calculateVariableLoanFee(rate, period, loanAmount, frequency) {
         let fee;
         const r = rate / 100;
@@ -179,6 +174,7 @@ function DatosCredito(props) {
     };
 
     let [service, setService] = React.useState(0);
+
     return (
         <NativeBaseProvider>
             <ScrollView background="white">
@@ -259,4 +255,5 @@ function DatosCredito(props) {
         </NativeBaseProvider>
     );
 }
+
 export default DatosCredito;

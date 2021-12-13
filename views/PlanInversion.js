@@ -40,8 +40,7 @@ function PlanInversion(props) {
         return total;
     }
     function validarSiguiente() {
-        if (gastOperativo == 0 || materiaPrima == 0 || reqPromocionales == 0 || infraestructura == 0
-            || maquinaria == 0 || reqLegales == 0) {
+        if (false) {
             Alert.alert("No se puede mandar campos Vacios o con 0");
         } else {
             navigation.navigate("Datos Resumen", {

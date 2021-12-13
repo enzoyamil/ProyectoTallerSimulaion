@@ -10,7 +10,7 @@ import {
   Box,
   NativeBaseProvider
 } from 'native-base';
-import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
+import { tamanioMaximo, tamanioMin } from '../helpers/Validation';
 
 function CostosOperativos(props) {
   const { navigation, route } = props;
@@ -33,7 +33,6 @@ function CostosOperativos(props) {
   function EstadoInputs(value, input) {
     setFormPersonal({ ...FormPersonal, [input]: value });
   }
-
   function devolverTotal() {
     let total = parseInt(FormPersonal.impuestos) + parseInt(FormPersonal.alimentacion) + parseInt(FormPersonal.luz) + parseInt(FormPersonal.agua) + parseInt(FormPersonal.gas) + parseInt(FormPersonal.celular) + parseInt(FormPersonal.internet) + parseInt(FormPersonal.alquiler) + parseInt(FormPersonal.transporte) + parseInt(FormPersonal.escritorio) + parseInt(FormPersonal.empleados) + parseInt(FormPersonal.promocion) + parseInt(FormPersonal.vestimenta) + parseInt(FormPersonal.salud) + parseInt(FormPersonal.otros);
     return isNaN(total) ? 'llenar los campos' : total;
@@ -59,7 +58,6 @@ function CostosOperativos(props) {
       salud == '' ||
       otros == ''
     ) {
-      console.log(impuestos);
       Alert.alert('error campo vacio');
     } else if (tamanioMaximo(impuestos, 15)) {
       Alert.alert('cadena nombre muy grande');
@@ -281,4 +279,5 @@ function CostosOperativos(props) {
     </NativeBaseProvider>
   );
 }
+
 export default CostosOperativos;

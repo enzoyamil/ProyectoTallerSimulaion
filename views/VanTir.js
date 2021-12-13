@@ -1,29 +1,15 @@
 import React, { useState } from "react";
 import { Alert, StyleSheet } from "react-native";
-import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
-// import { irr } from 'node-irr';
+import { FormControl, Input, Stack,  ScrollView, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
 
 function VanTir(props) {
     const { navigation, route } = props;
     const {montoFin, frecuencia, plazo, taza, utilidadOp} = route.params
     //parametros Tir
-    var IRRval = [];
-    console.log(montoFin);
-    console.log(frecuencia);
-    console.log(plazo);
-    console.log(taza);
-    console.log(utilidadOp);
-    // var financed = ;
-    // var period = 7;
-    // var rental = 32874;
-
-    ////
     
-    // let montoFin = 121990;
-    // let frecuencia = "bimensual";
-    // let plazo = 84;
-    // let taza = 7;
-    let aux = (((parseFloat( utilidadOp)*-1) / 12) * getVal_1(frecuencia));
+    var IRRval = [];
+    let aux = (((parseFloat( utilidadOp)) / 12) * getVal_1(frecuencia));
+
     const [FormVan, setFormVan] = useState({
         implementacionEst: '',
         desembolsoEst: '',
@@ -31,18 +17,8 @@ function VanTir(props) {
         anioDesembolso: ''
     });
 
-    // const irr = (values = number, options = RootFinderOptions) => number;
-    // const data = [-10, -10, 21]
-    // console.log(irr(data))
-
-
     function EstadoInputs(value, input) {
         setFormVan({ ...FormVan, [input]: value });
-    }
-
-    function operacionAux() {
-        let res = aux * periodoMes();
-        return res;
     }
 
     function getVal_1(divisionMes) {
@@ -108,37 +84,25 @@ function VanTir(props) {
         }
         return valor;
     }
-    function intervalo(variable) {
-        let valor = 0;
-        let num2 = parseInt(valorFecha(variable));
-        valor = (plazo - num2) / 12;
-        return valor.toFixed(0);
-    }
 
     let { implementacionEst, desembolsoEst, anioDesembolso, anioImplement } = FormVan;
-
-    function periodoAnio() {
-        let val = 0;
-        val = parseInt(anioDesembolso) + parseInt(intervalo(desembolsoEst));
-        return val;
-    }
 
     function periodoMes() {
         let val = 0;
         val = plazo / getVal_1(frecuencia);
         return val;
     }
-
+    console.log(periodoMes())
     function calcularVan() {
         let res = 0;
         let aux2 = 0;
         if (montoFin != 0) {
             aux2 = (parseFloat(taza) / 100) / parseInt(getVal_2(frecuencia));
             for (let index = 1; index <= periodoMes(); index++) {
-                res = res + (aux) / ((1 + aux2) ** index);
+                res = res + ((aux) / ((1 + aux2) ** index));
             }
         }
-        return (res + montoFin).toFixed(0);
+        return (res-montoFin).toFixed(0);
     }
     
     //Funcion TIR
@@ -147,7 +111,6 @@ function VanTir(props) {
         IRRval.push(aux);
     }
     var IRR = IRRCalc(IRRval, 0.001) * 0.01;
-    // console.log(IRR);
     function IRRCalc(CArray) {
         var r = 0
         var min = -1.0;
@@ -168,17 +131,8 @@ function VanTir(props) {
             }
             r++
         } while (r < 100);
-        return (guest * 100).toFixed(0);
+        return (guest*getVal_2(frecuencia)*10000).toFixed(0);
     }
-
-
-
-
-
-    // console.log((parseFloat(taza) / 100) / parseInt(getVal_2(frecuencia)));
-    // console.log(periodoMes());
-    // console.log(aux);
-    // console.log(calcularVan());
 
     let [service, setService] = React.useState("");
 

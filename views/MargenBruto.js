@@ -40,6 +40,7 @@ function MargenBruto(props) {
         // }
         navigation.navigate('DatosCredito', { montoFin, utilidadOp });
     }
+
     let utilidadOp= (ventas_anuales - costos_anuales) - (total * 12);
     let { impuestos } = FormPersonal;
     let [service, setService] = React.useState(0);
@@ -138,4 +139,5 @@ function MargenBruto(props) {
         </NativeBaseProvider>
     );
 }
+
 export default MargenBruto;
