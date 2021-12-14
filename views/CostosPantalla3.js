@@ -76,7 +76,7 @@ export default function CostoPantalla3(props) {
 
     function buttonPressNav() {
         if (true) {
-            navigation.navigate("Hoja-de-Costos4", { mub, ventas_anuales, costos_anuales, montoFin });
+            navigation.navigate("Costos Operativos", { mub, ventas_anuales, costos_anuales, montoFin });
         } else {
             Alert.alert("Error", "Llene con todos los meses");
         }
