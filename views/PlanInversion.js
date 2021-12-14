@@ -31,12 +31,10 @@ function PlanInversion(props) {
     }
     function EstadoInputs(value, input) {
         setFormInvEfectivo({ ...FormInvEfectivo, [input]: value });
-        console.log(FormInvEfectivo);
     }
     function sumaInversion() {
         let total = 0;
         total = parseInt(gastOperativo) + parseInt(materiaPrima) + parseInt(reqPromocionales) + parseInt(infraestructura) + parseInt(maquinaria) + parseInt(reqLegales);
-        console.log(total);
         return total;
     }
     function validarSiguiente() {
@@ -135,16 +133,14 @@ function PlanInversion(props) {
                                     onChangeText={(value) => EstadoInputs(value, 'reqLegales')}
                                 ></Input>
                             </DataTable.Row>
-                            <DataTable>
-                                <DataTable.Header>
-                                    <DataTable.Title style={{ width: 120 }}>TOTAL </DataTable.Title>
-                                    <DataTable.Title style={{ width: 100 }}>{sumaPlanInversion()}</DataTable.Title>
-                                    <DataTable.Title style={{ width: 100 }}>{sumaInversion()}</DataTable.Title>
-                                </DataTable.Header>
-                            </DataTable>
                         </DataTable>
-                        <Divider />
-
+                    </Box>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>TOTAL</Text>
+                            <Text>Monto total: {sumaPlanInversion()}</Text>
+                            <Text>Aporte propio efectivo: {sumaInversion()}</Text>
+                        </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
                 </Stack>

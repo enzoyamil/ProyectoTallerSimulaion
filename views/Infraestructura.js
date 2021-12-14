@@ -56,7 +56,7 @@ function Infraestructura(props) {
     }
     function validarAgregar() {
         let isValid = true;
-        if (cantidad == '' || unidad == '' || detalle == '' || aportePropio == '' || seInvertira == '') {
+        if (cantidad == '' || unidad == '' || aportePropio == '' || seInvertira == '') {
             return isValid;
         } else {
             return isValid = false;
@@ -84,13 +84,13 @@ function Infraestructura(props) {
 
     let totalPropioInfra = sumAportePropio("aportePropio");
     let totalInvInfra = sumInversionPropio("seInvertira");
-    let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormInfraestructura;
+    let { cantidad, unidad, aportePropio, seInvertira } = FormInfraestructura;
 
     return (
         <NativeBaseProvider>
             <ScrollView>
                 <Stack
-                    space={2.5}
+                    space={5}
                     alignSelf="center"
                     px="4"
                     safeArea
@@ -108,9 +108,9 @@ function Infraestructura(props) {
                             <FormControl.Label >Unidad</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'unidad')} />
-                            <FormControl.Label >Detalle</FormControl.Label>
+                            {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
-                                onChangeText={(value) => EstadoInputs(value, 'detalle')} />
+                                onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
                             <FormControl.Label >Aporte Propio</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
@@ -139,15 +139,14 @@ function Infraestructura(props) {
                                     </DataTable.Row>
                                 ))
                             }
-                            <DataTable>
-                                <DataTable.Row>
-                                    <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
-                                    <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
-                                </DataTable.Row>
-                            </DataTable>
                         </DataTable>
-                        <Divider />
+                    </Box>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>SUBTOTAL:</Text>
+                            <Text>Aporte propio: {sumAportePropio("aportePropio")}</Text>
+                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}</Text>
+                        </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
                 </Stack>

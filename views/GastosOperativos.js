@@ -68,7 +68,7 @@ function GastosOperativos(props) {
     }
     function validarAgregar() {
         let isValid = true;
-        if (cantidad == '' || unidad == '' || detalle == '' || aportePropio == '' || seInvertira == '') {
+        if (cantidad == '' || unidad == '' || aportePropio == '' || seInvertira == '') {
             return isValid;
         } else {
             return isValid = false;
@@ -94,7 +94,7 @@ function GastosOperativos(props) {
 
     let totalPropio = totalCapitalOpercionesPropio();
     let totalInv = totalInversionOpercionesPropio();
-    let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormGastOperativo;
+    let { cantidad, unidad, aportePropio, seInvertira } = FormGastOperativo;
 
     return (
         <NativeBaseProvider>
@@ -118,9 +118,9 @@ function GastosOperativos(props) {
                             <FormControl.Label >Unidad</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'unidad')} />
-                            <FormControl.Label >Detalle</FormControl.Label>
+                            {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
-                                onChangeText={(value) => EstadoInputs(value, 'detalle')} />
+                                onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
                             <FormControl.Label >Aporte Propio</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
@@ -149,22 +149,17 @@ function GastosOperativos(props) {
                                     </DataTable.Row>
                                 ))
                             }
-                            <DataTable>
-                                <DataTable.Row>
-                                    <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
-                                    <DataTable.Cell> {sumInversionPropio("seInvertira")}</DataTable.Cell>
-                                </DataTable.Row>
-                                <DataTable>
-                                    <DataTable.Row>
-                                        <DataTable.Cell> TOTAL</DataTable.Cell>
-                                        <DataTable.Cell>{totalPropio}</DataTable.Cell>
-                                        <DataTable.Cell>{totalInv}</DataTable.Cell>
-                                    </DataTable.Row>
-                                </DataTable>
-                            </DataTable>
                         </DataTable>
-                        <Divider />
+                    </Box>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>SUBTOTAL:</Text>
+                            <Text>Aporte propio: {sumAportePropio("aportePropio")}</Text>
+                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}</Text>
+                            <Text>TOTAL:</Text>
+                            <Text>Total aporte propio: {totalPropio}</Text>
+                            <Text>Total inversion: {totalInv}</Text>
+                        </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
                 </Stack>

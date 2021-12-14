@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
-import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, NativeBaseProvider, Select, Text, Center } from "native-base";
+import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select, Text, Center } from "native-base";
 import { DataTable } from 'react-native-paper';
 
 function PantallaPresupuesto(props) {
@@ -66,7 +66,7 @@ function PantallaPresupuesto(props) {
         <NativeBaseProvider>
             <ScrollView>
                 <Stack
-                    space={2.5}
+                    space={5}
                     alignSelf="center"
                     px="4"
                     safeArea
@@ -109,14 +109,12 @@ function PantallaPresupuesto(props) {
                                     </DataTable.Row>
                                 ))
                             }
-                            <DataTable>
-                                <DataTable.Header>
-                                    <DataTable.Cell>SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell >{sumatoria("montoDinero")}</DataTable.Cell>
-                                </DataTable.Header>
-                            </DataTable>
                         </DataTable>
-                        <Divider />
+                    </Box>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>SUBTOTAL: {sumatoria("montoDinero")}</Text>
+                        </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validacionSiguiente()}>Siguiente</Button>
                 </Stack>

@@ -75,14 +75,12 @@ function PresupuestoResumen(props) {
                                 <DataTable.Cell>Req. Legales</DataTable.Cell>
                                 <DataTable.Cell>{totalReqLegPropio}</DataTable.Cell>
                             </DataTable.Row>
-                            <DataTable>
-                                <DataTable.Header>
-                                    <DataTable.Title>TOTAL </DataTable.Title>
-                                    <DataTable.Title>{totalAportePropio()} </DataTable.Title>
-                                </DataTable.Header>
-                            </DataTable>
                         </DataTable>
-                        <Divider />
+                    </Box>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>TOTAL: {totalAportePropio()}</Text>
+                        </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => navigation.navigate("Plan Inversión", {
                         montoPresupuesto: montoPresupuesto,

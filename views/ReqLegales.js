@@ -71,7 +71,7 @@ function ReqLegales(props) {
     }
     function validarAgregar() {
         let isValid = true;
-        if (cantidad == '' || unidad == '' || detalle == '' || aportePropio == '' || seInvertira == '') {
+        if (cantidad == '' || unidad == '' || aportePropio == '' || seInvertira == '') {
             return isValid;
         } else {
             return isValid = false;
@@ -104,13 +104,13 @@ function ReqLegales(props) {
 
     let sumaCapitalInvProp = totalCapitalInvProp();
     let sumaCapitalInvInv = totalCapitalInvInv();
-    let { cantidad, unidad, detalle, aportePropio, seInvertira } = FormReqLegal;
+    let { cantidad, unidad, aportePropio, seInvertira } = FormReqLegal;
 
     return (
         <NativeBaseProvider>
             <ScrollView>
                 <Stack
-                    space={2.5}
+                    space={5}
                     alignSelf="center"
                     px="4"
                     safeArea
@@ -128,9 +128,9 @@ function ReqLegales(props) {
                             <FormControl.Label >Unidad</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'unidad')} />
-                            <FormControl.Label >Detalle</FormControl.Label>
+                            {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
-                                onChangeText={(value) => EstadoInputs(value, 'detalle')} />
+                                onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
                             <FormControl.Label >Aporte Propio</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
@@ -159,22 +159,17 @@ function ReqLegales(props) {
                                     </DataTable.Row>
                                 ))
                             }
-                            <DataTable>
-                                <DataTable.Row>
-                                    <DataTable.Cell> SUBTOTAL</DataTable.Cell>
-                                    <DataTable.Cell> {sumAportePropio("aportePropio")}</DataTable.Cell>
-                                    <DataTable.Cell>{sumInversionPropio("seInvertira")}</DataTable.Cell>
-                                </DataTable.Row>
-                            </DataTable>
-                            <DataTable>
-                                <DataTable.Row>
-                                    <DataTable.Cell> TOTAL</DataTable.Cell>
-                                    <DataTable.Cell> {sumaCapitalInvProp}</DataTable.Cell>
-                                    <DataTable.Cell> {sumaCapitalInvInv}</DataTable.Cell>
-                                </DataTable.Row>
-                            </DataTable>
                         </DataTable>
-                        <Divider />
+                    </Box>
+                    <Box rounded="xl" p="5" borderWidth="1">
+                        <Stack space={3}>
+                            <Text>SUBTOTAL:</Text>
+                            <Text>Aporte propio: {sumAportePropio("aportePropio")}</Text>
+                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}</Text>
+                            <Text>TOTAL:</Text>
+                            <Text>Total aporte propio: {sumaCapitalInvProp}</Text>
+                            <Text>Total inversion: {sumaCapitalInvInv}</Text>
+                        </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
                 </Stack>

@@ -19,7 +19,6 @@ function MargenBruto(props) {
 
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
-        console.log(FormPersonal);
     }
 
     function buttonPress() {

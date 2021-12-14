@@ -153,8 +153,7 @@ function VanTir(props) {
                         md: '25%',
                     }}>
                     <Center><Text fontSize="20" bold>Resultados VAN Y TIR.</Text></Center>
-
-                    <FormControl.Label>Mes Implementacion Estimada</FormControl.Label>
+                    {/* <FormControl.Label>Mes Implementacion Estimada</FormControl.Label>
                     <Select placeholder="Mes" borderColor="gray.400" variant="rounded" minWidth="100" value={implementacionEst} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                         onValueChange={(value) => EstadoInputs(value, 'implementacionEst')}>
                         <Select.Item label="Enero" value="Enero" />
@@ -173,7 +172,6 @@ function VanTir(props) {
                     <FormControl.Label>Año Implementacion Estimada</FormControl.Label>
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioImplement} onChangeText={(value) => EstadoInputs(value, 'anioImplement')} />
                     <FormControl.Label>Desembolso Estimado</FormControl.Label>
-
                     <Select placeholder="Mes" borderColor="gray.400" variant="rounded" minWidth="100" value={desembolsoEst} variant="rounded" minWidth="150" selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                         onValueChange={(value) => EstadoInputs(value, 'desembolsoEst')}>
                         <Select.Item label="Enero" value="Enero" />
@@ -190,7 +188,7 @@ function VanTir(props) {
                         <Select.Item label="Diciembre" value="Diciembre" />
                     </Select>
                     <FormControl.Label>Año Implementacion Estimada</FormControl.Label>
-                    <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} />
+                    <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} /> */}
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>VAN : {calcularVan()}</Text>
                         <Text>TIR : {tir}%</Text>
