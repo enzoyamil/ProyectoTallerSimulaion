@@ -19,7 +19,7 @@ export default function CostoPantalla3(props) {
     let { rango, ventas_anuales, costos_anuales } = FormManofactura;
     let [service, setService] = React.useState("");
 
-    pos_mes = TableService.length
+    let pos_mes = TableService.length
     ventas_anuales = sumVentasMensuales();
     costos_anuales = sumCostoProduc();
 

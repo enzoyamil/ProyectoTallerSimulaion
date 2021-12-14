@@ -47,7 +47,7 @@ export default function CostoPantalla2(props) {
     function MUB(item) {
         let res = 0;
         if (parseInt(totalVentaMensual(item)) != 0) {
-            res = (100 * (totalVentaMensual(item) - totalCompraMensual(item)) / totalVentaMensual(item));
+            res = (100 * (totalVentaMensual(item) - totalCompraMensual(item)) / totalVentaMensual(item)).toFixed(2);
         }
         return res;
     }
@@ -71,7 +71,7 @@ export default function CostoPantalla2(props) {
     function MUBTotal() {
         let res = 0;
         if (sumatoriaVentaMensuales() != 0) {
-            res = (100 * (sumatoriaVentaMensuales() - sumatoriaCompraMensuales()) / sumatoriaVentaMensuales()).toFixed(2);
+            res = (100 * (sumatoriaVentaMensuales() - sumatoriaCompraMensuales()) / sumatoriaVentaMensuales());
         }
         return res;
     }
@@ -176,7 +176,7 @@ export default function CostoPantalla2(props) {
                             <Text>Totales: </Text>
                             <Text>Sumatoria total compra mensual: {sumatoriaCompraMensuales()}</Text>
                             <Text>Sumatoria total venta mensual: {sumatoriaVentaMensuales()}</Text>
-                            <Text>MUB total: {MUBTotal()}%</Text>
+                            <Text>MUB total: {mub.toFixed(2)}%</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", { mub, montoFin })}>Siguiente</Button>

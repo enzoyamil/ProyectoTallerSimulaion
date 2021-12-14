@@ -6,7 +6,11 @@ function VanTir(props) {
     const { navigation, route } = props;
     const {montoFin, frecuencia, plazo, taza, utilidadOp} = route.params
     //parametros Tir
-    
+    console.log(montoFin)
+    console.log(frecuencia)
+    console.log(plazo)
+    console.log(taza)
+    console.log(utilidadOp)
     var IRRval = [];
     let aux = (((parseFloat( utilidadOp)) / 12) * getVal_1(frecuencia));
 
@@ -92,7 +96,6 @@ function VanTir(props) {
         val = plazo / getVal_1(frecuencia);
         return val;
     }
-    console.log(periodoMes())
     function calcularVan() {
         let res = 0;
         let aux2 = 0;
@@ -131,9 +134,9 @@ function VanTir(props) {
             }
             r++
         } while (r < 100);
-        return (guest*getVal_2(frecuencia)*10000).toFixed(0);
+        return (guest*getVal_2(frecuencia)*100);
     }
-
+    let tir = IRRCalc(IRRval).toFixed(2);
     let [service, setService] = React.useState("");
 
     return (
@@ -190,7 +193,7 @@ function VanTir(props) {
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} />
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>VAN : {calcularVan()}</Text>
-                        <Text>TIR : {IRR}%</Text>
+                        <Text>TIR : {tir}%</Text>
                     </Box>
                 </Stack>
             </ScrollView>
