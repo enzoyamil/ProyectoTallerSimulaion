@@ -173,5 +173,5 @@ export default function CostoPantalla2(props) {
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
-    )
+    );
 }
