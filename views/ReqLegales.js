@@ -119,22 +119,24 @@ function ReqLegales(props) {
                         base: "100%",
                         md: "25%",
                     }}>
-                    <Center><Text fontSize="20" bold>Capital Inversión Legales</Text></Center>
+                    <Center><Text fontSize="20" bold>Capital Inversión</Text></Center>
+                    <Center><Text fontSize="20" bold>Requerimientos Legales</Text></Center>
                     <Box>
                         <FormControl mb="5">
-                            <FormControl.Label >Cantidad</FormControl.Label>
-                            <Input variant="rounded" value={cantidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
-                            <FormControl.Label >Unidad</FormControl.Label>
+                        <FormControl.Label >Unidad(Precio Unitario)*</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'unidad')} />
+                            <FormControl.Label >Cantidad*</FormControl.Label>
+                            <Input variant="rounded" value={cantidad} keyboardType="numeric"
+                                onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
+                            
                             {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
-                            <FormControl.Label >Aporte Propio</FormControl.Label>
+                            <FormControl.Label >Aporte Propio*</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
-                            <FormControl.Label >Inversión</FormControl.Label>
+                            <FormControl.Label >Inversión*</FormControl.Label>
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
                         </FormControl>
