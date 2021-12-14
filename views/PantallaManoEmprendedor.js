@@ -85,15 +85,18 @@ function PantallaManoEmprendedor(props) {
                     <Box>
                         <Center><Text fontSize="20" bold >Mano de Obra</Text></Center>
                         <FormControl mb="5">
+                        <FormControl.Label >Aporte Propio(Bs)*</FormControl.Label>
+                            <Input variant="rounded" value={aportePropio} keyboardType="numeric"
+                                onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
+                                
                             <FormControl.Label >Cantidad</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
                             {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
-                            <FormControl.Label >Aporte Propio</FormControl.Label>
-                            <Input variant="rounded" value={aportePropio} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
+
+                        
                         </FormControl>
                         <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>

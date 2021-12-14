@@ -78,7 +78,7 @@ function PantallaPresupuesto(props) {
                     <Box>
                         <FormControl mb="5">
                             <Center><Text fontSize="20" bold >Efectivo</Text></Center>
-                            <FormControl.Label>Procedencia</FormControl.Label>
+                            <FormControl.Label>Procedencia*</FormControl.Label>
                             <Select placeholder="" variant="rounded" value={origenDinero}
                                 selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'origenDinero')}>
@@ -86,7 +86,7 @@ function PantallaPresupuesto(props) {
                                 <Select.Item label="Banco" value="Banco" />
                                 <Select.Item label="Otro" value="Otro" />
                             </Select>
-                            <FormControl.Label >Cantidad en Efectivo (Bs)</FormControl.Label>
+                            <FormControl.Label >Cantidad en Efectivo (Bs)*</FormControl.Label>
                             <Input variant="rounded" value={montoDinero} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'montoDinero')}
                             />

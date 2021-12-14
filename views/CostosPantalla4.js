@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeBaseProvider, Center, Stack, ScrollView, FormControl, Input, Button, Text } from "native-base";
-import DetalleInsumo from "../components/DetalleInsumos"
+import DetalleInsumo from "../Components/DetalleInsumos"
 
 export default function CostoPantalla4(props) {
 
