@@ -14,10 +14,9 @@ import {
 } from 'native-base';
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
 
-
 function DatosCredito(props) {
     const { navigation, route } = props;
-    const { montoFin,utilidadOp } = route.params
+    const { montoFin, utilidadOp } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
     });
@@ -25,7 +24,6 @@ function DatosCredito(props) {
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
     }
-
     function buttonPress() {
         // if (frecuencia == '' || poliza == '') {
         //     console.log(impuestos);
@@ -38,7 +36,7 @@ function DatosCredito(props) {
         //     Alert.alert('succesfull');
         //     navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
         // }
-        navigation.navigate('Resultados', {montoFin, frecuencia, plazo, taza,utilidadOp});
+        navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza, utilidadOp });
     }
 
     let {
@@ -51,7 +49,6 @@ function DatosCredito(props) {
     } = FormPersonal;
     let cuotaProx = 0;
     let calculo = 0;
-
     taza = cambioValor();
 
     function cambioValor() {

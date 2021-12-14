@@ -15,9 +15,6 @@ export default function CostoPantalla1(props) {
     function EstadoInputs(value, input) {
         setFormManofactura({ ...FormManofactura, [input]: value });
     }
-
-    let { alto, medio, bajo } = FormManofactura;
-
     function buttonPress() {
         if (bajo == '' || medio == '' || alto == '') {
             Alert.alert("Error", "No se permiten campos vacios");
@@ -29,6 +26,8 @@ export default function CostoPantalla1(props) {
             navigation.navigate("Hoja-de-Costos3", { alto, medio, bajo, mub, montoFin })
         }
     }
+
+    let { alto, medio, bajo } = FormManofactura;
 
     return (
         <NativeBaseProvider>
@@ -59,5 +58,4 @@ export default function CostoPantalla1(props) {
             </ScrollView>
         </NativeBaseProvider>
     );
-
 }

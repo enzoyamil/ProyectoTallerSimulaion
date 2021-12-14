@@ -12,24 +12,21 @@ export default function CostoPantalla3(props) {
         rango: '',
     });
 
-    function EstadoInputs(value, input) {
-        setFormManofactura({ ...FormManofactura, [input]: value });
-    }
-
     let { rango, ventas_anuales, costos_anuales } = FormManofactura;
     let [service, setService] = React.useState("");
-
     let pos_mes = TableService.length
     ventas_anuales = sumVentasMensuales();
     costos_anuales = sumCostoProduc();
 
+    function EstadoInputs(value, input) {
+        setFormManofactura({ ...FormManofactura, [input]: value });
+    }
     function agregarFila() {
         setTableService([...TableService, FormManofactura]);
         setFormManofactura({
             rango: ''
         });
     }
-
     function ventasMensuales(cadena) {
         let res = 0;
         if (cadena == "Alto") {
@@ -43,11 +40,9 @@ export default function CostoPantalla3(props) {
         }
         return res.toFixed(2);
     }
-
     function costoProduccionMensual(cadena) {
         return (parseFloat(ventasMensuales(cadena)) * (1 - (parseFloat(mub) / 100))).toFixed(2);
     }
-
     function sumVentasMensuales() {
         let res = 0;
         TableService.map((item) => {
@@ -55,7 +50,6 @@ export default function CostoPantalla3(props) {
         })
         return res.toFixed(2);
     }
-
     function sumCostoProduc() {
         let res = 0;
         TableService.map((item) => {
@@ -63,7 +57,6 @@ export default function CostoPantalla3(props) {
         })
         return res.toFixed(2);
     }
-
     function buttonPress() {
         if (rango == '') {
             Alert.alert("Error", "Debe seleccionar un valor en rango");
@@ -73,7 +66,6 @@ export default function CostoPantalla3(props) {
             Alert.alert("Error", "Ya lleno todas las fechas");
         }
     }
-
     function buttonPressNav() {
         if (true) {
             navigation.navigate("Costos Operativos", { mub, ventas_anuales, costos_anuales, montoFin });
@@ -81,7 +73,6 @@ export default function CostoPantalla3(props) {
             Alert.alert("Error", "Llene con todos los meses");
         }
     }
-
     function addMes(pos) {
         let res = "fechas no disponibles";
         if (pos == 0) {
@@ -182,5 +173,4 @@ export default function CostoPantalla3(props) {
             </ScrollView>
         </NativeBaseProvider>
     );
-
 }

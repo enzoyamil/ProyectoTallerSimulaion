@@ -19,7 +19,6 @@ export default function CostoPantalla2(props) {
     function EstadoInputs(value, input) {
         setFormTablaProducto({ ...FormTablaProducto, [input]: value });
     }
-
     function agregarFila() {
         setTableService([...TableService, FormTablaProducto]);
         setFormTablaProducto({
@@ -30,20 +29,12 @@ export default function CostoPantalla2(props) {
             precio_v: ''
         });
     }
-
-    let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v } = FormTablaProducto;
-    let [service, setService] = React.useState("");
-
-    let mub = MUBTotal();
-
     function totalCompraMensual(item) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_c)).toFixed(2);
     }
-
     function totalVentaMensual(item) {
         return (parseFloat(item.cantidad) * valorfrecuencia(item.frecuencia) * parseFloat(item.precio_v)).toFixed(2);
     }
-
     function MUB(item) {
         let res = 0;
         if (parseInt(totalVentaMensual(item)) != 0) {
@@ -51,7 +42,6 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
-
     function sumatoriaCompraMensuales() {
         let res = 0;
         TableService.map((item) => {
@@ -59,7 +49,6 @@ export default function CostoPantalla2(props) {
         })
         return res;
     }
-
     function sumatoriaVentaMensuales() {
         let res = 0;
         TableService.map((item) => {
@@ -67,7 +56,6 @@ export default function CostoPantalla2(props) {
         })
         return res;
     }
-
     function MUBTotal() {
         let res = 0;
         if (sumatoriaVentaMensuales() != 0) {
@@ -75,7 +63,6 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
-
     function valorfrecuencia(cadena) {
         let res = 0;
         if (cadena == "Diario") {
@@ -97,7 +84,6 @@ export default function CostoPantalla2(props) {
         }
         return res;
     }
-
     function buttonPress() {
         if (producto_o_servicio == '' || cantidad == '' || precio_c == '' || precio_v == '') {
             Alert.alert("Error", "No se permiten campos vacios");
@@ -107,6 +93,10 @@ export default function CostoPantalla2(props) {
             agregarFila();
         }
     }
+
+    let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v } = FormTablaProducto;
+    let [service, setService] = React.useState("");
+    let mub = MUBTotal();
 
     return (
         <NativeBaseProvider style={{ bg: "red" }}>
@@ -184,5 +174,4 @@ export default function CostoPantalla2(props) {
             </ScrollView>
         </NativeBaseProvider>
     )
-
 }

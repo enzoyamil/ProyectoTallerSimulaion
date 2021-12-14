@@ -6,11 +6,6 @@ function VanTir(props) {
     const { navigation, route } = props;
     const {montoFin, frecuencia, plazo, taza, utilidadOp} = route.params
     //parametros Tir
-    console.log(montoFin)
-    console.log(frecuencia)
-    console.log(plazo)
-    console.log(taza)
-    console.log(utilidadOp)
     var IRRval = [];
     let aux = (((parseFloat( utilidadOp)) / 12) * getVal_1(frecuencia));
 
