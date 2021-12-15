@@ -27,12 +27,14 @@ import MargenBruto from "../views/MargenBruto";
 import DatosCredito from "../views/DatosCredito";
 import VanTir from "../views/VanTir";
 import Report from "../views/Report";
+import Home from "../views/Home";
 
 const Stack = createNativeStackNavigator();
 
 function navigation() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="FOCASE" component={Home} />
       <Stack.Screen name="Información Personal" component={pantalla1} />
       <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
       {/* <Stack.Screen name="Descripción del Negocio" component={pantalla3} /> */}
