@@ -68,31 +68,29 @@ function MargenBruto(props) {
                             />
 
                         </FormControl> */}
-                        <Divider />
-
+                        <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>
                                     <Text>DATOS ANUALES</Text>
-
                                 </DataTable.Title>
                             </DataTable.Header>
                             <DataTable.Header>
-                                <DataTable.Title numeric></DataTable.Title>
-                                <DataTable.Title numeric>Ventas</DataTable.Title>
-                                <DataTable.Title numeric>Costos</DataTable.Title>
-                                <DataTable.Title numeric>Margen</DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }} numeric></DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }} numeric>Ventas</DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }} numeric>Costos</DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }} numeric>Margen</DataTable.Title>
                             </DataTable.Header>
 
                             <DataTable.Row>
-                                <DataTable.Cell>Manufactura</DataTable.Cell>
-                                <DataTable.Cell numeric>{ventas_anuales}</DataTable.Cell>
-                                <DataTable.Cell numeric>{costos_anuales}</DataTable.Cell>
-                                <DataTable.Cell numeric>{mub}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 100 }}>Manufactura</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 100 }} numeric>{ventas_anuales}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 100 }} numeric>{costos_anuales}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 100 }} numeric>{mub. toFixed(2)}</DataTable.Cell>
                             </DataTable.Row>
                             <Divider />
                         </DataTable>
-
+                        </ScrollView>
                         {'\n'}
                         {'\n'}
 
