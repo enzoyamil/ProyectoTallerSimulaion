@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AccessibilityPropertiesIOS } from "react-native";
+import { Alert } from "react-native";
 import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
 

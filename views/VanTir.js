@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StyleSheet } from "react-native";
-import { FormControl, Input, Stack,  ScrollView, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
+import { Stack, ScrollView, Box, Center, NativeBaseProvider, Button, Text } from "native-base";
 
 function VanTir(props) {
     const { navigation, route } = props;
@@ -188,6 +187,7 @@ function VanTir(props) {
                         <Text>VAN : {calcularVan()}</Text>
                         <Text>TIR : {tir}%</Text>
                     </Box>
+                    <Button colorScheme="primary" onPress={() => navigation.navigate("Reporte")}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
