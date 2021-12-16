@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
+import { ReporteContext } from "../Components/ReporteContext";
 
 function DatosResumen(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const { montoPresupuesto, totalAporte, totalInv, sumaEfectivo } = route.params;
     const [FormrDesembolso, setFormDesembolso] = useState({
         primerDesembolso: '',
@@ -56,7 +58,16 @@ function DatosResumen(props) {
         }
         return mensaje
     }
-
+    function buttonPress() {
+        setReporte((obj) => ({
+            ...obj, resumen: {
+                total_proyecto:totalProyecto() ,
+                aporte_propio: aportePropio() ,
+                monto_financiar: montoFinanciar()
+            }
+        }));
+        navigation.navigate("Hoja-de-Costos", { montoFin })
+    }
     let montoFin = montoFinanciar();
     let { primerDesembolso, segundoDesembolso } = FormrDesembolso;
 
@@ -114,7 +125,7 @@ function DatosResumen(props) {
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>{validarDesembolso()}</Text>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", { montoFin })}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

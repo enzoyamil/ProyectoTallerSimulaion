@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import {
     Button,
     Stack,
@@ -9,9 +9,10 @@ import {
     NativeBaseProvider
 } from 'native-base';
 import { DataTable } from 'react-native-paper';
-
+import { ReporteContext } from "../Components/ReporteContext";
 function MargenBruto(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const { mub, ventas_anuales, costos_anuales, total, montoFin } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
@@ -37,6 +38,16 @@ function MargenBruto(props) {
         //     console.log(FormPersonal);
         //     navigation.navigate('DatosCredito');
         // }
+        setReporte((obj) => ({
+            ...obj, tabla_utilidad: {
+                ingresos_total:ventas_anuales ,
+                costos_directos:costos_anuales ,
+                margen:mub. toFixed(2),
+                utilidad_bruta: ventas_anuales - costos_anuales,
+                costo_operativos: total * 12,
+                utilidad_operativa:utilidadOp 
+            }
+        }));
         navigation.navigate('DatosCredito', { montoFin, utilidadOp });
     }
 

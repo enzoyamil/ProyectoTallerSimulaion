@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Alert } from 'react-native';
+import { ReporteContext } from "../Components/ReporteContext";
 import {
     FormControl,
     Button,
@@ -16,6 +17,7 @@ import { tamanioMaximo, tamanioMin, sinCaractEsp } from '../helpers/Validation';
 
 function DatosCredito(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const { montoFin, utilidadOp } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
@@ -36,6 +38,13 @@ function DatosCredito(props) {
         //     Alert.alert('succesfull');
         //     navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
         // }
+        setReporte((obj) => ({
+            ...obj, datos_credito: {
+                tipo_cuota: cuota,
+                actividad: actividad ,
+                cuota_aprox:cambioCuota(cuota)
+            }
+        }));
         navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza, utilidadOp });
     }
 

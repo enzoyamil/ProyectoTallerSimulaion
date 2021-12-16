@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Stack, ScrollView, Box, Center, NativeBaseProvider, Button, Text } from "native-base";
-
+import { ReporteContext } from "../Components/ReporteContext";
 function VanTir(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const {montoFin, frecuencia, plazo, taza, utilidadOp} = route.params
     //parametros Tir
     var IRRval = [];
@@ -130,6 +131,16 @@ function VanTir(props) {
         } while (r < 100);
         return (guest*getVal_2(frecuencia)*100);
     }
+
+    function buttonPress(){
+        setReporte((obj) => ({
+            ...obj, van_tir: {
+                van: calcularVan(),
+                tir: tir
+            }
+        }));
+        navigation.navigate("Reporte")
+    }
     let tir = IRRCalc(IRRval).toFixed(2);
     let [service, setService] = React.useState("");
 
@@ -187,7 +198,7 @@ function VanTir(props) {
                         <Text>VAN : {calcularVan()}</Text>
                         <Text>TIR : {tir}%</Text>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Reporte")}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() =>buttonPress() }>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

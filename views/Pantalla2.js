@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Alert } from "react-native";
 import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select } from "native-base"
-
+import { ReporteContext } from "../Components/ReporteContext";
 function Pantalla2(props) {
 
     const { navigation } = props;
+    // const [reporte,setReporte]=useState();
+    const [reporte, setReporte] = useContext(ReporteContext);
+
+    // console.log(Reporte);
     const [FormEmpresa, SetFormEmpresa] = useState({
         razonSocial: '',
         nit: '',
@@ -20,6 +24,14 @@ function Pantalla2(props) {
     function EstadoInputs(value, input) {
         SetFormEmpresa({ ...FormEmpresa, [input]: value });
     }
+
+    function buttonPress() {
+        setReporte((obj) => ({ ...obj, nombre_empresa: FormEmpresa.nombEmp,nit: FormEmpresa.nit }));
+        // console.log(reporte);
+        navigation.navigate("Presupuesto Emprendimiento");
+        
+    }
+
 
     let [service, setService] = React.useState("");
     let [tipoSocial, setTipoSocial] = React.useState("");
@@ -75,7 +87,7 @@ function Pantalla2(props) {
                             <Input variant="rounded" value={direcEmpresa} onChangeText={(value) => EstadoInputs(value, 'direcEmpresa')} />
                         </FormControl>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Presupuesto Emprendimiento")}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Alert } from "react-native";
 import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select } from "native-base";
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from "../helpers/Validation"
+import { ReporteContext } from "../Components/ReporteContext";
 
 function Pantalla1(props) {
     const { navigation } = props;
+    const [reporte,setReporte] = useContext(ReporteContext);
+    console.log(reporte);
     const [FormPersonal, setFormPersonal] = useState({
         name: '',
         apellido: '',
@@ -18,7 +21,6 @@ function Pantalla1(props) {
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
     }
-
     function buttonPress() {
 
         // if (name == '' || apellido == '' || ci == '' || extension == '' || edad == '' || telefono == '' || direccion == '') {
@@ -48,6 +50,8 @@ function Pantalla1(props) {
         //     Alert.alert("Succesfull");
         //     navigation.navigate("Informacón del Emprendimiento");
         // }
+        setReporte((obj)=>({...obj,nombre_propietario:FormPersonal.name}));
+        console.log(reporte,"pantalla1");
         navigation.navigate("Informacón del Emprendimiento");
     }
 

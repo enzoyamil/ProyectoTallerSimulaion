@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { Alert } from "react-native";
 import { Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
+import { ReporteContext } from "../Components/ReporteContext";
 
 function PlanInversion(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
+    console.log(reporte);
     const [TableService, setTableService] = useState([]);
     const {
         montoPresupuesto, montoMano, totalAportMateriaP, totalInvMateriaP, totalAportePromo, totalInvPromo,
@@ -41,6 +44,17 @@ function PlanInversion(props) {
         if (false) {
             Alert.alert("No se puede mandar campos Vacios o con 0");
         } else {
+            setReporte((obj) => ({
+                ...obj, plan_inversion: {
+                    gasto_operativo:totalInvGasOpe ,
+                    materia_prima:totalInvMateriaP ,
+                    gasto_operativo: totalInvGasOpe,
+                    infraestructura: totalInvInfra,
+                    maquinaria: maqInvTotal ,
+                    req_legales: totalReqLegInv
+                }
+            }));
+
             navigation.navigate("Datos Resumen", {
                 montoPresupuesto: montoPresupuesto,
                 montoMano: montoMano,
