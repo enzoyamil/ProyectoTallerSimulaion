@@ -104,28 +104,27 @@ function Infraestructura(props) {
                         <Center><Text fontSize="20" bold> Infraestructura</Text></Center>
                         <FormControl mb="5">
 
-                            <FormControl.Label >Unidad (Precio Unitario)*</FormControl.Label>
+                            <FormControl.Label >Unidad (Precio Unitario Bs.)(*)</FormControl.Label>
                             <Input variant="rounded" value={unidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'unidad')} />
-                            <FormControl.Label >Cantidad*</FormControl.Label>
+                            <FormControl.Label >Cantidad(*)</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
-
 
                             {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
-                            <FormControl.Label >Aporte Propio*</FormControl.Label>
+                            <FormControl.Label >Aporte Propio Bs.(*)</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
-                            <FormControl.Label >Inversión*</FormControl.Label>
+                            <FormControl.Label >Inversión Bs.(*)</FormControl.Label>
                             <Input variant="rounded" value={seInvertira} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
                         </FormControl>
                         <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Center>
-                        <Text>Capital Operativo</Text>
+                        <Center><Text fontSize="15" bold margin="2">Capital Inversión Infraestructura</Text></Center>
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Title>Cantidad</DataTable.Title>
@@ -138,8 +137,8 @@ function Infraestructura(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.aportePropio}</DataTable.Cell>
-                                        <DataTable.Cell>{item.seInvertira}</DataTable.Cell>
+                                        <DataTable.Cell>{item.aportePropio}Bs.</DataTable.Cell>
+                                        <DataTable.Cell>{item.seInvertira}Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -148,8 +147,8 @@ function Infraestructura(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
                             <Text>SUBTOTAL:</Text>
-                            <Text>Aporte propio: {sumAportePropio("aportePropio")}</Text>
-                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}</Text>
+                            <Text>Aporte propio: {sumAportePropio("aportePropio")}Bs.</Text>
+                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>

@@ -104,21 +104,21 @@ function PlanInversion(props) {
                             </DataTable.Header>
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 120 }}>Operativo </DataTable.Cell>
-                                <DataTable.Cell style={{ width: 80 }}>{totalInvGasOpe}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvGasOpe}Bs.</DataTable.Cell>
                                 <Input type="text" width="30%" value={gastOperativo} keyboardType="numeric"
                                     onChangeText={(value) => EstadoInputs(value, 'gastOperativo')}
                                 ></Input>
                             </DataTable.Row>
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 120 }}>Materia Prima</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 80 }}>{totalInvMateriaP}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvMateriaP}Bs.</DataTable.Cell>
                                 <Input type="text" width="30%" value={materiaPrima} keyboardType="numeric"
                                     onChangeText={(value) => EstadoInputs(value, 'materiaPrima')}
                                 ></Input>
                             </DataTable.Row>
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 120 }}>Req. Promo</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 80 }}>{totalInvPromo}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvPromo}Bs.</DataTable.Cell>
                                 <Input type="text" width="30%" value={reqPromocionales} keyboardType="numeric"
                                     onChangeText={(value) => EstadoInputs(value, 'reqPromocionales')}
                                 ></Input>
@@ -128,21 +128,21 @@ function PlanInversion(props) {
                             </DataTable.Header>
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 120 }}>Infraestructura</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 80 }}>{totalInvInfra}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalInvInfra}Bs.</DataTable.Cell>
                                 <Input type="text" width="30%" value={infraestructura} keyboardType="numeric"
                                     onChangeText={(value) => EstadoInputs(value, 'infraestructura')}
                                 ></Input>
                             </DataTable.Row>
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 120 }}>Maquinaria</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 80 }}>{maqInvTotal}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{maqInvTotal}Bs.</DataTable.Cell>
                                 <Input type="text" width="30%" value={maquinaria} keyboardType="numeric"
                                     onChangeText={(value) => EstadoInputs(value, 'maquinaria')}
                                 ></Input>
                             </DataTable.Row>
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 120 }}>Req. Legales</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 80 }}>{totalReqLegInv}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 80 }}>{totalReqLegInv}Bs.</DataTable.Cell>
                                 <Input type="text" width="30%" value={reqLegales} keyboardType="numeric"
                                     onChangeText={(value) => EstadoInputs(value, 'reqLegales')}
                                 ></Input>
@@ -152,8 +152,8 @@ function PlanInversion(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
                             <Text>TOTAL</Text>
-                            <Text>Monto total: {sumaPlanInversion()}</Text>
-                            <Text>Aporte propio efectivo: {sumaInversion()}</Text>
+                            <Text>Monto total: {sumaPlanInversion()}Bs.</Text>
+                            <Text>Aporte propio efectivo: {sumaInversion()}Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>

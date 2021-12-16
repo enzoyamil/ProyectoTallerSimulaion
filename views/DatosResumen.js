@@ -89,18 +89,18 @@ function DatosResumen(props) {
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Cell>Total Proyecto</DataTable.Cell>
-                                <DataTable.Cell>{totalProyecto()} </DataTable.Cell>
+                                <DataTable.Cell>{totalProyecto()}Bs. </DataTable.Cell>
                             </DataTable.Header>
 
 
                             <DataTable.Row>
                                 <DataTable.Cell>Aporte Propio</DataTable.Cell>
-                                <DataTable.Cell>{aportePropio()}</DataTable.Cell>
+                                <DataTable.Cell>{aportePropio()}Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>Aporte Propio %</DataTable.Cell>
-                                <DataTable.Cell>{porcentajeAporte()}</DataTable.Cell>
+                                <DataTable.Cell>{porcentajeAporte()}%</DataTable.Cell>
                             </DataTable.Row>
 
                             <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
@@ -109,13 +109,13 @@ function DatosResumen(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>Monto a Financiar</DataTable.Cell>
-                                <DataTable.Cell>{montoFinanciar()}</DataTable.Cell>
+                                <DataTable.Cell>{montoFinanciar()}Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                         </DataTable>
-                        <FormControl.Label>Primer Desembolso</FormControl.Label>
+                        <FormControl.Label>Primer Desembolso Bs.(*)</FormControl.Label>
                         <Input variant="rounded" keyboardType="numeric" value={primerDesembolso} onChangeText={(value) => EstadoInputs(value, 'primerDesembolso')} />
-                        <FormControl.Label>Segundo Desembolso</FormControl.Label>
+                        <FormControl.Label>Segundo Desembolso Bs.(*)</FormControl.Label>
                         <Input variant="rounded" keyboardType="numeric" value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')} />
                         <Divider />
                     </Box>

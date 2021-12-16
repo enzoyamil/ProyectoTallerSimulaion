@@ -52,7 +52,7 @@ function navigation() {
     <ReporteContext.Provider value={[reporte, setReporte]}>
       <Stack.Navigator>
         <Stack.Screen name="Información Personal" component={pantalla1} />
-        <Stack.Screen name="Informacón del Emprendimiento" component={pantalla2} />
+        <Stack.Screen name="Datos del Emprendimiento" component={pantalla2} />
         {/* <Stack.Screen name="Descripción del Negocio" component={pantalla3} /> */}
         <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos" component={CostoPantalla1} />
         <Stack.Screen options={{ title: "Hoja de costos" }} name="Hoja-de-Costos2" component={CostoPantalla2} />

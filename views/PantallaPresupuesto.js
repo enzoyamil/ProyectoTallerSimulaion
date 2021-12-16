@@ -78,7 +78,7 @@ function PantallaPresupuesto(props) {
                     <Box>
                         <FormControl mb="5">
                             <Center><Text fontSize="20" bold >Efectivo</Text></Center>
-                            <FormControl.Label>Procedencia*</FormControl.Label>
+                            <FormControl.Label>Procedencia(*)</FormControl.Label>
                             <Select placeholder="" variant="rounded" value={origenDinero}
                                 selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'origenDinero')}>
@@ -86,7 +86,7 @@ function PantallaPresupuesto(props) {
                                 <Select.Item label="Banco" value="Banco" />
                                 <Select.Item label="Otro" value="Otro" />
                             </Select>
-                            <FormControl.Label >Cantidad en Efectivo (Bs)*</FormControl.Label>
+                            <FormControl.Label fontSize="20" bold >Cantidad en Efectivo (Bs.)(*)</FormControl.Label>
                             <Input variant="rounded" value={montoDinero} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'montoDinero')}
                             />
@@ -94,7 +94,7 @@ function PantallaPresupuesto(props) {
                         <Center>
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Center>
-                        <Text>Presupuesto</Text>
+                        <Center><Text fontSize="15" bold margin="2">Presupuesto</Text></Center>
 
                         <DataTable>
                             <DataTable.Header>
@@ -105,7 +105,7 @@ function PantallaPresupuesto(props) {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.origenDinero}</DataTable.Cell>
-                                        <DataTable.Cell>{item.montoDinero}</DataTable.Cell>
+                                        <DataTable.Cell>{item.montoDinero}Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -113,7 +113,7 @@ function PantallaPresupuesto(props) {
                     </Box>
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
-                            <Text>SUBTOTAL: {sumatoria("montoDinero")}</Text>
+                            <Text>SUBTOTAL: {sumatoria("montoDinero")}Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validacionSiguiente()}>Siguiente</Button>

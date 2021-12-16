@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Alert } from "react-native";
-import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select } from "native-base"
+import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select,Text } from "native-base"
 import { ReporteContext } from "../Components/ReporteContext";
 function Pantalla2(props) {
 
@@ -52,11 +52,12 @@ function Pantalla2(props) {
                     }}>
                     <Box>
                         <FormControl mb="5">
-                            <FormControl.Label>Razón Social*</FormControl.Label>
+                        <Text>Los campos con (*) son obligatorios</Text>
+                            <FormControl.Label>Razón Social(*)</FormControl.Label>
                             <Input variant="rounded" value={razonSocial} onChangeText={(value) => EstadoInputs(value, 'razonSocial')} />
-                            <FormControl.Label>NIT*</FormControl.Label>
+                            <FormControl.Label>NIT(*)</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={nit} onChangeText={(value) => EstadoInputs(value, 'nit')} />
-                            <FormControl.Label>Tipo de Sociedad*</FormControl.Label>
+                            <FormControl.Label>Tipo de Sociedad(*)</FormControl.Label>
                             <Select placeholder="Sociedad" variant="rounded" value={tipoSociedad} variant="rounded"
                                 selectedValue={tipoSocial} onValueChange={(itemValue) => setTipoSocial(itemValue)} onChangeText={(value) => EstadoInputs(value, 'tipoSocial')}>
                                 <Select.Item label="S.R.L" value="Sociedad de Responsabilidad Limitada" onPress={() => EstadoInputs('S.R.L', 'tipoSociedad')} />
@@ -64,9 +65,9 @@ function Pantalla2(props) {
                             </Select>
                             {/* <FormControl.Label>Representante legal</FormControl.Label>
                             <Input variant="rounded" value={representantelegal} onChangeText={(value) => EstadoInputs(value, 'representantelegal')} /> */}
-                            <FormControl.Label>Nombre de la Empresa*</FormControl.Label>
+                            <FormControl.Label>Nombre de la Empresa(*)</FormControl.Label>
                             <Input variant="rounded" value={nombEmp} onChangeText={(value) => EstadoInputs(value, 'nombEmp')} />
-                            <FormControl.Label>Departamento*</FormControl.Label>
+                            <FormControl.Label>Departamento(*)</FormControl.Label>
                             <Select placeholder="Departamento" variant="rounded" value={departamento} variant="rounded"
                                 selectedValue={service} onValueChange={(itemValue) => setService(itemValue)} onChangeText={(value) => EstadoInputs(value, 'departamento')}>
                                 <Select.Item label="cbba" value="cochabamba" onPress={() => EstadoInputs('cochabamba', 'extension')} />
@@ -79,11 +80,11 @@ function Pantalla2(props) {
                                 <Select.Item label="Tarija" value="Tarija" onPress={() => EstadoInputs('tarija', 'extension')} />
                                 <Select.Item label="Beni" value="Beni" onPress={() => EstadoInputs('beni', 'extension')} />
                             </Select>
-                            <FormControl.Label>Municipio*</FormControl.Label>
+                            <FormControl.Label>Municipio(*)</FormControl.Label>
                             <Input variant="rounded" value={municipio} onChangeText={(value) => EstadoInputs(value, 'municipio')} />
-                            <FormControl.Label>Telefono*</FormControl.Label>
+                            <FormControl.Label>Telefono(*)</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={telefono} onChangeText={(value) => EstadoInputs(value, 'telefono')} />
-                            <FormControl.Label>Dirección de la Empresa*</FormControl.Label>
+                            <FormControl.Label>Dirección de la Empresa(*)</FormControl.Label>
                             <Input variant="rounded" value={direcEmpresa} onChangeText={(value) => EstadoInputs(value, 'direcEmpresa')} />
                         </FormControl>
                     </Box>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Stack, ScrollView, Divider, Box, NativeBaseProvider, Text } from "native-base";
+import { Button, Stack, ScrollView, Divider, Box, NativeBaseProvider, Text ,Center} from "native-base";
 import { DataTable } from 'react-native-paper';
 import { ReporteContext } from "../Components/ReporteContext";
 function PresupuestoResumen(props) {
@@ -68,7 +68,7 @@ return (
                     md: "25%",
                 }}>
                 <Box>
-                    <Text>Aporte Propio</Text>
+                <Center><Text fontSize="22" bold margin="2">Capital Inversión Maquinaria</Text></Center>
                     <DataTable>
                         <DataTable.Header>
                             <DataTable.Title>Aporte Propio K.O</DataTable.Title>
@@ -76,23 +76,23 @@ return (
                         </DataTable.Header>
                         <DataTable.Row>
                             <DataTable.Cell>Efectivo</DataTable.Cell>
-                            <DataTable.Cell>{montoPresupuesto}</DataTable.Cell>
+                            <DataTable.Cell>{montoPresupuesto}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Mano de Obra</DataTable.Cell>
-                            <DataTable.Cell>{montoMano}</DataTable.Cell>
+                            <DataTable.Cell>{montoMano}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Materia Prima</DataTable.Cell>
-                            <DataTable.Cell>{totalAportMateriaP}</DataTable.Cell>
+                            <DataTable.Cell>{totalAportMateriaP}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Req. Promo</DataTable.Cell>
-                            <DataTable.Cell>{totalAportePromo}</DataTable.Cell>
+                            <DataTable.Cell>{totalAportePromo}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Gasto Operativo</DataTable.Cell>
-                            <DataTable.Cell>{totalPropioGasOpe}</DataTable.Cell>
+                            <DataTable.Cell>{totalPropioGasOpe}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Header>
                             <DataTable.Title>Aporte Propio K.I</DataTable.Title>
@@ -100,21 +100,21 @@ return (
                         </DataTable.Header>
                         <DataTable.Row>
                             <DataTable.Cell>Infraestructura</DataTable.Cell>
-                            <DataTable.Cell>{totalPropioInfra}</DataTable.Cell>
+                            <DataTable.Cell>{totalPropioInfra}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Maquinaria</DataTable.Cell>
-                            <DataTable.Cell>{maqPropTotal}</DataTable.Cell>
+                            <DataTable.Cell>{maqPropTotal}Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Req. Legales</DataTable.Cell>
-                            <DataTable.Cell>{totalReqLegPropio}</DataTable.Cell>
+                            <DataTable.Cell>{totalReqLegPropio}Bs.</DataTable.Cell>
                         </DataTable.Row>
                     </DataTable>
                 </Box>
                 <Box rounded="xl" p="5" borderWidth="1">
                     <Stack space={3}>
-                        <Text>TOTAL: {totalAportePropio()}</Text>
+                        <Text>TOTAL: {totalAportePropio()}Bs.</Text>
                     </Stack>
                 </Box>
                 <Button colorScheme="primary" onPress={() => buttonpress()}>Siguiente</Button>
