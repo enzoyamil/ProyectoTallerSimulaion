@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
+import { ReporteContext } from "../components/ReporteContext";
 
 function DatosResumen(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const { montoPresupuesto, totalAporte, totalInv, sumaEfectivo } = route.params;
     const [FormrDesembolso, setFormDesembolso] = useState({
         primerDesembolso: '',
@@ -56,7 +58,16 @@ function DatosResumen(props) {
         }
         return mensaje
     }
-
+    function buttonPress() {
+        setReporte((obj) => ({
+            ...obj, resumen: {
+                total_proyecto: totalProyecto() ,
+                aporte_propio: aportePropio() ,
+                monto_financiar: montoFinanciar()
+            }
+        }));
+        navigation.navigate("Hoja-de-Costos", { montoFin })
+    }
     let montoFin = montoFinanciar();
     let { primerDesembolso, segundoDesembolso } = FormrDesembolso;
 
@@ -78,18 +89,18 @@ function DatosResumen(props) {
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Cell>Total Proyecto</DataTable.Cell>
-                                <DataTable.Cell>{totalProyecto()} </DataTable.Cell>
+                                <DataTable.Cell>{totalProyecto().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs. </DataTable.Cell>
                             </DataTable.Header>
 
 
                             <DataTable.Row>
                                 <DataTable.Cell>Aporte Propio</DataTable.Cell>
-                                <DataTable.Cell>{aportePropio()}</DataTable.Cell>
+                                <DataTable.Cell>{parseFloat(aportePropio()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>Aporte Propio %</DataTable.Cell>
-                                <DataTable.Cell>{porcentajeAporte()}</DataTable.Cell>
+                                <DataTable.Cell>{porcentajeAporte()}%</DataTable.Cell>
                             </DataTable.Row>
 
                             <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
@@ -98,13 +109,13 @@ function DatosResumen(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>Monto a Financiar</DataTable.Cell>
-                                <DataTable.Cell>{montoFinanciar()}</DataTable.Cell>
+                                <DataTable.Cell>{montoFinanciar().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                         </DataTable>
-                        <FormControl.Label>Primer Desembolso</FormControl.Label>
+                        <FormControl.Label>Primer Desembolso Bs.(*)</FormControl.Label>
                         <Input variant="rounded" keyboardType="numeric" value={primerDesembolso} onChangeText={(value) => EstadoInputs(value, 'primerDesembolso')} />
-                        <FormControl.Label>Segundo Desembolso</FormControl.Label>
+                        <FormControl.Label>Segundo Desembolso Bs.(*)</FormControl.Label>
                         <Input variant="rounded" keyboardType="numeric" value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')} />
                         <Divider />
                     </Box>
@@ -114,7 +125,7 @@ function DatosResumen(props) {
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
                         <Text>{validarDesembolso()}</Text>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos", { montoFin })}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Alert } from "react-native";
-import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select } from "native-base";
+import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select,Text } from "native-base";
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from "../helpers/Validation"
+import { ReporteContext } from "../components/ReporteContext";
 
 function Pantalla1(props) {
     const { navigation } = props;
+    const [reporte,setReporte] = useContext(ReporteContext);
+    console.log(reporte);
     const [FormPersonal, setFormPersonal] = useState({
         name: '',
         apellido: '',
@@ -18,7 +21,6 @@ function Pantalla1(props) {
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
     }
-
     function buttonPress() {
 
         // if (name == '' || apellido == '' || ci == '' || extension == '' || edad == '' || telefono == '' || direccion == '') {
@@ -46,9 +48,11 @@ function Pantalla1(props) {
         //     Alert.alert("Dirección muy corta");
         // } else {
         //     Alert.alert("Succesfull");
-        //     navigation.navigate("Informacón del Emprendimiento");
+        //     navigation.navigate("Información del Emprendimiento");
         // }
-        navigation.navigate("Informacón del Emprendimiento");
+        setReporte((obj)=>({...obj,nombre_propietario:FormPersonal.name}));
+        console.log(reporte,"pantalla1");
+        navigation.navigate("Datos del Emprendimiento");
     }
 
     let { name, apellido, ci, extension, edad, telefono, direccion } = FormPersonal;
@@ -69,13 +73,13 @@ function Pantalla1(props) {
                     }}>
                     <Box >
                         <FormControl mb="5" >
-                            <FormControl.Label>Nombres*</FormControl.Label>
+                            <FormControl.Label>Nombres(*)</FormControl.Label>
                             <Input variant="rounded" value={name} onChangeText={(value) => EstadoInputs(value, 'name')} />
-                            <FormControl.Label>Apellidos*</FormControl.Label>
+                            <FormControl.Label>Apellidos(*)</FormControl.Label>
                             <Input variant="rounded" value={apellido} onChangeText={(value) => EstadoInputs(value, 'apellido')} />
-                            <FormControl.Label>CI*</FormControl.Label>
+                            <FormControl.Label>CI(*)</FormControl.Label>
                             <Input variant="rounded" value={ci} onChangeText={(value) => EstadoInputs(value, 'ci')} keyboardType="numeric" />
-                            <FormControl.Label>Extensión*</FormControl.Label>
+                            <FormControl.Label>Extensión(*)</FormControl.Label>
                             <Select placeholder="Extesion" variant="rounded" value={extension}
                                 selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'extension')}>
@@ -89,13 +93,14 @@ function Pantalla1(props) {
                                 <Select.Item label="Tarija" value="Tarija" />
                                 <Select.Item label="Beni" value="Beni" />
                             </Select>
-                            <FormControl.Label>Edad*</FormControl.Label>
+                            <FormControl.Label>Edad(*)</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={edad} onChangeText={(value) => EstadoInputs(value, 'edad')} />
-                            <FormControl.Label>Telefono*</FormControl.Label>
+                            <FormControl.Label>Telefono(*)</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={telefono} onChangeText={(value) => EstadoInputs(value, 'telefono')} />
-                            <FormControl.Label>Dirección*</FormControl.Label>
+                            <FormControl.Label>Dirección(*)</FormControl.Label>
                             <Input variant="rounded" value={direccion} onChangeText={(value) => EstadoInputs(value, 'direccion')} />
                         </FormControl>
+                        <Text>Los campos con (*) son obligatorios</Text>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>

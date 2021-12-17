@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import {
     Button,
     Stack,
@@ -9,9 +9,10 @@ import {
     NativeBaseProvider
 } from 'native-base';
 import { DataTable } from 'react-native-paper';
-
+import { ReporteContext } from "../components/ReporteContext";
 function MargenBruto(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const { mub, ventas_anuales, costos_anuales, total, montoFin } = route.params
     const [FormPersonal, setFormPersonal] = useState({
         impuestos: 0,
@@ -37,6 +38,16 @@ function MargenBruto(props) {
         //     console.log(FormPersonal);
         //     navigation.navigate('DatosCredito');
         // }
+        setReporte((obj) => ({
+            ...obj, tabla_utilidad: {
+                ingresos_total:ventas_anuales ,
+                costos_directos:costos_anuales ,
+                margen:mub. toFixed(2),
+                utilidad_bruta: ventas_anuales - costos_anuales,
+                costo_operativos: total * 12,
+                utilidad_operativa:utilidadOp 
+            }
+        }));
         navigation.navigate('DatosCredito', { montoFin, utilidadOp });
     }
 
@@ -77,16 +88,16 @@ function MargenBruto(props) {
                             </DataTable.Header>
                             <DataTable.Header>
                                 <DataTable.Title style={{ width: 100 }} numeric></DataTable.Title>
-                                <DataTable.Title style={{ width: 100 }} numeric>Ventas</DataTable.Title>
-                                <DataTable.Title style={{ width: 100 }} numeric>Costos</DataTable.Title>
+                                <DataTable.Title style={{ width: 125 }} numeric>Ventas</DataTable.Title>
+                                <DataTable.Title style={{ width: 125 }} numeric>Costos</DataTable.Title>
                                 <DataTable.Title style={{ width: 100 }} numeric>Margen</DataTable.Title>
                             </DataTable.Header>
 
                             <DataTable.Row>
                                 <DataTable.Cell style={{ width: 100 }}>Manufactura</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 100 }} numeric>{ventas_anuales}</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 100 }} numeric>{costos_anuales}</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 100 }} numeric>{mub. toFixed(2)}</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 125 }} numeric>{parseFloat(ventas_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 125 }} numeric>{parseFloat(costos_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 100 }} numeric>{mub.toFixed(2)}%</DataTable.Cell>
                             </DataTable.Row>
                             <Divider />
                         </DataTable>
@@ -103,27 +114,27 @@ function MargenBruto(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>(+)Ingresos Totales</DataTable.Cell>
-                                <DataTable.Cell numeric>{ventas_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{parseFloat(ventas_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(-)Costos Directos</DataTable.Cell>
-                                <DataTable.Cell numeric>{costos_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{parseFloat(costos_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Bruta</DataTable.Cell>
-                                <DataTable.Cell numeric>{ventas_anuales - costos_anuales}</DataTable.Cell>
+                                <DataTable.Cell numeric>{parseFloat(ventas_anuales - costos_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(-)Costo Operativo</DataTable.Cell>
-                                <DataTable.Cell numeric>{total * 12}</DataTable.Cell>
+                                <DataTable.Cell numeric>{parseFloat(total * 12).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
                                 <DataTable.Cell>(=)Utilidad Operativa</DataTable.Cell>
-                                <DataTable.Cell numeric>{utilidadOp}</DataTable.Cell>
+                                <DataTable.Cell numeric>{parseFloat(utilidadOp).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
                         </DataTable>
 

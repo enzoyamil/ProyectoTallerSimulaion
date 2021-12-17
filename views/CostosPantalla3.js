@@ -154,8 +154,8 @@ export default function CostoPantalla3(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell style={{ width: 90 }}>{addMes(pos)}</DataTable.Cell>
                                         <DataTable.Cell style={{ width: 80 }}>{item.rango}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 150 }}>{ventasMensuales(item.rango)}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 205 }}>{costoProduccionMensual(item.rango)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 150 }}>{parseFloat(ventasMensuales(item.rango)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 205 }}>{parseFloat(costoProduccionMensual(item.rango)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -164,8 +164,8 @@ export default function CostoPantalla3(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
                             <Text>Anual</Text>
-                            <Text>Sumatoria ventas mensuales: {sumVentasMensuales()}</Text>
-                            <Text>Sumatoria costo de produccion mensuales: {sumCostoProduc()}</Text>
+                            <Text>Sumatoria ventas mensuales: {parseFloat(sumVentasMensuales()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
+                            <Text>Sumatoria costo de produccion mensuales: {parseFloat(sumCostoProduc()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={buttonPressNav}>Siguiente</Button>

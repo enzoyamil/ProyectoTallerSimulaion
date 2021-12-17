@@ -85,10 +85,10 @@ function PantallaManoEmprendedor(props) {
                     <Box>
                         <Center><Text fontSize="20" bold >Mano de Obra</Text></Center>
                         <FormControl mb="5">
-                            <FormControl.Label >Cantidad</FormControl.Label>
+                            <FormControl.Label >Cantidad(*)</FormControl.Label>
                             <Input variant="rounded" value={cantidad} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
-                            <FormControl.Label >Aporte Propio(Bs)*</FormControl.Label>
+                            <FormControl.Label >Aporte Propio(Bs.)(*)</FormControl.Label>
                             <Input variant="rounded" value={aportePropio} keyboardType="numeric"
                                 onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
 
@@ -114,7 +114,7 @@ function PantallaManoEmprendedor(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.aportePropio}</DataTable.Cell>
+                                        <DataTable.Cell>{parseFloat(item.aportePropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -122,7 +122,7 @@ function PantallaManoEmprendedor(props) {
                     </Box>
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
-                            <Text>SUBTOTAL: {sumatoria("aportePropio")}</Text>
+                            <Text>SUBTOTAL: {sumatoria("aportePropio").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>

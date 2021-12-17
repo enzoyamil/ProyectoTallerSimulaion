@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Alert, StyleSheet } from "react-native";
-import { FormControl, Input, Stack,  ScrollView, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
-
+import React, { useState,useContext } from "react";
+import { Stack, ScrollView, Box, Center, NativeBaseProvider, Button, Text } from "native-base";
+import { ReporteContext } from "../components/ReporteContext";
 function VanTir(props) {
     const { navigation, route } = props;
+    const [reporte, setReporte] = useContext(ReporteContext);
     const {montoFin, frecuencia, plazo, taza, utilidadOp} = route.params
     //parametros Tir
     var IRRval = [];
@@ -131,6 +131,16 @@ function VanTir(props) {
         } while (r < 100);
         return (guest*getVal_2(frecuencia)*100);
     }
+
+    function buttonPress(){
+        setReporte((obj) => ({
+            ...obj, van_tir: {
+                van: calcularVan(),
+                tir: tir
+            }
+        }));
+        navigation.navigate("Reporte")
+    }
     let tir = IRRCalc(IRRval).toFixed(2);
     let [service, setService] = React.useState("");
 
@@ -185,9 +195,10 @@ function VanTir(props) {
                     <FormControl.Label>Año Implementacion Estimada</FormControl.Label>
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} /> */}
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
-                        <Text>VAN : {calcularVan()}</Text>
+                        <Text>VAN : {parseFloat(calcularVan()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text>TIR : {tir}%</Text>
                     </Box>
+                    <Button colorScheme="primary" onPress={() =>buttonPress() }>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>
