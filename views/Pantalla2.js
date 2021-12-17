@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Alert } from "react-native";
 import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select, Text } from "native-base"
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 function Pantalla2(props) {
 
     const { navigation } = props;

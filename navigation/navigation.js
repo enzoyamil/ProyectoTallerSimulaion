@@ -27,7 +27,7 @@ import MargenBruto from "../views/MargenBruto";
 import DatosCredito from "../views/DatosCredito";
 import VanTir from "../views/VanTir";
 import Report from "../views/Report";
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 import {getReporte,iniReporte,setReporteLocal,clearReporte} from "../helpers/ReportLocalFunciones"
 
 const Stack = createNativeStackNavigator();

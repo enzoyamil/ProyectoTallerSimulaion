@@ -9,7 +9,7 @@ import {
     NativeBaseProvider
 } from 'native-base';
 import { DataTable } from 'react-native-paper';
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 function MargenBruto(props) {
     const { navigation, route } = props;
     const [reporte, setReporte] = useContext(ReporteContext);

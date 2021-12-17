@@ -1,6 +1,6 @@
 import React, { useState,useContext } from 'react';
 import { Alert } from 'react-native';
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 import {
     FormControl,
     Button,

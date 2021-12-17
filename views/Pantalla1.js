@@ -2,7 +2,7 @@ import React, { useState,useContext } from "react";
 import { Alert } from "react-native";
 import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select,Text } from "native-base";
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from "../helpers/Validation"
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 
 function Pantalla1(props) {
     const { navigation } = props;

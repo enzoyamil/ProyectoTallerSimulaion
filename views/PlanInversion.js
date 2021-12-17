@@ -2,7 +2,7 @@ import React, { useState, useEffect,useContext } from "react";
 import { Alert } from "react-native";
 import { Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 
 function PlanInversion(props) {
     const { navigation, route } = props;

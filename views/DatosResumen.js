@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 
 function DatosResumen(props) {
     const { navigation, route } = props;

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
 import { getReporte } from "../helpers/ReportLocalFunciones"
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 function Report() {
     // const [listaReporte, setListaReporte] = useState({});
     const [reporte, setReporte] = useContext(ReporteContext);

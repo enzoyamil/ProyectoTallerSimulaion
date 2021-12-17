@@ -1,6 +1,6 @@
 import React, { useState,useContext } from "react";
 import { Stack, ScrollView, Box, Center, NativeBaseProvider, Button, Text } from "native-base";
-import { ReporteContext } from "../components/ReporteContext";
+import { ReporteContext } from "../Components/ReporteContext";
 function VanTir(props) {
     const { navigation, route } = props;
     const [reporte, setReporte] = useContext(ReporteContext);
