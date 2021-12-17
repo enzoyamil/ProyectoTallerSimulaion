@@ -1,6 +1,6 @@
 import React, { useState,useContext } from 'react';
 import { Alert } from 'react-native';
-import { ReporteContext } from "../Components/ReporteContext";
+import { ReporteContext } from "../components/ReporteContext";
 import {
     FormControl,
     Button,
@@ -217,7 +217,7 @@ function DatosCredito(props) {
                         </FormControl>
                         <FormControl mb="5">
                             <FormControl.Label>monto</FormControl.Label>
-                            <Text>{montoFin}</Text>
+                            <Text>{parseFloat(montoFin).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </FormControl>
                         <FormControl mb="5">
                             <FormControl.Label>plazo (meses)</FormControl.Label>
@@ -248,7 +248,7 @@ function DatosCredito(props) {
                             <Text>{cambioValor()}%</Text>
                             <Center>
                                 <Box p="5" borderWidth="1">
-                                    <Text bold>CUOTA APROXIMADA: {cambioCuota(cuota)}</Text>
+                                    <Text bold>CUOTA APROXIMADA: {parseFloat(cambioCuota(cuota)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                                 </Box>
                             </Center>
                         </FormControl>

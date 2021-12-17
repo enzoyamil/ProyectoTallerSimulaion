@@ -140,8 +140,8 @@ export default function CostoPantalla2(props) {
                             <DataTable.Header>
                                 <DataTable.Title style={{ width: 140 }}><Text bold>Producto o Servicio</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 90 }}><Text bold>Frecuencia</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 75 }}><Text bold>Precio C</Text></DataTable.Title>
-                                <DataTable.Title style={{ width: 75 }}><Text bold>Precio V</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 125 }}><Text bold>Precio C</Text></DataTable.Title>
+                                <DataTable.Title style={{ width: 125 }}><Text bold>Precio V</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 155 }}><Text bold>Total compra mensual</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 145 }}><Text bold>Total venta mensual</Text></DataTable.Title>
                                 <DataTable.Title style={{ width: 50 }}><Text bold>MUB</Text></DataTable.Title>
@@ -151,10 +151,10 @@ export default function CostoPantalla2(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell style={{ width: 140 }}>{item.producto_o_servicio}</DataTable.Cell>
                                         <DataTable.Cell style={{ width: 90 }}>{item.frecuencia}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 75 }}>{item.precio_c}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 75 }}>{item.precio_v}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 155 }}>{totalCompraMensual(item)}</DataTable.Cell>
-                                        <DataTable.Cell style={{ width: 145 }}>{totalVentaMensual(item)}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 125 }}>{parseFloat(item.precio_c).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 125 }}>{parseFloat(item.precio_v).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 155 }}>{parseFloat(totalCompraMensual(item)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 145 }}>{parseFloat(totalVentaMensual(item)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                         <DataTable.Cell style={{ width: 50 }}>{MUB(item)}%</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
@@ -164,8 +164,8 @@ export default function CostoPantalla2(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
                             <Text>Totales: </Text>
-                            <Text>Sumatoria total compra mensual: {sumatoriaCompraMensuales()}</Text>
-                            <Text>Sumatoria total venta mensual: {sumatoriaVentaMensuales()}</Text>
+                            <Text>Sumatoria total compra mensual: {sumatoriaCompraMensuales().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
+                            <Text>Sumatoria total venta mensual: {sumatoriaVentaMensuales().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                             <Text>MUB total: {mub.toFixed(2)}%</Text>
                         </Stack>
                     </Box>

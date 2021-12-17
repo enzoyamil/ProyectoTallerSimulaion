@@ -18,7 +18,6 @@ function PantallaPresupuesto(props) {
         setFormPresupuesto(FormPresupuesto);
     }, [FormPresupuesto]);
 
-
     function EstadoInputs(value, input) {
         setFormPresupuesto({ ...FormPresupuesto, [input]: value });
     }
@@ -105,7 +104,7 @@ function PantallaPresupuesto(props) {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.origenDinero}</DataTable.Cell>
-                                        <DataTable.Cell>{item.montoDinero}Bs.</DataTable.Cell>
+                                        <DataTable.Cell>{parseFloat(item.montoDinero).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -113,7 +112,7 @@ function PantallaPresupuesto(props) {
                     </Box>
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
-                            <Text>SUBTOTAL: {sumatoria("montoDinero")}Bs.</Text>
+                            <Text>SUBTOTAL: {sumatoria("montoDinero").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validacionSiguiente()}>Siguiente</Button>

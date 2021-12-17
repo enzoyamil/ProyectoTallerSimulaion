@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Alert } from "react-native";
-import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select,Text } from "native-base"
-import { ReporteContext } from "../Components/ReporteContext";
+import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select, Text } from "native-base"
+import { ReporteContext } from "../components/ReporteContext";
 function Pantalla2(props) {
 
     const { navigation } = props;
@@ -26,10 +26,10 @@ function Pantalla2(props) {
     }
 
     function buttonPress() {
-        setReporte((obj) => ({ ...obj, nombre_empresa: FormEmpresa.nombEmp,nit: FormEmpresa.nit }));
+        setReporte((obj) => ({ ...obj, nombre_empresa: FormEmpresa.nombEmp, nit: FormEmpresa.nit }));
         // console.log(reporte);
         navigation.navigate("Presupuesto Emprendimiento");
-        
+
     }
 
 
@@ -52,7 +52,6 @@ function Pantalla2(props) {
                     }}>
                     <Box>
                         <FormControl mb="5">
-                        <Text>Los campos con (*) son obligatorios</Text>
                             <FormControl.Label>Razón Social(*)</FormControl.Label>
                             <Input variant="rounded" value={razonSocial} onChangeText={(value) => EstadoInputs(value, 'razonSocial')} />
                             <FormControl.Label>NIT(*)</FormControl.Label>
@@ -87,6 +86,7 @@ function Pantalla2(props) {
                             <FormControl.Label>Dirección de la Empresa(*)</FormControl.Label>
                             <Input variant="rounded" value={direcEmpresa} onChangeText={(value) => EstadoInputs(value, 'direcEmpresa')} />
                         </FormControl>
+                        <Text>Los campos con (*) son obligatorios</Text>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>

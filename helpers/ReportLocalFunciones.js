@@ -1,4 +1,4 @@
-import Reporte from "../Components/Reporte";
+import Reporte from "../components/Reporte";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export async function getReporte(nombre) {

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
-import { ReporteContext } from "../Components/ReporteContext";
+import { ReporteContext } from "../components/ReporteContext";
 
 function DatosResumen(props) {
     const { navigation, route } = props;
@@ -61,7 +61,7 @@ function DatosResumen(props) {
     function buttonPress() {
         setReporte((obj) => ({
             ...obj, resumen: {
-                total_proyecto:totalProyecto() ,
+                total_proyecto: totalProyecto() ,
                 aporte_propio: aportePropio() ,
                 monto_financiar: montoFinanciar()
             }
@@ -89,13 +89,13 @@ function DatosResumen(props) {
                         <DataTable>
                             <DataTable.Header>
                                 <DataTable.Cell>Total Proyecto</DataTable.Cell>
-                                <DataTable.Cell>{totalProyecto()}Bs. </DataTable.Cell>
+                                <DataTable.Cell>{totalProyecto().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs. </DataTable.Cell>
                             </DataTable.Header>
 
 
                             <DataTable.Row>
                                 <DataTable.Cell>Aporte Propio</DataTable.Cell>
-                                <DataTable.Cell>{aportePropio()}Bs.</DataTable.Cell>
+                                <DataTable.Cell>{parseFloat(aportePropio()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                             <DataTable.Row>
@@ -109,7 +109,7 @@ function DatosResumen(props) {
 
                             <DataTable.Row>
                                 <DataTable.Cell>Monto a Financiar</DataTable.Cell>
-                                <DataTable.Cell>{montoFinanciar()}Bs.</DataTable.Cell>
+                                <DataTable.Cell>{montoFinanciar().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}Bs.</DataTable.Cell>
                             </DataTable.Row>
 
                         </DataTable>

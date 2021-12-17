@@ -267,7 +267,7 @@ function CostosOperativos(props) {
               />
             </FormControl>
             <Divider />
-            <FormControl.Label>Total: {total}</FormControl.Label>
+            <FormControl.Label>Total: {parseFloat(total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</FormControl.Label>
           </Box>
           <Button colorScheme="primary" onPress={buttonPress}>
             Siguiente

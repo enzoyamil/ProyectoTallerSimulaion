@@ -103,54 +103,53 @@ function Maquinaria(props) {
                         base: "100%",
                         md: "25%",
                     }}>
-                    <Center><Text fontSize="22" bold > Capital Inversión</Text></Center>
                     <Center><Text fontSize="20" bold >Maquinaria</Text></Center>
-                        <FormControl mb="5">
-                            <FormControl.Label >Unidad (Precio Unitario)(*)</FormControl.Label>
-                            <Input variant="rounded" value={unidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value, 'unidad')} />
+                    <FormControl mb="5">
+                        <FormControl.Label >Unidad (Precio Unitario)(*)</FormControl.Label>
+                        <Input variant="rounded" value={unidad} keyboardType="numeric"
+                            onChangeText={(value) => EstadoInputs(value, 'unidad')} />
 
-                            <FormControl.Label >Cantidad(*)</FormControl.Label>
-                            <Input variant="rounded" value={cantidad} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
+                        <FormControl.Label >Cantidad(*)</FormControl.Label>
+                        <Input variant="rounded" value={cantidad} keyboardType="numeric"
+                            onChangeText={(value) => EstadoInputs(value, 'cantidad')} />
 
-                            {/* <FormControl.Label >Detalle</FormControl.Label>
+                        {/* <FormControl.Label >Detalle</FormControl.Label>
                             <Input variant="rounded" value={detalle}
                                 onChangeText={(value) => EstadoInputs(value, 'detalle')} /> */}
-                            <FormControl.Label >Aporte Propio Bs.(*)</FormControl.Label>
-                            <Input variant="rounded" value={aportePropio} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
-                            <FormControl.Label >Inversión Bs.(*)</FormControl.Label>
-                            <Input variant="rounded" value={seInvertira} keyboardType="numeric"
-                                onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
-                        </FormControl>
-                        <Center>
-                            <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
-                        </Center>
-                        <Center><Text fontSize="15" bold margin="2">Capital Inversión Maquinaria</Text></Center>
-                        <DataTable>
-                            <DataTable.Header>
-                                <DataTable.Title>Cantidad</DataTable.Title>
-                                <DataTable.Title>Unidad </DataTable.Title>
-                                <DataTable.Title>Aporte Propio</DataTable.Title>
-                                <DataTable.Title>Inversión</DataTable.Title>
-                            </DataTable.Header>
-                            {
-                                TableService.map((item, pos) => (
-                                    <DataTable.Row key={pos}>
-                                        <DataTable.Cell>{item.cantidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.aportePropio}Bs.</DataTable.Cell>
-                                        <DataTable.Cell>{item.seInvertira}Bs.</DataTable.Cell>
-                                    </DataTable.Row>
-                                ))
-                            }
-                        </DataTable>
+                        <FormControl.Label >Aporte Propio Bs.(*)</FormControl.Label>
+                        <Input variant="rounded" value={aportePropio} keyboardType="numeric"
+                            onChangeText={(value) => EstadoInputs(value, 'aportePropio')} />
+                        <FormControl.Label >Inversión Bs.(*)</FormControl.Label>
+                        <Input variant="rounded" value={seInvertira} keyboardType="numeric"
+                            onChangeText={(value) => EstadoInputs(value, 'seInvertira')} />
+                    </FormControl>
+                    <Center>
+                        <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
+                    </Center>
+                    <Center><Text fontSize="15" bold margin="2">Capital Inversión Maquinaria</Text></Center>
+                    <DataTable>
+                        <DataTable.Header>
+                            <DataTable.Title>Cantidad</DataTable.Title>
+                            <DataTable.Title>Unidad </DataTable.Title>
+                            <DataTable.Title>Aporte Propio</DataTable.Title>
+                            <DataTable.Title>Inversión</DataTable.Title>
+                        </DataTable.Header>
+                        {
+                            TableService.map((item, pos) => (
+                                <DataTable.Row key={pos}>
+                                    <DataTable.Cell>{item.cantidad}</DataTable.Cell>
+                                    <DataTable.Cell>{item.unidad}</DataTable.Cell>
+                                    <DataTable.Cell>{parseFloat(item.aportePropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                    <DataTable.Cell>{parseFloat(item.seInvertira).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                </DataTable.Row>
+                            ))
+                        }
+                    </DataTable>
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
                             <Text>SUBTOTAL:</Text>
-                            <Text>Aporte propio: {sumAportePropio("aportePropio")}Bs.</Text>
-                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}Bs.</Text>
+                            <Text>Aporte propio: {sumAportePropio("aportePropio").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
+                            <Text>Inversion propia: {sumInversionPropio("seInvertira").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>

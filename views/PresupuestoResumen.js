@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Stack, ScrollView, Divider, Box, NativeBaseProvider, Text ,Center} from "native-base";
 import { DataTable } from 'react-native-paper';
-import { ReporteContext } from "../Components/ReporteContext";
+import { ReporteContext } from "../components/ReporteContext";
 function PresupuestoResumen(props) {
     const { navigation, route } = props;
     const [reporte, setReporte] = useContext(ReporteContext);
@@ -76,23 +76,23 @@ return (
                         </DataTable.Header>
                         <DataTable.Row>
                             <DataTable.Cell>Efectivo</DataTable.Cell>
-                            <DataTable.Cell>{montoPresupuesto}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(montoPresupuesto).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Mano de Obra</DataTable.Cell>
-                            <DataTable.Cell>{montoMano}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(montoMano).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Materia Prima</DataTable.Cell>
-                            <DataTable.Cell>{totalAportMateriaP}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(totalAportMateriaP).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Req. Promo</DataTable.Cell>
-                            <DataTable.Cell>{totalAportePromo}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(totalAportePromo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Gasto Operativo</DataTable.Cell>
-                            <DataTable.Cell>{totalPropioGasOpe}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(totalPropioGasOpe).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Header>
                             <DataTable.Title>Aporte Propio K.I</DataTable.Title>
@@ -100,21 +100,21 @@ return (
                         </DataTable.Header>
                         <DataTable.Row>
                             <DataTable.Cell>Infraestructura</DataTable.Cell>
-                            <DataTable.Cell>{totalPropioInfra}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(totalPropioInfra).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Maquinaria</DataTable.Cell>
-                            <DataTable.Cell>{maqPropTotal}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(maqPropTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                         <DataTable.Row>
                             <DataTable.Cell>Req. Legales</DataTable.Cell>
-                            <DataTable.Cell>{totalReqLegPropio}Bs.</DataTable.Cell>
+                            <DataTable.Cell>{parseFloat(totalReqLegPropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                         </DataTable.Row>
                     </DataTable>
                 </Box>
                 <Box rounded="xl" p="5" borderWidth="1">
                     <Stack space={3}>
-                        <Text>TOTAL: {totalAportePropio()}Bs.</Text>
+                        <Text>TOTAL: {totalAportePropio().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}Bs.</Text>
                     </Stack>
                 </Box>
                 <Button colorScheme="primary" onPress={() => buttonpress()}>Siguiente</Button>

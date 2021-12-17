@@ -1,6 +1,6 @@
 import React, { useState,useContext } from "react";
 import { Stack, ScrollView, Box, Center, NativeBaseProvider, Button, Text } from "native-base";
-import { ReporteContext } from "../Components/ReporteContext";
+import { ReporteContext } from "../components/ReporteContext";
 function VanTir(props) {
     const { navigation, route } = props;
     const [reporte, setReporte] = useContext(ReporteContext);
@@ -195,7 +195,7 @@ function VanTir(props) {
                     <FormControl.Label>Año Implementacion Estimada</FormControl.Label>
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} /> */}
                     <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
-                        <Text>VAN : {calcularVan()}</Text>
+                        <Text>VAN : {parseFloat(calcularVan()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text>TIR : {tir}%</Text>
                     </Box>
                     <Button colorScheme="primary" onPress={() =>buttonPress() }>Siguiente</Button>

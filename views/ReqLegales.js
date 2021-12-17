@@ -119,7 +119,6 @@ function ReqLegales(props) {
                         base: "100%",
                         md: "25%",
                     }}>
-                    <Center><Text fontSize="20" bold>Capital Inversión</Text></Center>
                     <Center><Text fontSize="20" bold>Requerimientos Legales</Text></Center>
                     <Box>
                         <FormControl mb="5">
@@ -156,8 +155,8 @@ function ReqLegales(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.aportePropio}Bs.</DataTable.Cell>
-                                        <DataTable.Cell>{item.seInvertira}Bs.</DataTable.Cell>
+                                        <DataTable.Cell>{parseFloat(item.aportePropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell>{parseFloat(item.seInvertira).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -166,11 +165,11 @@ function ReqLegales(props) {
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
                             <Text>SUBTOTAL:</Text>
-                            <Text>Aporte propio: {sumAportePropio("aportePropio")}Bs.</Text>
-                            <Text>Inversion propia: {sumInversionPropio("seInvertira")}Bs.</Text>
+                            <Text>Aporte propio: {sumAportePropio("aportePropio").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
+                            <Text>Inversion propia: {sumInversionPropio("seInvertira").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                             <Text>TOTAL:</Text>
-                            <Text>Total aporte propio: {sumaCapitalInvProp}Bs.</Text>
-                            <Text>Total inversion: {sumaCapitalInvInv}Bs.</Text>
+                            <Text>Total aporte propio: {parseFloat(sumaCapitalInvProp).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
+                            <Text>Total inversion: {parseFloat(sumaCapitalInvInv).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>

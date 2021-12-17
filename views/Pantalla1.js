@@ -2,7 +2,7 @@ import React, { useState,useContext } from "react";
 import { Alert } from "react-native";
 import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select,Text } from "native-base";
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from "../helpers/Validation"
-import { ReporteContext } from "../Components/ReporteContext";
+import { ReporteContext } from "../components/ReporteContext";
 
 function Pantalla1(props) {
     const { navigation } = props;
@@ -73,7 +73,6 @@ function Pantalla1(props) {
                     }}>
                     <Box >
                         <FormControl mb="5" >
-                            <Text>Los campos con (*) son obligatorios</Text>
                             <FormControl.Label>Nombres(*)</FormControl.Label>
                             <Input variant="rounded" value={name} onChangeText={(value) => EstadoInputs(value, 'name')} />
                             <FormControl.Label>Apellidos(*)</FormControl.Label>
@@ -101,6 +100,7 @@ function Pantalla1(props) {
                             <FormControl.Label>Dirección(*)</FormControl.Label>
                             <Input variant="rounded" value={direccion} onChangeText={(value) => EstadoInputs(value, 'direccion')} />
                         </FormControl>
+                        <Text>Los campos con (*) son obligatorios</Text>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>
                 </Stack>

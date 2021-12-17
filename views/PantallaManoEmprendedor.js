@@ -114,7 +114,7 @@ function PantallaManoEmprendedor(props) {
                                     <DataTable.Row key={pos}>
                                         <DataTable.Cell>{item.cantidad}</DataTable.Cell>
                                         <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.aportePropio}Bs.</DataTable.Cell>
+                                        <DataTable.Cell>{parseFloat(item.aportePropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
@@ -122,7 +122,7 @@ function PantallaManoEmprendedor(props) {
                     </Box>
                     <Box rounded="xl" p="5" borderWidth="1">
                         <Stack space={3}>
-                            <Text>SUBTOTAL: {sumatoria("aportePropio")}Bs.</Text>
+                            <Text>SUBTOTAL: {sumatoria("aportePropio").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
                     </Box>
                     <Button colorScheme="primary" onPress={() => validarSiguiente()}>Siguiente</Button>
