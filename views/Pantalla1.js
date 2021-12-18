@@ -23,7 +23,7 @@ function Pantalla1(props) {
     }
     function buttonPress() {
         if (name == '' || apellido == '' || ci == '' || extension == '' || edad == '' || telefono == '' || direccion == '') {
-            Alert.alert("Error Campo Vacio");
+            Alert.alert("Error","Error Campo Vacío");
         } else if (tamanioMaximo(name, 15)) {
             Alert.alert("Cadena nombre muy grande");
         } else if (tamanioMin(name, 2)) {
@@ -34,9 +34,9 @@ function Pantalla1(props) {
             Alert.alert("Cadena apellido muy pequeña");
         } else if (edad < 0 || edad < 18) {
             Alert.alert("Edad no aceptada");
-        } else if (telefono.length < 8) {
+        } else if (telefono.length < 7) {
             Alert.alert("Teléfono no aceptado");
-        } else if (ci.length < 10) {
+        } else if (ci.length < 7) {
             Alert.alert("CI no aceptado");
         } else if (tamanioMaximo(direccion, 50)) {
             Alert.alert("Edad no aceptada");
