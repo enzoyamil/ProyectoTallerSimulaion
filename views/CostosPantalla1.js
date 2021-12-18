@@ -93,7 +93,15 @@ export default function CostoPantalla2(props) {
             agregarFila();
         }
     }
-
+    function validarSiguiente(){
+        let tamanio = TableService.length;
+        if(tamanio > 0){
+            navigation.navigate("Hoja-de-Costos2", { mub, montoFin })
+        }
+        else{
+            Alert.alert("Error","Tabla Vacía");
+        }
+    }
     let { producto_o_servicio, cantidad, frecuencia, precio_c, precio_v } = FormTablaProducto;
     let [service, setService] = React.useState("");
     let mub = MUBTotal();
@@ -161,7 +169,7 @@ export default function CostoPantalla2(props) {
                             }
                         </DataTable>
                     </ScrollView>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                         <Stack space={3}>
                             <Text>Totales: </Text>
                             <Text>Sumatoria total compra mensual: {sumatoriaCompraMensuales().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
@@ -169,7 +177,7 @@ export default function CostoPantalla2(props) {
                             <Text>MUB total: {mub.toFixed(2)}%</Text>
                         </Stack>
                     </Box>
-                    <Button colorScheme="primary" onPress={() => navigation.navigate("Hoja-de-Costos2", { mub, montoFin })}>Siguiente</Button>
+                    <Button colorScheme="primary" onPress={() => validarSiguiente() }>Siguiente</Button>
                 </Stack>
             </ScrollView>
         </NativeBaseProvider>

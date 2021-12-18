@@ -40,7 +40,7 @@ function Infraestructura(props) {
     }
     function agregarFila() {
         if (validarAgregar()) {
-            Alert.alert("Error Campos Vacios");
+            
         } else {
             setTableService([...TableService, FormInfraestructura]);
             setFormInfraestructura(
@@ -57,6 +57,10 @@ function Infraestructura(props) {
     function validarAgregar() {
         let isValid = true;
         if (cantidad == '' || unidad == '' || aportePropio == '' || seInvertira == '') {
+            Alert.alert("Error","Error Campos Vacíos");
+            return isValid;
+        }else if((parseInt(cantidad)*parseInt(unidad))!=(parseInt(aportePropio) + parseInt(seInvertira))){
+            Alert.alert("Error","La suma de aporte propio y inversión no coincide con la cantidad por el precio unitario");
             return isValid;
         } else {
             return isValid = false;
@@ -78,7 +82,7 @@ function Infraestructura(props) {
                 totalInvInfra: totalInvInfra
             })
         } else {
-            Alert.alert("Error Tabla Vacia");
+            Alert.alert("Error","Error Tabla Vacía");
         }
     }
 
@@ -124,26 +128,28 @@ function Infraestructura(props) {
                             <Button colorScheme="primary" onPress={agregarFila}>Añadir</Button>
                         </Center>
                         <Center><Text fontSize="15" bold margin="2">Capital Inversión Infraestructura</Text></Center>
+                        <ScrollView horizontal>
                         <DataTable>
                             <DataTable.Header>
-                                <DataTable.Title>Cantidad</DataTable.Title>
-                                <DataTable.Title>Unidad </DataTable.Title>
-                                <DataTable.Title>Aporte Propio</DataTable.Title>
-                                <DataTable.Title>Inversión</DataTable.Title>
+                                <DataTable.Title style={{ width: 80 }}>Cantidad</DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }}>Precio Unitario</DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }}>Aporte Propio</DataTable.Title>
+                                <DataTable.Title style={{ width: 100 }}>Inversión</DataTable.Title>
                             </DataTable.Header>
                             {
                                 TableService.map((item, pos) => (
                                     <DataTable.Row key={pos}>
-                                        <DataTable.Cell>{item.cantidad}</DataTable.Cell>
-                                        <DataTable.Cell>{item.unidad}</DataTable.Cell>
-                                        <DataTable.Cell>{parseFloat(item.aportePropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
-                                        <DataTable.Cell>{parseFloat(item.seInvertira).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 80 }}>{item.cantidad}</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 100 }}>{parseFloat(item.unidad).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 100 }}>{parseFloat(item.aportePropio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                        <DataTable.Cell style={{ width: 100 }}>{parseFloat(item.seInvertira).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
                                     </DataTable.Row>
                                 ))
                             }
                         </DataTable>
+                        </ScrollView>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                         <Stack space={3}>
                             <Text>SUBTOTAL:</Text>
                             <Text>Aporte propio: {sumAportePropio("aportePropio") .toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>

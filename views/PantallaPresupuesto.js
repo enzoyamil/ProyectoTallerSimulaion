@@ -23,7 +23,7 @@ function PantallaPresupuesto(props) {
     }
     function agregarFila() {
         if (validacionAgregar()) {
-            Alert.alert("No se puede agregar campos vacios");
+            Alert.alert("Error","No se puede agregar campos vacíos");
         } else {
             setTableService([...TableService, FormPresupuesto]);
             setFormPresupuesto(
@@ -110,7 +110,7 @@ function PantallaPresupuesto(props) {
                             }
                         </DataTable>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                         <Stack space={3}>
                             <Text>SUBTOTAL: {sumatoria("montoDinero").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>

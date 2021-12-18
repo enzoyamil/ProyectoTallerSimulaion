@@ -73,7 +73,7 @@ function navigation() {
         <Stack.Screen name="Requerimiento Legal" component={reqLegales} />
         <Stack.Screen name="Presupuesto Resumen" component={presupuestoResumen} />
         <Stack.Screen name="Plan Inversión" component={planInversion} />
-        <Stack.Screen options={{ title: "Analisis Financiero" }} name="MargenBruto" component={MargenBruto} />
+        <Stack.Screen options={{ title: "Ánalisis Financiero" }} name="MargenBruto" component={MargenBruto} />
         <Stack.Screen options={{ title: "Datos del Credito" }} name="DatosCredito" component={DatosCredito} />
         <Stack.Screen name="Datos Resumen" component={datosResumen} />
         <Stack.Screen name="Resultados" component={VanTir} />

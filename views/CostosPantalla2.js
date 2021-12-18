@@ -17,7 +17,7 @@ export default function CostoPantalla1(props) {
     }
     function buttonPress() {
         if (bajo == '' || medio == '' || alto == '') {
-            Alert.alert("Error", "No se permiten campos vacios");
+            Alert.alert("Error", "No se permiten campos vacíos");
         } else if (parseInt(bajo) > parseInt(medio)) {
             Alert.alert("Error", "El valor de bajo no puede ser mayor al valor de medio");
         } else if (parseInt(medio) > parseInt(alto)) {

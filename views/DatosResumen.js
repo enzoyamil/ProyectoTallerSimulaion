@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { FormControl, Button, Input, Stack, ScrollView, Divider, Box, Center, NativeBaseProvider, Text } from "native-base";
 import { DataTable } from 'react-native-paper';
 import { ReporteContext } from "../Components/ReporteContext";
+import { Alert } from "react-native";
 
 function DatosResumen(props) {
     const { navigation, route } = props;
@@ -59,14 +60,18 @@ function DatosResumen(props) {
         return mensaje
     }
     function buttonPress() {
-        setReporte((obj) => ({
-            ...obj, resumen: {
-                total_proyecto: totalProyecto() ,
-                aporte_propio: aportePropio() ,
-                monto_financiar: montoFinanciar()
-            }
-        }));
-        navigation.navigate("Hoja-de-Costos", { montoFin })
+        if(montoFinanciar()==(parseInt(primerDesembolso)+parseInt(segundoDesembolso))){
+            setReporte((obj) => ({
+                ...obj, resumen: {
+                    total_proyecto: totalProyecto() ,
+                    aporte_propio: aportePropio() ,
+                    monto_financiar: montoFinanciar()
+                }
+            }));
+            navigation.navigate("Hoja-de-Costos", { montoFin })
+
+        }else{ Alert.alert("Error","Desembolsos Incorrectos");}
+        
     }
     let montoFin = montoFinanciar();
     let { primerDesembolso, segundoDesembolso } = FormrDesembolso;
@@ -103,7 +108,7 @@ function DatosResumen(props) {
                                 <DataTable.Cell>{porcentajeAporte()}%</DataTable.Cell>
                             </DataTable.Row>
 
-                            <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
+                            <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                                 <Text>APORTE PROPIO PARA GARANTIA HIPOTECARIA DEBE SER 10% Y PARA OTRA GARANTIA 20%</Text>
                             </Box>
 
@@ -119,10 +124,10 @@ function DatosResumen(props) {
                         <Input variant="rounded" keyboardType="numeric" value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')} />
                         <Divider />
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text>{validarAporte()}</Text>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text>{validarDesembolso()}</Text>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>

@@ -67,10 +67,10 @@ export default function CostoPantalla3(props) {
         }
     }
     function buttonPressNav() {
-        if (true) {
+        if (TableService.length==12) {
             navigation.navigate("Costos Operativos", { mub, ventas_anuales, costos_anuales, montoFin });
         } else {
-            Alert.alert("Error", "Llene con todos los meses");
+            Alert.alert("Error", "Complete todos los meses");
         }
     }
     function addMes(pos) {

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { FormControl, Button, Input, Stack, TextArea, ScrollView, Divider, Box, Center, NativeBaseProvider, Select, Text } from "native-base";
 import { getReporte } from "../helpers/ReportLocalFunciones"
 import { ReporteContext } from "../Components/ReporteContext";
+import { yellow100 } from "react-native-paper/lib/typescript/styles/colors";
 function Report() {
     // const [listaReporte, setListaReporte] = useState({});
     const [reporte, setReporte] = useContext(ReporteContext);
@@ -53,13 +54,13 @@ function Report() {
                     <Text fontSize="12" bold>Infraestructura: {parseFloat(plan_inversion.req_promo).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                     <Text fontSize="12" bold>Maquinaria: {parseFloat(plan_inversion.infraestructura).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                     <Text fontSize="12" bold>Req. Legales: {parseFloat(plan_inversion.maquinaria).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text> */}
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text fontSize="16" bold>Resumen</Text>
                         <Text fontSize="12" bold>Total Proyecto: {parseFloat(resumen.total_proyecto).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text fontSize="12" bold>Aporte Propio: {parseFloat(resumen.aporte_propio).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text fontSize="12" bold>Monto a Financiar: {parseFloat(resumen.monto_financiar).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text fontSize="16" bold>Tabla de Utilidad</Text>
                         <Text fontSize="12" bold>Margen: {parseFloat(tabla_utilidad.margen)}%</Text>
                         <Text fontSize="12" bold>(+)Ingresos Totales: {parseFloat(tabla_utilidad.ingresos_total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
@@ -68,13 +69,13 @@ function Report() {
                         <Text fontSize="12" bold>(-)Costos Operativo: {parseFloat(tabla_utilidad.costo_operativos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text fontSize="12" bold>(=)Utilidad Operativa: {parseFloat(tabla_utilidad.utilidad_operativa).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text fontSize="16" bold>Datos Credito</Text>
                         <Text fontSize="12" bold>Tipo de Cuota: {datos_credito.tipo_cuota}</Text>
                         <Text fontSize="12" bold>Actividad: {datos_credito.actividad}</Text>
                         <Text fontSize="12" bold>Cuota Aprox: {parseFloat(datos_credito.cuota_aprox).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text fontSize="16" bold>Flujo</Text>
                         <Text fontSize="12" bold>VAN: {parseFloat(van_tir.van).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text fontSize="12" bold>TIR: {van_tir.tir}%</Text>

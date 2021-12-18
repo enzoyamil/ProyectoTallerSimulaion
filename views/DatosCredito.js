@@ -20,33 +20,16 @@ function DatosCredito(props) {
     const [reporte, setReporte] = useContext(ReporteContext);
     const { montoFin, utilidadOp } = route.params
     const [FormPersonal, setFormPersonal] = useState({
-        impuestos: 0,
+        frecuencia:'',
+        plazo:'',
+        cuota:'',
+        actividad:'',
     });
 
     function EstadoInputs(value, input) {
         setFormPersonal({ ...FormPersonal, [input]: value });
     }
-    function buttonPress() {
-        // if (frecuencia == '' || poliza == '') {
-        //     console.log(impuestos);
-        //     Alert.alert('error campo vacio');
-        // } else if (tamanioMaximo(impuestos, 15)) {
-        //     Alert.alert('cadena nombre muy grande');
-        // } else if (tamanioMin(impuestos, 2)) {
-        //     Alert.alert('cadena nombre muy pequeña');
-        // } else {
-        //     Alert.alert('succesfull');
-        //     navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza });
-        // }
-        setReporte((obj) => ({
-            ...obj, datos_credito: {
-                tipo_cuota: cuota,
-                actividad: actividad ,
-                cuota_aprox:cambioCuota(cuota)
-            }
-        }));
-        navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza, utilidadOp });
-    }
+    
 
     let {
         frecuencia,
@@ -178,6 +161,20 @@ function DatosCredito(props) {
         }
         return fee;
     };
+    function buttonPress() {
+        if (frecuencia==''|| plazo==''|| cuota==''|| actividad=='') {
+            Alert.alert("Error",'Error campo vacío');
+        } else {
+            setReporte((obj) => ({
+                ...obj, datos_credito: {
+                    tipo_cuota: cuota,
+                    actividad: actividad ,
+                    cuota_aprox:cambioCuota(cuota)
+                }
+            }));
+            navigation.navigate('Resultados', { montoFin, frecuencia, plazo, taza, utilidadOp });
+        }
+    }
 
     let [service, setService] = React.useState(0);
 

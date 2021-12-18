@@ -194,7 +194,7 @@ function VanTir(props) {
                     </Select>
                     <FormControl.Label>Año Implementacion Estimada</FormControl.Label>
                     <Input variant="rounded" keyboardType="numeric" borderColor="gray.400" value={anioDesembolso} onChangeText={(value) => EstadoInputs(value, 'anioDesembolso')} /> */}
-                    <Box rounded="xl" p="5" borderWidth="1" bg="yellow.250">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
                         <Text>VAN : {parseFloat(calcularVan()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         <Text>TIR : {tir}%</Text>
                     </Box>

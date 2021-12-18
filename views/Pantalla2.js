@@ -26,9 +26,15 @@ function Pantalla2(props) {
     }
 
     function buttonPress() {
-        setReporte((obj) => ({ ...obj, nombre_empresa: FormEmpresa.nombEmp, nit: FormEmpresa.nit }));
-        // console.log(reporte);
-        navigation.navigate("Presupuesto Emprendimiento");
+
+        if(razonSocial==''||nit==''||tipoSociedad==''||nombEmp==''||telefono==''||direcEmpresa==''){
+            Alert.alert("Error","Error campos vacíos");
+        }else{
+            setReporte((obj) => ({ ...obj, nombre_empresa: FormEmpresa.nombEmp, nit: FormEmpresa.nit }));
+            // console.log(reporte);
+            navigation.navigate("Presupuesto Emprendimiento");
+        }
+        
 
     }
 
@@ -57,16 +63,18 @@ function Pantalla2(props) {
                             <FormControl.Label>NIT(*)</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={nit} onChangeText={(value) => EstadoInputs(value, 'nit')} />
                             <FormControl.Label>Tipo de Sociedad(*)</FormControl.Label>
-                            <Select placeholder="Sociedad" variant="rounded" value={tipoSociedad} variant="rounded"
-                                selectedValue={tipoSocial} onValueChange={(itemValue) => setTipoSocial(itemValue)} onChangeText={(value) => EstadoInputs(value, 'tipoSocial')}>
-                                <Select.Item label="S.R.L" value="Sociedad de Responsabilidad Limitada" onPress={() => EstadoInputs('S.R.L', 'tipoSociedad')} />
-                                <Select.Item label="S.A" value="Sociedad Anonima" onPress={() => EstadoInputs('S.A', 'tipoSociedad')} />
+                            <Select placeholder="Sociedad" variant="rounded" value={tipoSociedad}
+                                selectedValue={setTipoSocial} onValueChange={(itemValue) => setTipoSocial(itemValue)}
+                                onValueChange={(value) => EstadoInputs(value, 'tipoSociedad')}
+                                >
+                                <Select.Item label="S.R.L" value="S.R.L" />
+                                <Select.Item label="S.A" value="S.A"/>
                             </Select>
                             {/* <FormControl.Label>Representante legal</FormControl.Label>
                             <Input variant="rounded" value={representantelegal} onChangeText={(value) => EstadoInputs(value, 'representantelegal')} /> */}
                             <FormControl.Label>Nombre de la Empresa(*)</FormControl.Label>
                             <Input variant="rounded" value={nombEmp} onChangeText={(value) => EstadoInputs(value, 'nombEmp')} />
-                            <FormControl.Label>Departamento(*)</FormControl.Label>
+                            {/* <FormControl.Label>Departamento(*)</FormControl.Label>
                             <Select placeholder="Departamento" variant="rounded" value={departamento} variant="rounded"
                                 selectedValue={service} onValueChange={(itemValue) => setService(itemValue)} onChangeText={(value) => EstadoInputs(value, 'departamento')}>
                                 <Select.Item label="cbba" value="cochabamba" onPress={() => EstadoInputs('cochabamba', 'extension')} />
@@ -80,7 +88,7 @@ function Pantalla2(props) {
                                 <Select.Item label="Beni" value="Beni" onPress={() => EstadoInputs('beni', 'extension')} />
                             </Select>
                             <FormControl.Label>Municipio(*)</FormControl.Label>
-                            <Input variant="rounded" value={municipio} onChangeText={(value) => EstadoInputs(value, 'municipio')} />
+                            <Input variant="rounded" value={municipio} onChangeText={(value) => EstadoInputs(value, 'municipio')} /> */}
                             <FormControl.Label>Telefono(*)</FormControl.Label>
                             <Input keyboardType='numeric' variant="rounded" value={telefono} onChangeText={(value) => EstadoInputs(value, 'telefono')} />
                             <FormControl.Label>Dirección de la Empresa(*)</FormControl.Label>

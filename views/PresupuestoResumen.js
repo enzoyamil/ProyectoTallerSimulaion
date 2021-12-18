@@ -112,7 +112,7 @@ return (
                         </DataTable.Row>
                     </DataTable>
                 </Box>
-                <Box rounded="xl" p="5" borderWidth="1">
+                <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                     <Stack space={3}>
                         <Text>TOTAL: {totalAportePropio().toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}Bs.</Text>
                     </Stack>

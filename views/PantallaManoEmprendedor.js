@@ -46,7 +46,7 @@ function PantallaManoEmprendedor(props) {
                 return [...obj, arr];
             });
         } else {
-            Alert.alert("No se puede agregar campos Vacios");
+            Alert.alert("Error","No se puede agregar campos Vacíos");
         }
     }
     function validarAgregar() {
@@ -62,7 +62,7 @@ function PantallaManoEmprendedor(props) {
         if (tamanio > 0) {
             navigation.navigate("Materia Prima", { montoPresupuesto: montoPresupuesto, montoMano: monto });
         } else {
-            Alert.alert("Tabla Vacia");
+            Alert.alert("Error","Tabla Vacía");
         }
     }
 
@@ -120,7 +120,7 @@ function PantallaManoEmprendedor(props) {
                             }
                         </DataTable>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                         <Stack space={3}>
                             <Text>SUBTOTAL: {sumatoria("aportePropio").toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </Stack>
