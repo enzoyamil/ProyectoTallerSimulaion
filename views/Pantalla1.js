@@ -86,7 +86,7 @@ function Pantalla1(props) {
                             <Select placeholder="Extesión" variant="rounded" value={extension}
                                 selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                                 onValueChange={(value) => EstadoInputs(value, 'extension')}>
-                                <Select.Item label="cbba" value="cochabamba" />
+                                <Select.Item label="cochabamba" value="cochabamba" />
                                 <Select.Item label="La paz" value="La paz" />
                                 <Select.Item label="Santa Cruz" value="Santa Cruz" />
                                 <Select.Item label="Oruro" value="Oruro" />
