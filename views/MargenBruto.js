@@ -87,17 +87,17 @@ function MargenBruto(props) {
                                 </DataTable.Title>
                             </DataTable.Header>
                             <DataTable.Header>
-                                <DataTable.Title style={{ width: 100 }} numeric></DataTable.Title>
-                                <DataTable.Title style={{ width: 125 }} numeric>Ventas</DataTable.Title>
-                                <DataTable.Title style={{ width: 125 }} numeric>Costos</DataTable.Title>
-                                <DataTable.Title style={{ width: 100 }} numeric>Margen</DataTable.Title>
+                                <DataTable.Title style={{ width: 90 }} numeric></DataTable.Title>
+                                <DataTable.Title style={{ width: 90 }} numeric>Ventas</DataTable.Title>
+                                <DataTable.Title style={{ width: 90 }} numeric>Costos</DataTable.Title>
+                                <DataTable.Title style={{ width: 90 }} numeric>Margen</DataTable.Title>
                             </DataTable.Header>
 
                             <DataTable.Row>
-                                <DataTable.Cell style={{ width: 100 }}>Manufactura</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 125 }} numeric>{parseFloat(ventas_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 125 }} numeric>{parseFloat(costos_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
-                                <DataTable.Cell style={{ width: 100 }} numeric>{mub.toFixed(2)}%</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 90 }}>Manufactura</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 90 }} numeric>{parseFloat(ventas_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 90 }} numeric>{parseFloat(costos_anuales).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</DataTable.Cell>
+                                <DataTable.Cell style={{ width: 90 }} numeric>{mub.toFixed(2)}%</DataTable.Cell>
                             </DataTable.Row>
                             <Divider />
                         </DataTable>

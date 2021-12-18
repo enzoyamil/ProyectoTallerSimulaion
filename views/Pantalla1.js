@@ -1,12 +1,12 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Alert } from "react-native";
-import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select,Text } from "native-base";
+import { FormControl, Button, Input, Stack, ScrollView, Box, NativeBaseProvider, Select, Text } from "native-base";
 import { tamanioMaximo, tamanioMin, sinCaractEsp } from "../helpers/Validation"
 import { ReporteContext } from "../Components/ReporteContext";
 
 function Pantalla1(props) {
     const { navigation } = props;
-    const [reporte,setReporte] = useContext(ReporteContext);
+    const [reporte, setReporte] = useContext(ReporteContext);
     console.log(reporte);
     const [FormPersonal, setFormPersonal] = useState({
         name: '',
@@ -23,7 +23,7 @@ function Pantalla1(props) {
     }
     function buttonPress() {
         if (name == '' || apellido == '' || ci == '' || extension == '' || edad == '' || telefono == '' || direccion == '') {
-            Alert.alert("Error","Error Campo Vacío");
+            Alert.alert("Error", "Error Campo Vacío");
         } else if (tamanioMaximo(name, 15)) {
             Alert.alert("Cadena nombre muy grande");
         } else if (tamanioMin(name, 2)) {
@@ -40,12 +40,23 @@ function Pantalla1(props) {
             Alert.alert("CI no aceptado");
         } else if (tamanioMaximo(direccion, 50)) {
             Alert.alert("Edad no aceptada");
-        } else if (tamanioMin(direccion,5)) {
+        } else if (tamanioMin(direccion, 5)) {
             Alert.alert("Dirección muy corta");
         } else {
-            setReporte((obj)=>({...obj,nombre_propietario:FormPersonal.name}));
+            setReporte((obj) => ({ ...obj, nombre_propietario: FormPersonal.name }));
+            setFormPersonal(
+                {
+                    name: '',
+                    apellido: '',
+                    ci: '',
+                    extension: '',
+                    edad: '',
+                    telefono: '',
+                    direccion: ''
+                }
+            );
             navigation.navigate("Datos del Emprendimiento");
-        }   
+        }
     }
     let { name, apellido, ci, extension, edad, telefono, direccion } = FormPersonal;
     let [service, setService] = React.useState("");

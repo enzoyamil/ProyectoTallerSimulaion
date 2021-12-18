@@ -164,6 +164,8 @@ function DatosCredito(props) {
     function buttonPress() {
         if (frecuencia==''|| plazo==''|| cuota==''|| actividad=='') {
             Alert.alert("Error",'Error campo vacío');
+        } else if(parseInt(plazo)>84){
+            Alert.alert("Error",'Error plazo tiene que ser menor o igual a 84');
         } else {
             setReporte((obj) => ({
                 ...obj, datos_credito: {
@@ -192,7 +194,7 @@ function DatosCredito(props) {
                         md: '25%',
                     }}>
                     <Box>
-                        <FormControl.Label>Frecuencia</FormControl.Label>
+                        <FormControl.Label>Frecuencia(*)</FormControl.Label>
                         <Select variant="rounded" value={frecuencia}
                             selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                             onValueChange={(value) => EstadoInputs(value, 'frecuencia')}>
@@ -204,7 +206,7 @@ function DatosCredito(props) {
                             <Select.Item label="anual" value="anual" />
                         </Select>
                         <FormControl mb="5">
-                            <FormControl.Label>poliza</FormControl.Label>
+                            <FormControl.Label>Poliza</FormControl.Label>
                             <Input
                                 keyboardType="numeric"
                                 variant="rounded"
@@ -213,11 +215,11 @@ function DatosCredito(props) {
                             />
                         </FormControl>
                         <FormControl mb="5">
-                            <FormControl.Label>monto</FormControl.Label>
+                            <FormControl.Label>Monto</FormControl.Label>
                             <Text>{parseFloat(montoFin).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                         </FormControl>
                         <FormControl mb="5">
-                            <FormControl.Label>plazo (meses)</FormControl.Label>
+                            <FormControl.Label>Plazo (meses)(*)</FormControl.Label>
                             <Input
                                 keyboardType="numeric"
                                 variant="rounded"
@@ -225,7 +227,7 @@ function DatosCredito(props) {
                                 onChangeText={value => EstadoInputs(value, 'plazo')}
                             />
                         </FormControl>
-                        <FormControl.Label>tipo de cuota</FormControl.Label>
+                        <FormControl.Label>Tipo de cuota(*)</FormControl.Label>
                         <Select variant="rounded" value={cuota}
                             selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                             onValueChange={(value) => EstadoInputs(value, 'cuota')}>
@@ -233,7 +235,7 @@ function DatosCredito(props) {
                             <Select.Item label="cuota variable" value="variable" />
                             <Select.Item label="personalizada" value="personalizada" />
                         </Select>
-                        <FormControl.Label>Actividad</FormControl.Label>
+                        <FormControl.Label>Actividad(*)</FormControl.Label>
                         <Select variant="rounded" value={actividad}
                             selectedValue={service} onValueChange={(itemValue) => setService(itemValue)}
                             onValueChange={(value) => EstadoInputs(value, 'actividad')}>
@@ -244,7 +246,7 @@ function DatosCredito(props) {
                             <FormControl.Label>tasa de interes</FormControl.Label>
                             <Text>{cambioValor()}%</Text>
                             <Center>
-                                <Box p="5" borderWidth="1">
+                                <Box p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                                     <Text bold>CUOTA APROXIMADA: {parseFloat(cambioCuota(cuota)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
                                 </Box>
                             </Center>

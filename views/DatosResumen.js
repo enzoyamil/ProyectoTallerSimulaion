@@ -108,7 +108,7 @@ function DatosResumen(props) {
                                 <DataTable.Cell>{porcentajeAporte()}%</DataTable.Cell>
                             </DataTable.Row>
 
-                            <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
+                            <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#F5F166'}}>
                                 <Text>APORTE PROPIO PARA GARANTIA HIPOTECARIA DEBE SER 10% Y PARA OTRA GARANTIA 20%</Text>
                             </Box>
 
@@ -124,10 +124,10 @@ function DatosResumen(props) {
                         <Input variant="rounded" keyboardType="numeric" value={segundoDesembolso} onChangeText={(value) => EstadoInputs(value, 'segundoDesembolso')} />
                         <Divider />
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#F5F166'}}>
                         <Text>{validarAporte()}</Text>
                     </Box>
-                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAE63E'}}>
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#F5F166'}}>
                         <Text>{validarDesembolso()}</Text>
                     </Box>
                     <Button colorScheme="primary" onPress={() => buttonPress()}>Siguiente</Button>

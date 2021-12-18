@@ -54,9 +54,10 @@ function CostosOperativos(props) {
   }
   function devolverTotal() {
     let total = parseInt(FormPersonal.impuestos) + parseInt(FormPersonal.alimentacion) + parseInt(FormPersonal.luz) + parseInt(FormPersonal.agua) + parseInt(FormPersonal.gas) + parseInt(FormPersonal.celular) + parseInt(FormPersonal.internet) + parseInt(FormPersonal.alquiler) + parseInt(FormPersonal.transporte) + parseInt(FormPersonal.escritorio) + parseInt(FormPersonal.empleados) + parseInt(FormPersonal.promocion) + parseInt(FormPersonal.vestimenta) + parseInt(FormPersonal.salud) + parseInt(FormPersonal.otros);
-    return total ? 'llenar los campos' : total;
+    return isNaN(total) ? 'llenar los campos' : total;
   }
   console.log(devolverTotal());
+
   function buttonPress() {
     if (
       impuestos == '' ||

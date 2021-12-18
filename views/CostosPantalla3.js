@@ -161,7 +161,7 @@ export default function CostoPantalla3(props) {
                             }
                         </DataTable>
                     </ScrollView>
-                    <Box rounded="xl" p="5" borderWidth="1">
+                    <Box rounded="xl" p="5" borderWidth="1" style={{ backgroundColor: '#FAF2B0'}}>
                         <Stack space={3}>
                             <Text>Anual</Text>
                             <Text>Sumatoria ventas mensuales: {parseFloat(sumVentasMensuales()).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} Bs.</Text>
